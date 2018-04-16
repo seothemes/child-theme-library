@@ -42,37 +42,37 @@ Coming soon.
 
 The Child Theme Library is modular built with configuration architecture that loosely follows the Genesis Framework file structure:
 
-lib/  
+lib/
 ├── admin/
-│   ├── css-handler.php
-│   └── customizer.php
+│	├── css-handler.php
+│	└── customizer.php
 ├── classes/
-│   ├── class-colors.php
-│   ├── class-plugins.php
-│   └── class-rgba.php
+│	├── class-colors.php
+│	├── class-plugins.php
+│	└── class-rgba.php
 ├── css/
-│   ├── core.css
-│   └── load-styles.php
+│	├── core.css
+│	└── load-styles.php
 ├── functions/
-│   ├── general.php
-│   ├── head.php
-│   ├── helpers.php
-│   ├── layout.php
-│   ├── markup.php
-│   ├── setup.php
-│   └── upgrade.php
+│	├── general.php
+│	├── head.php
+│	├── helpers.php
+│	├── layout.php
+│	├── markup.php
+│	├── setup.php
+│	└── upgrade.php
 ├── js/
-│   ├── core.js
-│   └── load-scripts.php
+│	├── core.js
+│	└── load-scripts.php
 ├── languages/
-│   └── core.pot
+│	└── core.pot
 ├── structure/
-│   ├── footer.php
-│   ├── header.php
-│   ├── hero.php
-│   ├── logo.php
-│   └── menu.php
+│	├── footer.php
+│	├── header.php
+│	├── hero.php
+│	├── logo.php
+│	└── menu.php
 ├── widgets/
-│   └── widgets.php
+│	└── widgets.php
 ├── init.php
 └── README.md
