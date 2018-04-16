@@ -6,19 +6,21 @@ A lightweight drop-in library for extending Genesis child themes.
 
 ### Git
 
+The Child Theme Library can be installed as a Git Submodule. This allows the library to receive future updates with ease. If you are not familiar with Git Submodules please read [this article](https://gist.github.com/gitaarik/8735255).
+
 From the terminal, navigate to your project directory:
 
 ```sh
-cd wp-content/themes/my-project
+cd wp-content/themes/my-theme
 ```
 
-Clone from Github into the `lib` directory:
+Clone from Github into the `lib` directory. This creates a submodule
 
 ```sh
-git clone https://github.com/seothemes/child-theme-library.git lib
+git submodule add https://github.com/seothemes/child-theme-library.git lib
 ```
 
-Include the library from your functions.php file:
+Include the library from your `functions.php` file:
 
 ```php
 // Load child theme's lib (do not remove).
@@ -31,7 +33,7 @@ Download the zip file from Github [here](https://github.com/seothemes/child-them
 
 Upload the file to your theme's main directory and unzip the contents.
 
-Include the library from your functions.php file:
+Include the library from your `functions.php` file:
 
 ```php
 // Load child theme's lib (do not remove).
