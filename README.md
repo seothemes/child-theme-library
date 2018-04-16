@@ -27,7 +27,7 @@ require_once get_stylesheet_directory() . '/lib/init.php';
 
 ### Manually
 
-Download the zip file from Github [here](https://github.com/seothemes/seothemes-core/archive/master.zip).
+Download the zip file from Github [here](https://github.com/seothemes/child-theme-library/archive/master.zip).
 
 Upload the file to your theme's main directory and unzip the contents.
 
@@ -49,36 +49,36 @@ The Child Theme Library is modular built with configuration architecture that lo
 ```sh
 lib/
 ├── admin/
-│	├── css-handler.php
-│	└── customizer.php
+│    ├── css-handler.php
+│    └── customizer.php
 ├── classes/
-│	├── class-colors.php
-│	├── class-plugins.php
-│	└── class-rgba.php
+│    ├── class-colors.php
+│    ├── class-plugins.php
+│    └── class-rgba.php
 ├── css/
-│	├── core.css
-│	└── load-styles.php
+│    ├── core.css
+│    └── load-styles.php
 ├── functions/
-│	├── general.php
-│	├── head.php
-│	├── helpers.php
-│	├── layout.php
-│	├── markup.php
-│	├── setup.php
-│	└── upgrade.php
+│    ├── general.php
+│    ├── head.php
+│    ├── helpers.php
+│    ├── layout.php
+│    ├── markup.php
+│    ├── setup.php
+│    └── upgrade.php
 ├── js/
-│	├── core.js
-│	└── load-scripts.php
+│    ├── core.js
+│    └── load-scripts.php
 ├── languages/
-│	└── core.pot
+│    └── core.pot
 ├── structure/
-│	├── footer.php
-│	├── header.php
-│	├── hero.php
-│	├── logo.php
-│	└── menu.php
+│    ├── footer.php
+│    ├── header.php
+│    ├── hero.php
+│    ├── logo.php
+│    └── menu.php
 ├── widgets/
-│	└── widgets.php
+│    └── widgets.php
 ├── init.php
 └── README.md
 ```
