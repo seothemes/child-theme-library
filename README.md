@@ -8,11 +8,15 @@ A lightweight drop-in library for extending Genesis child themes.
 
 From the terminal, navigate to your project directory:
 
-`cd wp-content/themes/my-project`
+```sh
+cd wp-content/themes/my-project
+```
 
-Then clone from Github:
+Clone from Github into the `lib` directory:
 
-`git clone https://github.com/seothemes/child-theme-lib.git lib`
+```sh
+git clone https://github.com/seothemes/child-theme-library.git lib
+```
 
 Include the library from your functions.php file:
 
@@ -42,6 +46,7 @@ Coming soon.
 
 The Child Theme Library is modular built with configuration architecture that loosely follows the Genesis Framework file structure:
 
+```sh
 lib/
 ├── admin/
 │	├── css-handler.php
@@ -76,3 +81,4 @@ lib/
 │	└── widgets.php
 ├── init.php
 └── README.md
+```
