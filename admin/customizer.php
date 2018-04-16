@@ -4,16 +4,16 @@
  *
  * This file adds customizer settings to the Genesis Starter theme.
  *
- * @package   SEOThemes\GenesisStarter
- * @link      https://seothemes.com/themes/genesis-starter
+ * @package   SEOThemes\ChildThemeLibrary
+ * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\GenesisStarter\Admin;
+namespace SEOThemes\ChildThemeLibrary\Admin;
 
-use \SEOThemes\GenesisStarter\Classes\RGBA_Customize_Control;
+use \SEOThemes\ChildThemeLibrary\Classes\RGBA_Customize_Control;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

@@ -4,16 +4,16 @@
  *
  * This file contains the core functionality for the Genesis Starter theme.
  *
- * @package   SEOThemes\GenesisStarter\Functions
- * @link      https://seothemes.com/themes/genesis-starter
+ * @package   SEOThemes\ChildThemeLibrary\Functions
+ * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\GenesisStarter\Functions;
+namespace SEOThemes\ChildThemeLibrary\Functions;
 
-use SEOThemes\GenesisStarter\Functions;
+use SEOThemes\ChildThemeLibrary\Functions;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -22,23 +22,13 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\load_assets', 99 );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\load_scripts', 99 );
 /**
  * Enqueue theme scripts and styles.
  *
  * @return void
  */
-function load_assets() {
-
-	// Google fonts.
-	wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700', array(), CHILD_THEME_VERSION );
-
-	// Conditionally load WooCommerce styles.
-	if ( Functions\is_woocommerce_page() ) {
-
-		wp_enqueue_style( CHILD_TEXT_DOMAIN . '-woocommerce', CHILD_THEME_URI . '/assets/styles/min/woocommerce.min.css', array(), CHILD_THEME_VERSION );
-
-	}
+function load_scripts() {
 
 	// Check if debugging is enabled.
 	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : 'min.';

@@ -4,14 +4,14 @@
  *
  * This file contains the core functionality for the Genesis Starter theme.
  *
- * @package   SEOThemes\GenesisStarter
- * @link      https://seothemes.com/themes/genesis-starter
+ * @package   SEOThemes\ChildThemeLibrary
+ * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\GenesisStarter;
+namespace SEOThemes\ChildThemeLibrary;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -36,7 +36,7 @@ define( 'CHILD_LIB_DIR', CHILD_THEME_DIR . '/lib/' );
 define( 'CHILD_THEME_PREFIX', str_replace( '-', '_', CHILD_TEXT_DOMAIN ) );
 
 // Store the theme config.
-$child_theme_config = require_once( CHILD_THEME_DIR . '/config/theme.php' );
+$config = require_once( CHILD_THEME_DIR . '/config/theme.php' );
 
 // Get the autoload class.
 require_once CHILD_THEME_DIR . '/lib/functions/autoload.php';

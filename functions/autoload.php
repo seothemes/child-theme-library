@@ -4,14 +4,14 @@
  *
  * This file contains the core functionality for the Genesis Starter theme.
  *
- * @package   SEOThemes\GenesisStarter
- * @link      https://seothemes.com/themes/genesis-starter
+ * @package   SEOThemes\ChildThemeLibrary
+ * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\GenesisStarter\Functions;
+namespace SEOThemes\ChildThemeLibrary\Functions;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -29,7 +29,16 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function autoload() {
 
-	$files = glob( CHILD_THEME_DIR . '/lib/**/*.php' );
+	$files     = glob( CHILD_THEME_DIR . '/lib/**/*.php' );
+
+	// $backend   = '';
+	// $backend  .= CHILD_THEME_DIR . '/lib/admin/*.php';
+	// $backend  .= CHILD_THEME_DIR . '/lib/classes/*.php';
+	// $backend  .= CHILD_THEME_DIR . '/lib/widgets/*.php';
+	// $backend   = glob( $backend, GLOB_BRACE );
+
+	// $frontend  = '';
+	// $frontend  = array_diff( $files, $backend );
 
 	foreach ( $files as $file ) {
 

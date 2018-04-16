@@ -4,14 +4,14 @@
  *
  * This file adds helper functions used in the Genesis Starter theme.
  *
- * @package   SEOThemes\GenesisStarter
- * @link      https://seothemes.com/themes/genesis-starter
+ * @package   SEOThemes\ChildThemeLibrary
+ * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\GenesisStarter\Functions;
+namespace SEOThemes\ChildThemeLibrary\Functions;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
