@@ -35,8 +35,42 @@ define( 'CHILD_CONFIG_DIR', CHILD_THEME_DIR . '/config/' );
 define( 'CHILD_LIB_DIR', CHILD_THEME_DIR . '/lib/' );
 define( 'CHILD_THEME_PREFIX', str_replace( '-', '_', CHILD_TEXT_DOMAIN ) );
 
-// Store the theme config.
+// Store the theme config globally.
 $config = require_once( CHILD_THEME_DIR . '/config/theme.php' );
 
-// Get the autoload class.
-require_once CHILD_THEME_DIR . '/lib/functions/autoload.php';
+/**
+ * Load theme files.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function autoload() {
+
+	global $config;
+
+	$all   = glob( CHILD_THEME_DIR . '/lib/**/*.php' );
+
+	$files = array_diff( $all, $config['autoload'] );
+
+	// $backend   = '';
+	// $backend  .= CHILD_THEME_DIR . '/lib/admin/*.php';
+	// $backend  .= CHILD_THEME_DIR . '/lib/classes/*.php';
+	// $backend  .= CHILD_THEME_DIR . '/lib/widgets/*.php';
+	// $backend   = glob( $backend, GLOB_BRACE );
+
+	// $frontend  = '';
+	// $frontend  = array_diff( $files, $backend );
+
+	foreach ( $files as $file ) {
+
+		if ( file_exists( $file ) ) {
+
+			require_once $file;
+
+		}
+	}
+
+}
+
+autoload();

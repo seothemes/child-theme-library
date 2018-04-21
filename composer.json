@@ -20,6 +20,7 @@
 		"source": "https://github.com/seothemes/child-theme-library"
     },
     "require": {},
+    "require-dev": {},
     "config": {
         "sort-order": true
     },

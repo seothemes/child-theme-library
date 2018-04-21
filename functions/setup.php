@@ -200,3 +200,54 @@ function ssi_default_styles( $defaults ) {
 	return $defaults;
 
 }
+
+add_action( 'tgmpa_register', __NAMESPACE__ . '\required_plugins' );
+/**
+ * Register required plugins.
+ *
+ * The variables passed to the `tgmpa()` function should be:
+ *
+ * - an array of plugin arrays;
+ * - optionally a configuration array.
+ *
+ * If you are not changing anything in the configuration array, you can remove the
+ * array and remove the variable from the function call: `tgmpa( $plugins );`.
+ * In that case, the TGMPA default settings will be used.
+ *
+ * This function is hooked into `tgmpa_register`, which is fired on the WP `init`
+ * action on priority 10.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function required_plugins() {
+
+	global $config;
+
+	$plugins = $config['plugins'];
+
+	if ( class_exists( 'WooCommerce' ) ) {
+
+		$plugins[] = array(
+			'name'     => 'Genesis Connect WooCommerce',
+			'slug'     => 'genesis-connect-woocommerce',
+			'required' => true,
+		);
+
+	}
+
+	$config = array(
+		'id'           => CHILD_TEXT_DOMAIN,
+		'default_path' => '',
+		'menu'         => 'tgmpa-install-plugins',
+		'has_notices'  => true,
+		'dismissable'  => true,
+		'dismiss_msg'  => '',
+		'is_automatic' => false,
+		'message'      => '',
+	);
+
+	tgmpa( $plugins, $config );
+
+}

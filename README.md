@@ -74,7 +74,8 @@ lib/
 │    ├── layout.php
 │    ├── markup.php
 │    ├── setup.php
-│    └── upgrade.php
+│    ├── upgrade.php
+│    └── widgetize.php
 ├── js/
 │    ├── core.js
 │    └── load-scripts.php
@@ -86,8 +87,6 @@ lib/
 │    ├── hero.php
 │    ├── logo.php
 │    └── menu.php
-├── widgets/
-│    └── widgets.php
 ├── init.php
 └── README.md
 ```

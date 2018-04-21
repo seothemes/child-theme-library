@@ -34,7 +34,9 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\customizer_output', 100 );
 function customizer_output() {
 
 	// Set in customizer-settings.php.
-	$colors = require CHILD_THEME_DIR . '/config/theme.php';
+	global $config;
+
+	$colors = $config['colors'];
 
 	/**
 	 * Loop though each color in the global array of theme colors
@@ -44,7 +46,7 @@ function customizer_output() {
 	 * manually is that we can just declare the colors once in the
 	 * `$colors` array, and they can be used in multiple ways.
 	 */
-	foreach ( $colors['colors'] as $id => $hex ) {
+	foreach ( $colors as $id => $hex ) {
 
 		${"$id"} = get_theme_mod( CHILD_THEME_PREFIX . "_{$id}_color",  $hex );
 
