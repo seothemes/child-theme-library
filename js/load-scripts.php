@@ -4,16 +4,16 @@
  *
  * This file contains the core functionality for the Genesis Starter theme.
  *
- * @package   SEOThemes\ChildThemeLibrary\Functions
- * @link      https://github.com/seothemes/child-theme-library
+ * @package   SEOThemes\Library\Functions
+ * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\ChildThemeLibrary\Functions;
+namespace SEOThemes\Library\Functions;
 
-use SEOThemes\ChildThemeLibrary\Functions;
+use SEOThemes\Library\Functions;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

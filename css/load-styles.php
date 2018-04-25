@@ -4,16 +4,16 @@
  *
  * This file contains the core functionality for the Genesis Starter theme.
  *
- * @package   SEOThemes\ChildThemeLibrary\Functions
- * @link      https://github.com/seothemes/child-theme-library
+ * @package   SEOThemes\Library\Functions
+ * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\ChildThemeLibrary\Functions;
+namespace SEOThemes\Library\Functions;
 
-use SEOThemes\ChildThemeLibrary\Functions;
+use SEOThemes\Library\Functions\Utils;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -34,7 +34,7 @@ function load_styles() {
 	wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700', array(), CHILD_THEME_VERSION );
 
 	// Conditionally load WooCommerce styles.
-	if ( Functions\is_woocommerce_page() ) {
+	if ( Utils\is_woocommerce_page() ) {
 
 		wp_enqueue_style( CHILD_TEXT_DOMAIN . '-woocommerce', CHILD_THEME_URI . '/assets/styles/min/woocommerce.min.css', array(), CHILD_THEME_VERSION );
 

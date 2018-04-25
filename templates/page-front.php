@@ -2,7 +2,9 @@
 /**
  * Genesis Starter Theme
  *
- * This file adds extra functions used in the Genesis Starter theme.
+ * This file adds the front page template to the Genesis Starter theme.
+ *
+ * Template Name: Front Page
  *
  * @package   SEOThemes\Library
  * @link      https://github.com/seothemes/seothemes-library
@@ -11,8 +13,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -20,6 +20,17 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-// Reposition footer widgets inside site footer.
-remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
-add_action( 'genesis_before_footer_wrap', 'genesis_footer_widget_areas', 5 );
+// Get site-header.
+get_header();
+
+// Custom loop, remove all hooks except entry content.
+if ( have_posts() ) :
+
+	the_post();
+
+	do_action( 'genesis_entry_content' );
+
+endif;
+
+// Get site-footer.
+get_footer();

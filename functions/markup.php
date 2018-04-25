@@ -4,14 +4,14 @@
  *
  * This file adds extra functions used in the Genesis Starter theme.
  *
- * @package   SEOThemes\ChildThemeLibrary
- * @link      https://github.com/seothemes/child-theme-library
+ * @package   SEOThemes\Library
+ * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\ThemeLibrary\Functions;
+namespace SEOThemes\Library\Functions;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -54,12 +54,14 @@ function body_class( $classes ) {
 
 	}
 
-	if ( is_page_template( 'page_blog.php' ) ) {
+	if ( is_page_template( 'page-blog.php' ) ) {
 
 		$classes[] = 'blog';
 		$classes = array_diff( $classes, [ 'page' ] );
 
 	}
+
+	$classes[] = str_replace( '.php', '', get_page_template_slug() );
 
 	return $classes;
 
@@ -115,8 +117,8 @@ add_filter( 'genesis_attr_hero-section', __NAMESPACE__ . '\hero_section_attr' );
  */
 function hero_section_attr( $attr ) {
 
-	$attr['id']     = 'hero-section';
-	$attr['role']   = 'banner';
+	$attr['id']   = 'hero-section';
+	$attr['role'] = 'banner';
 
 	return $attr;
 

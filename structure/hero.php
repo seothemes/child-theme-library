@@ -4,14 +4,14 @@
  *
  * This file adds the hero section to the Genesis Starter theme.
  *
- * @package   SEOThemes\ChildThemeLibrary
- * @link      https://github.com/seothemes/child-theme-library
+ * @package   SEOThemes\Library
+ * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\ChildThemeLibrary\Structure;
+namespace SEOThemes\Library\Structure\Hero;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -19,6 +19,14 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 
 }
+
+register_default_headers( array(
+	'child' => array(
+		'url'           => '%2$s/assets/images/hero.jpg',
+		'thumbnail_url' => '%2$s/assets/images/hero.jpg',
+		'description'   => __( 'Hero Image', CHILD_TEXT_DOMAIN ),
+	),
+) );
 
 add_action( 'genesis_before', __NAMESPACE__ . '\hero_section_setup' );
 /**
@@ -50,11 +58,11 @@ function hero_section_setup() {
 	remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 
 	// Add custom hero section.
-	add_action( 'genesis_starter_hero_section', 'genesis_do_posts_page_heading' );
-	add_action( 'genesis_starter_hero_section', 'genesis_do_date_archive_title' );
-	add_action( 'genesis_starter_hero_section', 'genesis_do_taxonomy_title_description' );
-	add_action( 'genesis_starter_hero_section', 'genesis_do_author_title_description' );
-	add_action( 'genesis_starter_hero_section', 'genesis_do_cpt_archive_title_description' );
+	add_action( 'genesis_hero_section', 'genesis_do_posts_page_heading' );
+	add_action( 'genesis_hero_section', 'genesis_do_date_archive_title' );
+	add_action( 'genesis_hero_section', 'genesis_do_taxonomy_title_description' );
+	add_action( 'genesis_hero_section', 'genesis_do_author_title_description' );
+	add_action( 'genesis_hero_section', 'genesis_do_cpt_archive_title_description' );
 
 	// Remove search results and shop page titles.
 	add_filter( 'woocommerce_show_page_title', '__return_null' );
@@ -95,12 +103,12 @@ add_action( 'be_title_toggle_remove', __NAMESPACE__ . '\title_toggle' );
  */
 function title_toggle() {
 
-	remove_action( 'genesis_starter_hero_section', __NAMESPACE__ . '\page_title', 10 );
-	remove_action( 'genesis_starter_hero_section', __NAMESPACE__ . '\page_excerpt', 20 );
+	remove_action( 'genesis_hero_section', __NAMESPACE__ . '\page_title', 10 );
+	remove_action( 'genesis_hero_section', __NAMESPACE__ . '\page_excerpt', 20 );
 
 }
 
-add_action( 'genesis_starter_hero_section', __NAMESPACE__ . '\page_title', 10 );
+add_action( 'genesis_hero_section', __NAMESPACE__ . '\page_title', 10 );
 /**
  * Display title in hero section.
  *
@@ -170,7 +178,7 @@ function page_title() {
 
 }
 
-add_action( 'genesis_starter_hero_section', __NAMESPACE__ . '\page_excerpt', 20 );
+add_action( 'genesis_hero_section', __NAMESPACE__ . '\page_excerpt', 20 );
 /**
  * Display page excerpt.
  *
@@ -222,7 +230,7 @@ add_action( 'genesis_before_content_sidebar_wrap', __NAMESPACE__ . '\hero_sectio
  * Display the hero section.
  *
  * Conditionally outputs the opening and closing hero section markup and runs
- * genesis_starter_hero_section which all of our header functions are hooked to.
+ * the hero_section hook which all of our hero functions are hooked to.
  *
  * @since  2.2.4
  *
@@ -248,7 +256,7 @@ function hero_section() {
 	 * @hooked genesis_do_author_title_description
 	 * @hooked genesis_do_cpt_archive_title_description
 	 */
-	do_action( 'genesis_starter_hero_section' );
+	do_action( 'genesis_hero_section' );
 
 	// Output hero section markup.
 	genesis_markup( array(

@@ -4,16 +4,16 @@
  *
  * This file adds extra functions used in the Genesis Starter theme.
  *
- * @package   SEOThemes\ChildThemeLibrary
- * @link      https://github.com/seothemes/child-theme-library
+ * @package   SEOThemes\Library
+ * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\ChildThemeLibrary\Admin;
+namespace SEOThemes\Library\Admin;
 
-use SEOThemes\ChildThemeLibrary\Functions;
+use SEOThemes\Library\Functions\Utils;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -33,10 +33,7 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\customizer_output', 100 );
  */
 function customizer_output() {
 
-	// Set in customizer-settings.php.
-	global $config;
-
-	$colors = $config['colors'];
+	$colors = Utils\get_config( 'colors' );
 
 	/**
 	 * Loop though each color in the global array of theme colors
@@ -84,7 +81,7 @@ function customizer_output() {
 		.menu-item a:hover,
 		.menu-item.current-menu-item > a {
 			color: %1$s;
-		}		
+		}
 
 		', $primary ) : '';
 

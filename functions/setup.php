@@ -4,16 +4,16 @@
  *
  * This file contains the core functionality for the Genesis Starter theme.
  *
- * @package   SEOThemes\ChildThemeLibrary
- * @link      https://github.com/seothemes/child-theme-library
+ * @package   SEOThemes\Library
+ * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\ChildThemeLibrary;
+namespace SEOThemes\Library;
 
-use SEOThemes\ChildThemeLibrary\Functions;
+use SEOThemes\Library\Functions\Utils;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -32,26 +32,22 @@ add_action( 'after_setup_theme', __NAMESPACE__ . '\setup_theme', 1 );
  */
 function setup_theme() {
 
-	// Get theme config.
 	global $config;
 
 	// Add theme textdomain.
-	add_theme_textdomain();
+	adds_theme_textdomain();
 
 	// Add theme support.
-	add_theme_supports( $config['theme-support'] );
+	adds_theme_supports( $config['theme-support'] );
 
 	// Add theme layouts.
-	add_theme_layouts( $config['layouts'] );
+	adds_theme_layouts( $config['layouts'] );
+
+	// Add theme widget areas.
+	adds_theme_widget_areas( $config['widget-areas'] );
 
 	// Add theme image sizes.
-	add_theme_image_sizes( $config['image-sizes'] );
-
-	Functions\front_page_widgets();
-
-	// Remove secondary sidebar.
-	unregister_sidebar( 'sidebar-alt' );
-
+	adds_theme_image_sizes( $config['image-sizes'] );
 
 	// Enable support for page excerpts.
 	add_post_type_support( 'page', 'excerpt' );
@@ -71,7 +67,7 @@ function setup_theme() {
  *
  * @return void
  */
-function add_theme_textdomain() {
+function adds_theme_textdomain() {
 
 	// Set Localization (do not remove).
 	load_child_theme_textdomain( CHILD_TEXT_DOMAIN, apply_filters( 'child_theme_textdomain', CHILD_THEME_DIR . '/languages', CHILD_TEXT_DOMAIN ) );
@@ -87,7 +83,7 @@ function add_theme_textdomain() {
  *
  * @return void
  */
-function add_theme_supports( array $config ) {
+function adds_theme_supports( array $config ) {
 
 	foreach ( $config as $feature => $args ) {
 
@@ -106,11 +102,44 @@ function add_theme_supports( array $config ) {
  *
  * @return void
  */
-function add_theme_layouts( array $config ) {
+function adds_theme_layouts( array $config ) {
 
 	foreach ( $config as $layout ) {
 
-		genesis_unregister_layout( $layout );
+		genesis_register_layout( $layout );
+
+	}
+
+}
+
+/**
+ * Register widget areas.
+ *
+ * @since  1.0.0
+ *
+ * @param  array $config Theme widget areas configuration.
+ *
+ * @return void
+ */
+function adds_theme_widget_areas() {
+
+	global $config;
+
+	unregister_sidebar( 'after-entry' );
+	unregister_sidebar( 'header-right' );
+	unregister_sidebar( 'sidebar' );
+	unregister_sidebar( 'sidebar-alt' );
+
+	foreach ( $config['widget-areas'] as $widget_area ) {
+
+		$name        = ucwords( str_replace( '-', ' ', $widget_area ) );
+		$description = $name . ' widget area';
+
+		genesis_register_sidebar( array(
+			'name'        => $name,
+			'description' => $description,
+			'id'          => $widget_area,
+		));
 
 	}
 
@@ -125,7 +154,7 @@ function add_theme_layouts( array $config ) {
  *
  * @return void
  */
-function add_theme_image_sizes( array $config ) {
+function adds_theme_image_sizes( array $config ) {
 
 	foreach ( $config as $name => $args ) {
 
@@ -176,7 +205,7 @@ function update_theme_settings() {
 
 	}
 
-	update_option( 'posts_per_page', $config['genesis-settings']['blog_cat_num'] );
+	update_option( 'posts_per_page', $config['blog_cat_num'] );
 
 }
 
@@ -237,7 +266,7 @@ function required_plugins() {
 
 	}
 
-	$config = array(
+	$plugin_config = array(
 		'id'           => CHILD_TEXT_DOMAIN,
 		'default_path' => '',
 		'menu'         => 'tgmpa-install-plugins',
@@ -248,6 +277,6 @@ function required_plugins() {
 		'message'      => '',
 	);
 
-	tgmpa( $plugins, $config );
+	tgmpa( $plugins, $plugin_config );
 
 }

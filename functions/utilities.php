@@ -4,14 +4,14 @@
  *
  * This file adds helper functions used in the Genesis Starter theme.
  *
- * @package   SEOThemes\ChildThemeLibrary
- * @link      https://github.com/seothemes/child-theme-library
+ * @package   SEOThemes\Library
+ * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\ChildThemeLibrary\Functions;
+namespace SEOThemes\Library\Functions\Utils;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,15 +25,23 @@ if ( ! defined( 'WPINC' ) ) {
  *
  * @since  2.0.0
  *
- * @param  array $config The rgba config to sanitize.
+ * @param  array $sub_config The rgba config to sanitize.
  *
  * @return mixed
  */
-function get_config( $config ) {
+function get_config( $sub_config = '' ) {
 
-	$theme_config = require_once( CHILD_THEME_DIR . '/config/theme.php' );
+	global $config;
 
-	return $theme_config[ $config ];
+	if ( $sub_config ) {
+
+		return $config[ $sub_config ];
+
+	} else {
+
+		return $config;
+
+	}
 
 }
 

@@ -4,14 +4,16 @@
  *
  * This file adds extra functions used in the Genesis Starter theme.
  *
- * @package   SEOThemes\ChildThemeLibrary
- * @link      https://github.com/seothemes/child-theme-library
+ * @package   SEOThemes\Library
+ * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\ThemeLibrary\Functions;
+namespace SEOThemes\Library\Functions;
+
+use SEOThemes\Library\Functions\Utils;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -81,7 +83,7 @@ function simple_social_icons_css() {
 			font-size: ' . $font_size . 'px;
 			padding: ' . $icon_padding . 'px;
 		}
-		
+
 		#' . $obj->id_base . '-' . $key . ' ul li a:hover {
 			background-color: ' . $instance['background_color_hover'] . ';
 			border-color: ' . $instance['border_color_hover'] . ';
@@ -89,7 +91,7 @@ function simple_social_icons_css() {
 		}';
 
 		// Minify.
-		$css = \SEOThemes\ChildThemeLibrary\Functions\minify_css( $css );
+		$css = Utils\minify_css( $css );
 
 		// Output.
 		printf( '<style type="text/css" media="screen">%s</style>', $css );

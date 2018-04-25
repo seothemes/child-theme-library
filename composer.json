@@ -1,5 +1,5 @@
 {
-    "name": "seothemes/child-theme-library",
+    "name": "seothemes/seothemes-library",
     "type": "project",
     "description": "A lightweight drop-in library for extending Genesis child themes.",
     "keywords": [
@@ -16,8 +16,8 @@
         }
     ],
 	"support": {
-		"issues": "https://github.com/seothemes/child-theme-library/issues",
-		"source": "https://github.com/seothemes/child-theme-library"
+		"issues": "https://github.com/seothemes/seothemes-library/issues",
+		"source": "https://github.com/seothemes/seothemes-library"
     },
     "require": {},
     "require-dev": {},
