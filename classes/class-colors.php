@@ -314,7 +314,7 @@ class Color {
 	 * provided, then the color mixed by this ratio.
 	 *
 	 * @param string $hex2 Secondary HEX value to mix with.
-	 * @param int    $amount = -100..0..+100.
+	 * @param int $amount = -100..0..+100.
 	 *
 	 * @return string mixed HEX value
 	 */
@@ -361,7 +361,7 @@ class Color {
 	 * Returns whether or not given color is considered "light"
 	 *
 	 * @param string|Boolean $color Color to check.
-	 * @param int            $lighter_than Light amount.
+	 * @param int $lighter_than Light amount.
 	 *
 	 * @return boolean
 	 */
@@ -380,8 +380,8 @@ class Color {
 	/**
 	 * Returns whether or not a given color is considered "dark"
 	 *
-	 * @param string|Boolean $color       Color to check.
-	 * @param int            $darker_than Darkness.
+	 * @param string|Boolean $color Color to check.
+	 * @param int $darker_than Darkness.
 	 *
 	 * @return boolean
 	 */
@@ -445,10 +445,10 @@ class Color {
 	/**
 	 * Returns the cross browser CSS3 gradient
 	 *
-	 * @param int     $amount Optional: percentage amount to light/darken the gradient.
+	 * @param int $amount Optional: percentage amount to light/darken the gradient.
 	 * @param boolean $vintage_browsers Optional: include vendor prefixes for browsers that almost died out already.
-	 * @param string  $suffix Optional: suffix for every lines.
-	 * @param string  $prefix Optional: prefix for every lines.
+	 * @param string $suffix Optional: suffix for every lines.
+	 * @param string $prefix Optional: prefix for every lines.
 	 *
 	 * @link  http://caniuse.com/css-gradients Resource for the browser support
 	 *
@@ -501,8 +501,8 @@ class Color {
 	/**
 	 * Darkens a given HSL array
 	 *
-	 * @param  array $hsl    HSL color to check.
-	 * @param  int   $amount Amount to darken.
+	 * @param  array $hsl HSL color to check.
+	 * @param  int $amount Amount to darken.
 	 *
 	 * @return array $hsl
 	 */
@@ -528,8 +528,8 @@ class Color {
 	/**
 	 * Lightens a given HSL array
 	 *
-	 * @param array $hsl    HSL color to check.
-	 * @param int   $amount Amount to darken.
+	 * @param array $hsl HSL color to check.
+	 * @param int $amount Amount to darken.
 	 *
 	 * @return array $hsl
 	 */
@@ -556,7 +556,7 @@ class Color {
 	 *
 	 * @param array $rgb1 First RGBA color.
 	 * @param array $rgb2 Second RGBA color.
-	 * @param int   $amount ranged -100..0..+100.
+	 * @param int $amount ranged -100..0..+100.
 	 *
 	 * @link http://phpxref.pagelines.com/nav.html?includes/class.colors.php.source.html
 	 *
@@ -592,13 +592,13 @@ class Color {
 
 		if ( $vh < 0 ) {
 
-			$vh++;
+			$vh ++;
 
 		}
 
 		if ( $vh > 1 ) {
 
-			$vh--;
+			$vh --;
 
 		}
 

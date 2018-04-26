@@ -36,7 +36,7 @@ function load_styles() {
 	// Conditionally load WooCommerce styles.
 	if ( Utils\is_woocommerce_page() ) {
 
-		wp_enqueue_style( CHILD_TEXT_DOMAIN . '-woocommerce', CHILD_THEME_URI . '/assets/styles/min/woocommerce.min.css', array(), CHILD_THEME_VERSION );
+		wp_enqueue_style( CHILD_THEME_HANDLE . '-woocommerce', CHILD_THEME_STYLES . '/woocommerce/woocommerce.css', array(), CHILD_THEME_VERSION );
 
 	}
 

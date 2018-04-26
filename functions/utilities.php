@@ -31,15 +31,15 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function get_config( $sub_config = '' ) {
 
-	global $config;
+	global $child_theme_config;
 
 	if ( $sub_config ) {
 
-		return $config[ $sub_config ];
+		return $child_theme_config[ $sub_config ];
 
 	} else {
 
-		return $config;
+		return $child_theme_config;
 
 	}
 

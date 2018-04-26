@@ -20,16 +20,27 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
+// Load Genesis Framework (do not remove).
+require_once get_template_directory() . '/lib/init.php';
+
 $child_theme = wp_get_theme();
 
+// Child theme constants.
 define( 'CHILD_THEME_NAME', $child_theme->get( 'Name' ) );
 define( 'CHILD_THEME_URL', $child_theme->get( 'ThemeURI' ) );
 define( 'CHILD_THEME_VERSION', $child_theme->get( 'Version' ) );
-define( 'CHILD_TEXT_DOMAIN', $child_theme->get( 'TextDomain' ) );
+define( 'CHILD_THEME_HANDLE', $child_theme->get( 'TextDomain' ) );
+define( 'CHILD_THEME_AUTHOR', $child_theme->get( 'Author' ) );
+define( 'CHILD_THEME_PREFIX', str_replace( '-', '_', CHILD_THEME_HANDLE ) );
 define( 'CHILD_THEME_DIR', get_stylesheet_directory() );
 define( 'CHILD_THEME_URI', get_stylesheet_directory_uri() );
-define( 'CHILD_THEME_PREFIX', str_replace( '-', '_', CHILD_TEXT_DOMAIN ) );
+define( 'CHILD_THEME_LIB', CHILD_THEME_DIR . '/lib' );
+define( 'CHILD_THEME_CONFIG', CHILD_THEME_DIR . '/config/theme.php' );
+define( 'CHILD_THEME_VENDOR', CHILD_THEME_DIR . '/vendor' );
+define( 'CHILD_THEME_SCRIPTS', CHILD_THEME_URI . '/assets/scripts' );
+define( 'CHILD_THEME_STYLES', CHILD_THEME_URI . '/assets/styles' );
+define( 'CHILD_THEME_IMAGES', CHILD_THEME_URI . '/assets/images' );
 
-$config = require apply_filters( 'child_theme_config', CHILD_THEME_DIR . '/config/theme.php' );
+$child_theme_config = require apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
 
-require_once CHILD_THEME_DIR . '/lib/functions/autoload.php';
+require_once CHILD_THEME_LIB . '/functions/autoload.php';
