@@ -35,12 +35,12 @@ add_filter( 'theme_page_templates', __NAMESPACE__ . '\add_page_templates' );
  */
 function add_page_templates( $page_templates ) {
 
-	global $config;
+	global $child_theme_config;
 
 	unset( $page_templates['page_archive.php'] );
 	unset( $page_templates['page_blog.php'] );
 
-	$page_templates = array_merge( $page_templates, $config['page-templates'] );
+	$page_templates = array_merge( $page_templates, $child_theme_config['page-templates'] );
 
 	return $page_templates;
 
@@ -58,9 +58,9 @@ add_filter( 'template_include', __NAMESPACE__ . '\set_page_template' );
  */
 function set_page_template( $template ) {
 
-	global $config;
+	global $child_theme_config;
 
-	$page_templates = $config['page-templates'];
+	$page_templates = $child_theme_config['page-templates'];
 
 	if ( ! is_singular( 'page' ) ) {
 
@@ -84,7 +84,7 @@ function set_page_template( $template ) {
 
 	} else {
 
-		$template_path = CHILD_THEME_DIR . '/lib/templates/' . $current_template;
+		$template_path = CHILD_THEME_LIB . '/templates/' . $current_template;
 
 		if ( file_exists( $template_path ) ) {
 

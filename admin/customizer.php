@@ -53,7 +53,7 @@ function customize_register( $wp_customize ) {
 
 		// Format ID and label.
 		$setting = CHILD_THEME_PREFIX . "_{$id}_color";
-		$label   = ucwords( str_replace( '_', ' ', $id ) ) . __( ' Color', CHILD_TEXT_DOMAIN );
+		$label   = ucwords( str_replace( '_', ' ', $id ) ) . __( ' Color', CHILD_THEME_HANDLE );
 
 		// Add color setting.
 		$wp_customize->add_setting(

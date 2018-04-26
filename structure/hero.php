@@ -24,7 +24,7 @@ register_default_headers( array(
 	'child' => array(
 		'url'           => '%2$s/assets/images/hero.jpg',
 		'thumbnail_url' => '%2$s/assets/images/hero.jpg',
-		'description'   => __( 'Hero Image', CHILD_TEXT_DOMAIN ),
+		'description'   => __( 'Hero Image', CHILD_THEME_HANDLE ),
 	),
 ) );
 
@@ -144,7 +144,7 @@ function page_title() {
 		genesis_markup( array(
 			'open'    => '<h1 %s>',
 			'close'   => '</h1>',
-			'content' => apply_filters( 'genesis_starter_latest_posts_title', __( 'Latest Posts', CHILD_TEXT_DOMAIN ) ),
+			'content' => apply_filters( 'genesis_starter_latest_posts_title', __( 'Latest Posts', CHILD_THEME_HANDLE ) ),
 			'context' => 'entry-title',
 		) );
 
@@ -153,7 +153,7 @@ function page_title() {
 		genesis_markup( array(
 			'open'    => '<h1 %s>',
 			'close'   => '</h1>',
-			'content' => apply_filters( 'genesis_404_entry_title', __( 'Not found, error 404', CHILD_TEXT_DOMAIN ) ),
+			'content' => apply_filters( 'genesis_404_entry_title', __( 'Not found, error 404', CHILD_THEME_HANDLE ) ),
 			'context' => 'entry-title',
 		) );
 
@@ -162,7 +162,7 @@ function page_title() {
 		genesis_markup( array(
 			'open'    => '<h1 %s>',
 			'close'   => '</h1>',
-			'content' => apply_filters( 'genesis_search_title_text', __( 'Search results for: ', CHILD_TEXT_DOMAIN ) ) . get_search_query(),
+			'content' => apply_filters( 'genesis_search_title_text', __( 'Search results for: ', CHILD_THEME_HANDLE ) ) . get_search_query(),
 			'context' => 'entry-title',
 		) );
 

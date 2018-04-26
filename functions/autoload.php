@@ -13,8 +13,6 @@
 
 namespace SEOThemes\Library\Functions;
 
-use SEOThemes\Library\Functions\Utils;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -22,41 +20,125 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
+spl_autoload_register( __NAMESPACE__ . '\spl_autoload_register' );
 /**
- * Load theme files.
+ * Register class autoloader.
  *
- * @since 1.0.0
+ * @since  1.0.0
+ *
+ * @param  string $class Class to load.
  *
  * @return void
  */
-function autoload() {
+function spl_autoload_register( $class ) {
 
-	global $config;
+	$file = CHILD_THEME_LIB . "/classes/{$class}.class.php";
 
-	$files = $config['autoload'];
+	if ( stream_resolve_include_path( $file ) ) {
 
-	//$all = glob( CHILD_THEME_DIR . '/lib/**/*.php' );
+		include $file;
 
-	// $backend   = '';
-	// $backend  .= CHILD_THEME_DIR . '/lib/admin/*.php';
-	// $backend  .= CHILD_THEME_DIR . '/lib/classes/*.php';
-	// $backend  .= CHILD_THEME_DIR . '/lib/widgets/*.php';
-	// $backend   = glob( $backend, GLOB_BRACE );
-
-	// $frontend  = '';
-	// $frontend  = array_diff( $ok, $backend );
-
-	foreach ( (array) $files as $file ) {
-
-		$filename = CHILD_THEME_DIR . '/lib/' . $file . '.php';
-
-		if ( file_exists( $filename ) ) {
-
-			require_once $filename;
-
-		}
 	}
-
 }
 
-autoload();
+/**
+ * Recursively loads all php files in all subdirectories of the given path
+ *
+ * @since  1.0.0
+ *
+ * @param  string $directory Directory of files to autoload.
+ *
+ * @throws \Exception If too many files are loaded.
+ */
+function autoload( $directory ) {
+
+	// Get a listing of the current directory.
+	$scanned_dir = scandir( $directory );
+
+	if ( empty( $scanned_dir ) ) {
+		return;
+	}
+
+	if ( count( $scanned_dir ) > 100 ) {
+		throw new \Exception( 'Too many files attempted to load via autoload' );
+	}
+
+	// Ignore these items from scandir.
+	$ignore = [
+		'.',
+		'..',
+	];
+
+	// Remove the ignored items.
+	$scanned_dir = array_diff( $scanned_dir, $ignore );
+
+	foreach ( $scanned_dir as $item ) {
+
+		$filename  = $directory . '/' . $item;
+		$real_path = realpath( $filename );
+
+		if ( false === $real_path ) {
+			continue;
+		}
+
+		$filetype = filetype( $real_path );
+
+		if ( empty( $filetype ) ) {
+			continue;
+		}
+
+		// If it's a directory then recursively load it.
+		if ( 'dir' === $filetype ) {
+
+			autoload( $real_path );
+
+		} elseif ( 'file' === $filetype ) {
+
+			// Don't allow files that have been uploaded.
+			if ( is_uploaded_file( $real_path ) ) {
+				continue;
+			}
+
+			$filesize = filesize( $real_path );
+			// Don't include empty or negative sized files.
+			if ( $filesize <= 0 ) {
+				continue;
+			}
+
+			// Don't include files that are greater than 300kb.
+			if ( $filesize > 300000 ) {
+				continue;
+			}
+
+			$pathinfo = pathinfo( $real_path );
+
+			// An empty filename wouldn't be a good idea.
+			if ( empty( $pathinfo['filename'] ) ) {
+				continue;
+			}
+
+			// Sorry, need an extension.
+			if ( empty( $pathinfo['extension'] ) ) {
+				continue;
+			}
+
+			// Actually, we want just a PHP extension!
+			if ( 'php' !== $pathinfo['extension'] ) {
+				continue;
+			}
+
+			// Only for files that really exist.
+			if ( true !== file_exists( $real_path ) ) {
+				continue;
+			}
+
+			if ( true !== is_readable( $real_path ) ) {
+				continue;
+			}
+
+			require_once $real_path;
+		}
+	}
+}
+
+autoload( CHILD_THEME_LIB . '/functions' );

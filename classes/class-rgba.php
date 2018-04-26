@@ -116,7 +116,7 @@ class RGBA_Customize_Control extends \WP_Customize_Control {
 		}
 
 		?>
-        <label>
+		<label>
 			<?php
 			if ( isset( $this->description ) && '' !== $this->description ) {
 
@@ -124,10 +124,10 @@ class RGBA_Customize_Control extends \WP_Customize_Control {
 
 			}
 			?>
-            <input class="alpha-color-control" type="text" data-show-opacity="<?php echo esc_html( $show_opacity ); ?>"
-                   data-palette="<?php echo esc_attr( $palette ); ?>"
-                   data-default-color="<?php echo esc_attr( $this->settings['default']->default ); ?>" <?php $this->link(); ?> />
-        </label>
+			<input class="alpha-color-control" type="text" data-show-opacity="<?php echo esc_html( $show_opacity ); ?>"
+			       data-palette="<?php echo esc_attr( $palette ); ?>"
+			       data-default-color="<?php echo esc_attr( $this->settings['default']->default ); ?>" <?php $this->link(); ?> />
+		</label>
 		<?php
 
 	}
