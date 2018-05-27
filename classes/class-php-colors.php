@@ -11,7 +11,7 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Classes;
+namespace SEOThemes\Core\Classes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -29,7 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @link    http://mexitek.github.io/phpColors/
  * @license http://arlo.mit-license.org/
  */
-class Color {
+class PHP_Colors {
 
 	/**
 	 * HEX color.

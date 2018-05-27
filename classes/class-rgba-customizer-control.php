@@ -11,7 +11,7 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Classes;
+namespace SEOThemes\Core\Classes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

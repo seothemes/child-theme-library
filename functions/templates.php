@@ -4,14 +4,16 @@
  *
  * This file adds extra functions used in the Genesis Starter theme.
  *
- * @package   SEOThemes\Library
+ * @package   SEOThemes\Core
  * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
+namespace SEOThemes\Core\Functions;
+
+use SEOThemes\Core\Functions\Utils;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -35,12 +37,12 @@ add_filter( 'theme_page_templates', __NAMESPACE__ . '\add_page_templates' );
  */
 function add_page_templates( $page_templates ) {
 
-	global $child_theme_config;
+	$child_theme_templates = Utils\get_config( 'page-templates' );
 
 	unset( $page_templates['page_archive.php'] );
 	unset( $page_templates['page_blog.php'] );
 
-	$page_templates = array_merge( $page_templates, $child_theme_config['page-templates'] );
+	$page_templates = array_merge( $page_templates, $child_theme_templates );
 
 	return $page_templates;
 
@@ -58,9 +60,7 @@ add_filter( 'template_include', __NAMESPACE__ . '\set_page_template' );
  */
 function set_page_template( $template ) {
 
-	global $child_theme_config;
-
-	$page_templates = $child_theme_config['page-templates'];
+	$page_templates = Utils\get_config( 'page-templates' );
 
 	if ( ! is_singular( 'page' ) ) {
 
@@ -76,7 +76,7 @@ function set_page_template( $template ) {
 
 	}
 
-	$template_override = CHILD_THEME_DIR . '/templates/' . $current_template;
+	$template_override = CHILD_THEME_DIR . '/views/' . $current_template;
 
 	if ( file_exists( $template_override ) ) {
 
@@ -84,7 +84,7 @@ function set_page_template( $template ) {
 
 	} else {
 
-		$template_path = CHILD_THEME_LIB . '/templates/' . $current_template;
+		$template_path = CHILD_THEME_LIB . '/views/' . $current_template;
 
 		if ( file_exists( $template_path ) ) {
 

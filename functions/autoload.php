@@ -11,7 +11,7 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
+namespace SEOThemes\Core\Functions;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -42,7 +42,7 @@ function spl_autoload_register( $class ) {
 }
 
 /**
- * Recursively loads all php files in all subdirectories of the given path
+ * Recursively loads all php files in all subdirectories of the given path.
  *
  * @since  1.0.0
  *
@@ -100,6 +100,7 @@ function autoload( $directory ) {
 			}
 
 			$filesize = filesize( $real_path );
+
 			// Don't include empty or negative sized files.
 			if ( $filesize <= 0 ) {
 				continue;
@@ -140,5 +141,3 @@ function autoload( $directory ) {
 		}
 	}
 }
-
-autoload( CHILD_THEME_LIB . '/functions' );

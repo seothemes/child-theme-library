@@ -11,7 +11,7 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions\Utils;
+namespace SEOThemes\Core\Functions\Utils;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -31,15 +31,15 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function get_config( $sub_config = '' ) {
 
-	global $child_theme_config;
+	$config = require apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
 
 	if ( $sub_config ) {
 
-		return $child_theme_config[ $sub_config ];
+		return $config[ $sub_config ];
 
 	} else {
 
-		return $child_theme_config;
+		return $config;
 
 	}
 

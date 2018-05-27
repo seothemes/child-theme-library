@@ -11,9 +11,10 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Admin;
+namespace SEOThemes\Core\Admin;
 
-use \SEOThemes\Library\Classes\RGBA_Customize_Control;
+use SEOThemes\Core\Functions\Utils;
+use SEOThemes\Core\Classes\RGBA_Customize_Control;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -21,7 +22,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 
 }
-
 
 add_action( 'customize_register', __NAMESPACE__ . '\customize_register' );
 /**
@@ -34,28 +34,76 @@ add_action( 'customize_register', __NAMESPACE__ . '\customize_register' );
  */
 function customize_register( $wp_customize ) {
 
-	// Globals.
 	global $wp_customize;
 
-	// Load default theme colors.
-	$colors = require_once CHILD_THEME_DIR . '/config/theme.php';
+	$wp_customize->remove_control( 'background_color' );
+	$wp_customize->remove_control( 'header_textcolor' );
 
-	/**
-	 * Custom colors.
-	 *
-	 * Loop through the global variable array of colors and
-	 * register a customizer setting and control for each.
-	 * To add additional color settings, do not modify this
-	 * function, instead add your color name and hex value to
-	 * the $colors` array at the start of this file.
-	 */
-	foreach ( $colors['colors'] as $id => $rgba ) {
+	$prefix = str_replace( '-', '_', CHILD_THEME_HANDLE );
+	$colors = Utils\get_config( 'colors' );
 
-		// Format ID and label.
-		$setting = CHILD_THEME_PREFIX . "_{$id}_color";
+	/*
+	| ------------------------------------------------------------------
+	| Logo Size
+	| ------------------------------------------------------------------
+	*/
+	$wp_customize->add_setting(
+		$prefix . '_logo_size',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => 100,
+			'sanitize_callback' => $prefix . '_sanitize_number',
+		)
+	);
+
+	$wp_customize->add_control( new WP_Customize_Control(
+		$wp_customize,
+		$prefix . '_logo_size',
+		array(
+			'label'       => __( 'Logo Size', CHILD_THEME_HANDLE ),
+			'description' => __( 'Set the logo size in pixels. Default is 100.', CHILD_THEME_HANDLE ),
+			'settings'    => $prefix . '_logo_size',
+			'section'     => 'title_tagline',
+			'type'        => 'number',
+			'priority'    => 8,
+		)
+	) );
+
+	/*
+	| ------------------------------------------------------------------
+	| Sticky Header
+	| ------------------------------------------------------------------
+	*/
+	$wp_customize->add_setting(
+		$prefix . '_fixed_header',
+		array(
+			'capability' => 'edit_theme_options',
+			'default'    => false,
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+		$wp_customize,
+		$prefix . '_fixed_header',
+		array(
+			'label'    => __( 'Enable fixed header', CHILD_THEME_HANDLE ),
+			'settings' => $prefix . '_fixed_header',
+			'section'  => 'genesis_layout',
+			'type'     => 'checkbox',
+		)
+	) );
+
+	/*
+	| ------------------------------------------------------------------
+	| Colors
+	| ------------------------------------------------------------------
+	*/
+	foreach ( $colors as $id => $rgba ) {
+
+		$setting = $prefix . "_{$id}_color";
 		$label   = ucwords( str_replace( '_', ' ', $id ) ) . __( ' Color', CHILD_THEME_HANDLE );
 
-		// Add color setting.
 		$wp_customize->add_setting(
 			$setting,
 			array(
@@ -64,7 +112,6 @@ function customize_register( $wp_customize ) {
 			)
 		);
 
-		// Add color control.
 		$wp_customize->add_control(
 			new RGBA_Customize_Control(
 				$wp_customize,
@@ -74,16 +121,7 @@ function customize_register( $wp_customize ) {
 					'label'        => $label,
 					'settings'     => $setting,
 					'show_opacity' => true,
-					'palette'      => array(
-						'#000000',
-						'#ffffff',
-						'#dd3333',
-						'#dd9933',
-						'#eeee22',
-						'#81d742',
-						'#1e73be',
-						'#8224e3',
-					),
+					'palette'      => true,
 				)
 			)
 		);

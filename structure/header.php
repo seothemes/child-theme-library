@@ -20,6 +20,9 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
+// Display custom logo in site title area.
+add_action( 'genesis_site_title', 'the_custom_logo', 0 );
+
 add_filter( 'genesis_markup_title-area_close', __NAMESPACE__ . '\after_title_area', 10, 2 );
 /**
  * Appends HTML to the closing markup for .title-area.

@@ -4,16 +4,16 @@
  *
  * This file adds extra functions used in the Genesis Starter theme.
  *
- * @package   SEOThemes\Library
+ * @package   SEOThemes\Core
  * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
+namespace SEOThemes\Core\Functions;
 
-use SEOThemes\Library\Functions\Utils;
+use SEOThemes\Core\Functions\Utils;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

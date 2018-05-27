@@ -20,22 +20,10 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'after_setup_theme', __NAMESPACE__ . '\theme_setup', 1 );
-/**
- * Sets up the theme.
- *
- * @since  2.6.0
- *
- * @return void
- */
-function theme_setup() {
+// Reposition primary navigation menu.
+remove_action( 'genesis_after_header', 'genesis_do_nav' );
+add_action( 'genesis_after_title_area', 'genesis_do_nav' );
 
-	// Reposition primary navigation menu.
-	remove_action( 'genesis_after_header', 'genesis_do_nav' );
-	add_action( 'genesis_after_title_area', 'genesis_do_nav' );
-
-	// Reposition the secondary navigation menu.
-	remove_action( 'genesis_after_header', 'genesis_do_subnav' );
-	add_action( 'genesis_after_header_wrap', 'genesis_do_subnav' );
-
-}
+// Reposition the secondary navigation menu.
+remove_action( 'genesis_after_header', 'genesis_do_subnav' );
+add_action( 'genesis_after_header_wrap', 'genesis_do_subnav' );

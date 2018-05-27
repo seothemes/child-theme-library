@@ -4,16 +4,16 @@
  *
  * This file adds extra functions used in the Genesis Starter theme.
  *
- * @package   SEOThemes\Library
+ * @package   SEOThemes\Core
  * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Admin;
+namespace SEOThemes\Core\Admin;
 
-use SEOThemes\Library\Functions\Utils;
+use SEOThemes\Core\Functions\Utils;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -36,16 +36,16 @@ function customizer_output() {
 	$colors = Utils\get_config( 'colors' );
 
 	/**
-	 * Loop though each color in the global array of theme colors
-	 * and create a new variable for each. This is just a shorthand
-	 * way of creating multiple variables that we can reuse. The
-	 * benefit of using a foreach loop over creating each variable
-	 * manually is that we can just declare the colors once in the
-	 * `$colors` array, and they can be used in multiple ways.
+	 * Loop though each color in the global array of theme colors and create a new
+	 * variable for each. This is just a shorthand way of creating multiple
+	 * variables that we can reuse. The benefit of using a foreach loop
+	 * over creating each variable manually is that we can just
+	 * declare the colors once in the `$colors` array, and
+	 * they can be used in multiple ways.
 	 */
 	foreach ( $colors as $id => $hex ) {
 
-		${"$id"} = get_theme_mod( CHILD_THEME_PREFIX . "_{$id}_color",  $hex );
+		${"$id"} = get_theme_mod( str_replace( '-', '_', CHILD_THEME_HANDLE ) . "_{$id}_color",  $hex );
 
 	}
 
@@ -55,10 +55,10 @@ function customizer_output() {
 	/**
 	 * Build the CSS.
 	 *
-	 * We need to concatenate each one of our colors to the $css
-	 * variable, but first check if the color has been changed by
-	 * the user from the theme customizer. If the theme mod is not
-	 * equal to the default color then the string is appended to $css.
+	 * We need to concatenate each one of our colors to the $css variable, but first
+	 * check if the color has been changed by the user from the theme customizer.
+	 * If the theme mod is not equal to the default color then the string is
+	 * appended to $css.
 	 */
 	$css .= ( $colors['primary'] !== $primary ) ? sprintf( '
 
@@ -100,7 +100,7 @@ function customizer_output() {
 	if ( ! empty( $css ) ) {
 
 		// Add the inline styles, also minify CSS first.
-		wp_add_inline_style( $handle, Functions\minify_css( $css ) );
+		wp_add_inline_style( $handle, Utils\minify_css( $css ) );
 
 	}
 
