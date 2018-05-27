@@ -11,9 +11,7 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library;
-
-add_action( 'tgmpa_register', __NAMESPACE__ . '\required_plugins' );
+add_action( 'tgmpa_register', 'child_theme_required_plugins' );
 /**
  * Register required plugins.
  *
@@ -33,11 +31,9 @@ add_action( 'tgmpa_register', __NAMESPACE__ . '\required_plugins' );
  *
  * @return void
  */
-function required_plugins() {
+function child_theme_required_plugins() {
 
-	global $child_theme_config;
-
-	$plugins = $child_theme_config['plugins'];
+	$plugins = child_theme_get_config( 'plugins' );
 
 	if ( class_exists( 'WooCommerce' ) ) {
 

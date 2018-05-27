@@ -11,26 +11,10 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Core\Functions;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
 	die;
-
-}
-
-/**
- * Sets up the theme.
- *
- * @since  2.6.0
- *
- * @return void
- */
-function setup_theme() {
-
-	// Enable shortcodes in text widgets.
-	add_filter( 'widget_text', 'do_shortcode' );
 
 }
 
@@ -41,7 +25,7 @@ function setup_theme() {
  *
  * @return void
  */
-function add_theme_textdomain() {
+function child_theme_add_textdomain() {
 
 	// Set Localization (do not remove).
 	load_child_theme_textdomain( CHILD_THEME_HANDLE, apply_filters( 'child_theme_textdomain', CHILD_THEME_LIB . '/languages', CHILD_THEME_HANDLE ) );
@@ -57,7 +41,7 @@ function add_theme_textdomain() {
  *
  * @return void
  */
-function add_theme_supports( array $config ) {
+function child_theme_add_theme_supports( array $config ) {
 
 	foreach ( $config as $feature => $args ) {
 
@@ -76,7 +60,7 @@ function add_theme_supports( array $config ) {
  *
  * @return void
  */
-function add_theme_layouts( array $config ) {
+function child_theme_add_layouts( array $config ) {
 
 	foreach ( $config as $layout ) {
 
@@ -95,7 +79,7 @@ function add_theme_layouts( array $config ) {
  *
  * @return void
  */
-function add_theme_widget_areas( $config ) {
+function child_theme_add_widget_areas( $config ) {
 
 	unregister_sidebar( 'after-entry' );
 	unregister_sidebar( 'header-right' );
@@ -126,7 +110,7 @@ function add_theme_widget_areas( $config ) {
  *
  * @return void
  */
-function add_theme_image_sizes( array $config ) {
+function child_theme_add_image_sizes( array $config ) {
 
 	foreach ( $config as $name => $args ) {
 
@@ -147,7 +131,7 @@ function add_theme_image_sizes( array $config ) {
  *
  * @return void
  */
-function add_post_type_supports( array $config ) {
+function child_theme_add_post_type_supports( array $config ) {
 
 	foreach ( $config as $post_type => $support ) {
 

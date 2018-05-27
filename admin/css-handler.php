@@ -11,10 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Core\Admin;
-
-use SEOThemes\Core\Functions\Utils;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -22,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\customizer_output', 100 );
+add_action( 'wp_enqueue_scripts', 'child_theme_customizer_output', 100 );
 /**
  * Output customizer styles.
  *
@@ -31,9 +27,9 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\customizer_output', 100 );
  *
  * @var array $colors Global theme colors.
  */
-function customizer_output() {
+function child_theme_customizer_output() {
 
-	$colors = Utils\get_config( 'colors' );
+	$colors = child_theme_get_config( 'colors' );
 
 	/**
 	 * Loop though each color in the global array of theme colors and create a new
@@ -100,7 +96,7 @@ function customizer_output() {
 	if ( ! empty( $css ) ) {
 
 		// Add the inline styles, also minify CSS first.
-		wp_add_inline_style( $handle, Utils\minify_css( $css ) );
+		wp_add_inline_style( $handle, child_theme_minify_css( $css ) );
 
 	}
 

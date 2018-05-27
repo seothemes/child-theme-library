@@ -11,10 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Core\Functions;
-
-use SEOThemes\Core\Functions\Utils;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -22,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'wp_head', __NAMESPACE__ . '\remove_ssi_inline_styles', 1 );
+add_action( 'wp_head', 'child_theme_remove_ssi_inline_styles', 1 );
 /**
  * Remove Simple Social Icons inline CSS.
  *
@@ -33,7 +29,7 @@ add_action( 'wp_head', __NAMESPACE__ . '\remove_ssi_inline_styles', 1 );
  *
  * @return void
  */
-function remove_ssi_inline_styles() {
+function child_theme_remove_ssi_inline_styles() {
 
 	global $wp_widget_factory;
 
@@ -41,7 +37,7 @@ function remove_ssi_inline_styles() {
 
 }
 
-add_action( 'wp_head', __NAMESPACE__ . '\simple_social_icons_css' );
+add_action( 'wp_head', 'child_theme_simple_social_icons_css' );
 /**
  * Simple Social Icons multiple instances workaround.
  *
@@ -53,7 +49,7 @@ add_action( 'wp_head', __NAMESPACE__ . '\simple_social_icons_css' );
  *
  * @return void
  */
-function simple_social_icons_css() {
+function child_theme_simple_social_icons_css() {
 
 	if ( ! class_exists( 'Simple_Social_Icons_Widget' ) ) {
 
@@ -91,7 +87,7 @@ function simple_social_icons_css() {
 		}';
 
 		// Minify.
-		$css = Utils\minify_css( $css );
+		$css = child_theme_minify_css( $css );
 
 		// Output.
 		printf( '<style type="text/css" media="screen">%s</style>', $css );

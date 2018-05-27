@@ -10,9 +10,7 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Core\Classes;
-
-class Demo_Import {
+class Child_Theme_Demo_Import {
 
 	public function __construct() {
 

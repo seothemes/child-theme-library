@@ -11,8 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -20,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'after_switch_theme', __NAMESPACE__ . '\display_excerpt_metabox' );
+add_action( 'after_switch_theme', 'child_theme_display_excerpt_metabox' );
 /**
  * Display excerpt metabox by default.
  *
@@ -34,7 +32,7 @@ add_action( 'after_switch_theme', __NAMESPACE__ . '\display_excerpt_metabox' );
  *
  * @return void
  */
-function display_excerpt_metabox() {
+function child_theme_display_excerpt_metabox() {
 
 	// Get current user ID.
 	$user_id = get_current_user_id();

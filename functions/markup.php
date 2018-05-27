@@ -11,8 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -20,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_filter( 'body_class', __NAMESPACE__ . '\body_class' );
+add_filter( 'body_class', 'child_theme_body_class' );
 /**
  * Add fixed header class.
  *
@@ -34,7 +32,7 @@ add_filter( 'body_class', __NAMESPACE__ . '\body_class' );
  *
  * @return array
  */
-function body_class( $classes ) {
+function child_theme_body_class( $classes ) {
 
 	if ( current_theme_supports( 'fixed-header' ) ) {
 
@@ -67,7 +65,7 @@ function body_class( $classes ) {
 
 }
 
-add_filter( 'genesis_attr_title-area', __NAMESPACE__ . '\title_area_schema' );
+add_filter( 'genesis_attr_title-area', 'child_theme_title_area_schema' );
 /**
  * Add schema microdata to title-area.
  *
@@ -77,7 +75,7 @@ add_filter( 'genesis_attr_title-area', __NAMESPACE__ . '\title_area_schema' );
  *
  * @return array
  */
-function title_area_schema( $attr ) {
+function child_theme_title_area_schema( $attr ) {
 
 	$attr['itemscope'] = 'itemscope';
 	$attr['itemtype']  = 'http://schema.org/Organization';
@@ -86,7 +84,7 @@ function title_area_schema( $attr ) {
 
 }
 
-add_filter( 'genesis_attr_site-title', __NAMESPACE__ . '\site_title_schema' );
+add_filter( 'genesis_attr_site-title', 'child_theme_site_title_schema' );
 /**
  * Correct site title schema.
  *
@@ -96,14 +94,14 @@ add_filter( 'genesis_attr_site-title', __NAMESPACE__ . '\site_title_schema' );
  *
  * @return array
  */
-function site_title_schema( $attr ) {
+function child_theme_site_title_schema( $attr ) {
 
 	$attr['itemprop'] = 'name';
 
 	return $attr;
 }
 
-add_filter( 'genesis_attr_hero-section', __NAMESPACE__ . '\hero_section_attr' );
+add_filter( 'genesis_attr_hero-section', 'child_theme_hero_section_attr' );
 /**
  * Callback for dynamic Genesis 'genesis_attr_$context' filter.
  *
@@ -115,7 +113,7 @@ add_filter( 'genesis_attr_hero-section', __NAMESPACE__ . '\hero_section_attr' );
  *
  * @return array
  */
-function hero_section_attr( $attr ) {
+function child_theme_hero_section_attr( $attr ) {
 
 	$attr['id']   = 'hero-section';
 	$attr['role'] = 'banner';
@@ -124,7 +122,7 @@ function hero_section_attr( $attr ) {
 
 }
 
-add_filter( 'genesis_attr_entry', __NAMESPACE__ . '\entry_attr' );
+add_filter( 'genesis_attr_entry', 'child_theme_entry_attr' );
 /**
  * Add itemref attribute to link entry-title.
  *
@@ -140,7 +138,7 @@ add_filter( 'genesis_attr_entry', __NAMESPACE__ . '\entry_attr' );
  *
  * @return array
  */
-function entry_attr( $atts ) {
+function child_theme_entry_attr( $atts ) {
 
 	$atts['itemref'] = 'hero-section';
 

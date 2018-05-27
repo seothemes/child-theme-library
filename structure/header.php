@@ -11,8 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -23,7 +21,7 @@ if ( ! defined( 'WPINC' ) ) {
 // Display custom logo in site title area.
 add_action( 'genesis_site_title', 'the_custom_logo', 0 );
 
-add_filter( 'genesis_markup_title-area_close', __NAMESPACE__ . '\after_title_area', 10, 2 );
+add_filter( 'genesis_markup_title-area_close', 'child_theme_after_title_area', 10, 2 );
 /**
  * Appends HTML to the closing markup for .title-area.
  *
@@ -40,7 +38,7 @@ add_filter( 'genesis_markup_title-area_close', __NAMESPACE__ . '\after_title_are
  *
  * @return string
  */
-function after_title_area( $close_html, $args ) {
+function child_theme_after_title_area( $close_html, $args ) {
 
 	if ( $close_html ) {
 

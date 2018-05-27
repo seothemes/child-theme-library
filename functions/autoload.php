@@ -11,8 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Core\Functions;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -20,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-spl_autoload_register( __NAMESPACE__ . '\spl_autoload_register' );
+spl_autoload_register( 'child_theme_spl_autoload_register' );
 /**
  * Register class autoloader.
  *
@@ -30,7 +28,7 @@ spl_autoload_register( __NAMESPACE__ . '\spl_autoload_register' );
  *
  * @return void
  */
-function spl_autoload_register( $class ) {
+function child_theme_spl_autoload_register( $class ) {
 
 	$file = CHILD_THEME_LIB . "/classes/{$class}.class.php";
 
@@ -50,7 +48,7 @@ function spl_autoload_register( $class ) {
  *
  * @throws \Exception If too many files are loaded.
  */
-function autoload( $directory ) {
+function child_theme_autoloader( $directory ) {
 
 	// Get a listing of the current directory.
 	$scanned_dir = scandir( $directory );
@@ -90,7 +88,7 @@ function autoload( $directory ) {
 		// If it's a directory then recursively load it.
 		if ( 'dir' === $filetype ) {
 
-			autoload( $real_path );
+			child_theme_autoload( $real_path );
 
 		} elseif ( 'file' === $filetype ) {
 

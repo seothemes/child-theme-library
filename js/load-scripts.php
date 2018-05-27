@@ -11,10 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
-
-use SEOThemes\Library\Functions;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -22,19 +18,19 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\load_scripts', 99 );
+add_action( 'wp_enqueue_scripts', 'child_theme_load_scripts', 99 );
 /**
  * Enqueue theme scripts and styles.
  *
  * @return void
  */
-function load_scripts() {
+function child_theme_load_scripts() {
 
 	// Enqueue custom theme scripts.
-	wp_enqueue_script( CHILD_THEME_HANDLE, CHILD_THEME_SCRIPTS . '/scripts.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
+	wp_enqueue_script( CHILD_THEME_HANDLE, CHILD_THEME_ASSETS . '/scripts/scripts.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
 
 	// Enqueue responsive menu script.
-	wp_enqueue_script( 'genesis-menus', CHILD_THEME_SCRIPTS . '/menus.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
+	wp_enqueue_script( 'genesis-menus', CHILD_THEME_ASSETS . '/scripts/menus.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
 
 	// Localize responsive menu script.
 	wp_localize_script( CHILD_THEME_HANDLE, 'genesis_responsive_menu', array(

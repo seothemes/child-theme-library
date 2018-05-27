@@ -11,8 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -20,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_filter( 'http_request_args', __NAMESPACE__ . '\dont_update_theme', 5, 2 );
+add_filter( 'http_request_args', 'child_theme_dont_update_theme', 5, 2 );
 /**
  * Don't Update Theme.
  *
@@ -34,7 +32,7 @@ add_filter( 'http_request_args', __NAMESPACE__ . '\dont_update_theme', 5, 2 );
  *
  * @return array  request arguments
  */
-function dont_update_theme( $request, $url ) {
+function child_theme_dont_update_theme( $request, $url ) {
 
 	 // Not a theme update request. Bail immediately.
 	if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check' ) ) {

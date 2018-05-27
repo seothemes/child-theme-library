@@ -11,9 +11,27 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library;
+add_action( 'after_setup_theme', 'child_theme_register_default_headers' );
+/**
+ * Register default header image.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function child_theme_register_default_headers() {
 
-add_filter( 'genesis_theme_settings_defaults', __NAMESPACE__ . '\set_theme_default_settings' );
+	register_default_headers( array(
+		'child' => array(
+			'url' => '%2$s/assets/images/hero.jpg',
+			'thumbnail_url' => '%2$s/assets/images/hero.jpg',
+			'description' => __( 'Hero Image', CHILD_THEME_HANDLE ),
+		),
+	) );
+
+}
+
+add_filter( 'genesis_theme_settings_defaults', 'child_theme_set_default_settings' );
 /**
  * Update Theme Settings upon reset.
  *
@@ -23,9 +41,9 @@ add_filter( 'genesis_theme_settings_defaults', __NAMESPACE__ . '\set_theme_defau
  *
  * @return array Custom theme settings.
  */
-function set_theme_default_settings( array $defaults ) {
+function child_theme_set_default_settings( array $defaults ) {
 
-	global $child_theme_config;
+	$child_theme_config = child_theme_get_config();
 
 	$defaults = wp_parse_args( $child_theme_config['genesis-settings'], $defaults );
 
@@ -33,7 +51,7 @@ function set_theme_default_settings( array $defaults ) {
 
 }
 
-add_action( 'after_switch_theme', __NAMESPACE__ . '\update_theme_settings' );
+add_action( 'after_switch_theme', 'child_theme_update_settings' );
 /**
  * Update Theme Settings upon activation.
  *
@@ -41,9 +59,9 @@ add_action( 'after_switch_theme', __NAMESPACE__ . '\update_theme_settings' );
  *
  * @return void
  */
-function update_theme_settings() {
+function child_theme_update_settings() {
 
-	global $child_theme_config;
+	$child_theme_config = child_theme_get_config();
 
 	if ( function_exists( 'genesis_update_settings' ) ) {
 
@@ -56,7 +74,7 @@ function update_theme_settings() {
 }
 
 
-add_filter( 'simple_social_default_styles', __NAMESPACE__ . '\ssi_default_styles' );
+add_filter( 'simple_social_default_styles', 'child_theme_ssi_default_styles' );
 /**
  * Simple Social Icons default settings.
  *
@@ -66,9 +84,9 @@ add_filter( 'simple_social_default_styles', __NAMESPACE__ . '\ssi_default_styles
  *
  * @return array Custom settings.
  */
-function ssi_default_styles( $defaults ) {
+function child_theme_ssi_default_styles( $defaults ) {
 
-	global $child_theme_config;
+	$child_theme_config = child_theme_get_config();
 
 	$defaults = wp_parse_args( $child_theme_config['simple-social-icons'], $defaults );
 

@@ -11,11 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Core;
-
-use SEOThemes\Core\Functions;
-use SEOThemes\Core\Functions\Utils;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -23,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'after_setup_theme', __NAMESPACE__ . '\init', 10 );
+add_action( 'after_setup_theme', 'child_theme_init', 10 );
 /**
  * Description of expected behavior.
  *
@@ -31,20 +26,20 @@ add_action( 'after_setup_theme', __NAMESPACE__ . '\init', 10 );
  *
  * @return void
  */
-function init() {
+function child_theme_init() {
 
 	/**
 	 * Hooks.
 	 *
-	 * @hooked SEOThemes\Core\constants - 0
-	 * @hooked SEOThemes\Core\autoload  - 5
-	 * @hooked SEOThemes\Core\setup     - 10
+	 * @hooked child_theme_constants - 0
+	 * @hooked child_theme_autoload  - 5
+	 * @hooked child_theme_setup     - 10
 	 */
 	do_action( 'child_theme_init' );
 
 }
 
-add_action( 'child_theme_init', __NAMESPACE__ . '\constants', 0 );
+add_action( 'child_theme_init', 'child_theme_constants', 0 );
 /**
  * Defines the child theme constants.
  *
@@ -52,7 +47,7 @@ add_action( 'child_theme_init', __NAMESPACE__ . '\constants', 0 );
  *
  * @return void
  */
-function constants() {
+function child_theme_constants() {
 
 	define( 'CHILD_THEME_NAME',    wp_get_theme()->get( 'Name' )         );
 	define( 'CHILD_THEME_URL',     wp_get_theme()->get( 'ThemeURI' )     );
@@ -69,7 +64,7 @@ function constants() {
 
 }
 
-add_action( 'child_theme_init', __NAMESPACE__ . '\autoload', 5 );
+add_action( 'child_theme_init', 'child_theme_autoload', 5 );
 /**
  * Description of expected behavior.
  *
@@ -79,17 +74,27 @@ add_action( 'child_theme_init', __NAMESPACE__ . '\autoload', 5 );
  *
  * @return void
  */
-function autoload() {
+function child_theme_autoload() {
 
 	require_once CHILD_THEME_LIB . '/functions/autoload.php';
 
-	Functions\autoload( CHILD_THEME_LIB . '/functions' );
-	Functions\autoload( CHILD_THEME_LIB . '/structure' );
-	Functions\autoload( CHILD_THEME_LIB . '/admin'     );
+	$dirs = array(
+		'/functions',
+		'/structure',
+		'/admin',
+		'/css',
+		'/js',
+	);
+
+	foreach ( $dirs as $dir ) {
+
+		child_theme_autoloader( CHILD_THEME_LIB . $dir );
+
+	}
 
 }
 
-add_action( 'child_theme_init', __NAMESPACE__ . '\setup', 10 );
+add_action( 'child_theme_init', 'child_theme_setup', 10 );
 /**
  * Description of expected behavior.
  *
@@ -97,14 +102,13 @@ add_action( 'child_theme_init', __NAMESPACE__ . '\setup', 10 );
  *
  * @return void
  */
-function setup() {
+function child_theme_setup() {
 
-	require_once CHILD_THEME_LIB . '/functions/setup.php';
-
-	Functions\add_theme_supports(     Utils\get_config( 'theme-support'     ) );
-	Functions\add_theme_layouts(      Utils\get_config( 'layouts'           ) );
-	Functions\add_theme_widget_areas( Utils\get_config( 'widget-areas'      ) );
-	Functions\add_theme_image_sizes(  Utils\get_config( 'image-sizes'       ) );
-	Functions\add_post_type_supports( Utils\get_config( 'post-type-support' ) );
+	child_theme_add_textdomain();
+	child_theme_add_theme_supports( child_theme_get_config( 'theme-support' ) );
+	child_theme_add_layouts( child_theme_get_config( 'layouts' ) );
+	child_theme_add_widget_areas( child_theme_get_config( 'widget-areas' ) );
+	child_theme_add_image_sizes( child_theme_get_config( 'image-sizes' ) );
+	child_theme_add_post_type_supports( child_theme_get_config( 'post-type-support' ) );
 
 }

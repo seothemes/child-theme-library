@@ -11,8 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Core\Functions\Utils;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -25,11 +23,11 @@ if ( ! defined( 'WPINC' ) ) {
  *
  * @since  2.0.0
  *
- * @param  array $sub_config The rgba config to sanitize.
+ * @param  string $sub_config The rgba config to sanitize.
  *
  * @return mixed
  */
-function get_config( $sub_config = '' ) {
+function child_theme_get_config( $sub_config = '' ) {
 
 	$config = require apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
 
@@ -57,7 +55,7 @@ function get_config( $sub_config = '' ) {
  *
  * @return string $color Sanitized value.
  */
-function sanitize_rgba_color( $color ) {
+function child_theme_sanitize_rgba_color( $color ) {
 
 	// Return invisible if empty.
 	if ( empty( $color ) || is_array( $color ) ) {
@@ -92,7 +90,7 @@ function sanitize_rgba_color( $color ) {
  *
  * @return string Minified CSS.
  */
-function minify_css( $css ) {
+function child_theme_minify_css( $css ) {
 
 	// Normalize whitespace.
 	$css = preg_replace( '/\s+/', ' ', $css );
@@ -137,7 +135,7 @@ function minify_css( $css ) {
  *
  * @return bool
  */
-function is_woocommerce_page() {
+function child_theme_is_woocommerce_page() {
 
 	if ( ! class_exists( 'WooCommerce' ) ) {
 
@@ -171,7 +169,7 @@ function is_woocommerce_page() {
  *
  * @return string
  */
-function custom_header() {
+function child_theme_custom_header() {
 
 	$id = '';
 

@@ -11,11 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Core\Admin;
-
-use SEOThemes\Core\Functions\Utils;
-use SEOThemes\Core\Classes\RGBA_Customize_Control;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -23,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'customize_register', __NAMESPACE__ . '\customize_register' );
+add_action( 'customize_register', 'child_theme_customize_register' );
 /**
  * Sets up the theme customizer sections, controls, and settings.
  *
@@ -40,7 +35,7 @@ function customize_register( $wp_customize ) {
 	$wp_customize->remove_control( 'header_textcolor' );
 
 	$prefix = str_replace( '-', '_', CHILD_THEME_HANDLE );
-	$colors = Utils\get_config( 'colors' );
+	$colors = child_theme_get_config( 'colors' );
 
 	/*
 	| ------------------------------------------------------------------
@@ -113,7 +108,7 @@ function customize_register( $wp_customize ) {
 		);
 
 		$wp_customize->add_control(
-			new RGBA_Customize_Control(
+			new Child_Theme_RGBA_Customizer_Control(
 				$wp_customize,
 				$setting,
 				array(
