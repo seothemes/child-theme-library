@@ -32,7 +32,7 @@ function child_theme_spl_autoload_register( $class ) {
 
 	$file_name = str_replace( '_', '-', strtolower( $class ) );
 
-	$file = CHILD_THEME_LIB . "/classes/class-child-theme-{$file_name}.php";
+	$file = CHILD_THEME_LIB . "/classes/class-{$file_name}.php";
 
 	if ( stream_resolve_include_path( $file ) ) {
 

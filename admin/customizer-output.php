@@ -28,16 +28,23 @@ add_action( 'wp_enqueue_scripts', 'child_theme_customizer_output', 100 );
  */
 function child_theme_customizer_output() {
 
-	$colors = child_theme_get_config( 'colors' );
-	$css    = '';
+	$css       = '';
+	$colors    = child_theme_get_config( 'colors' );
+	$logo_size = get_theme_mod( 'child_theme_logo_size', '170' );
 
-	foreach ( $colors as $color => $values ) {
+	$css .= ( '170' !== $logo_size ) ? sprintf( '
+		.wp-custom-logo .title-area {
+			width: %1$spx;
+		}
+	', $logo_size ) : '';
 
-		$custom_color = get_theme_mod( str_replace( '-', '_', CHILD_THEME_HANDLE ) . "_{$color}_color", $values['hex'] );
+	foreach ( $colors as $color => $settings ) {
+
+		$custom_color = get_theme_mod( "child_theme_{$color}_color", $settings['value'] );
 
 		if ( $color !== $custom_color ) {
 
-			foreach ( $values['css'] as $rule ) {
+			foreach ( $settings['css'] as $rule ) {
 
 				$counter = 0;
 
@@ -52,7 +59,7 @@ function child_theme_customizer_output() {
 
 				foreach ( $rule['properties'] as $property ) {
 
-					$css .= $property . ':' . $values['hex'] . ';';
+					$css .= $property . ':' . $custom_color . ';';
 
 				}
 
@@ -66,7 +73,7 @@ function child_theme_customizer_output() {
 
 	if ( ! empty( $css ) ) {
 
-		wp_add_inline_style( CHILD_THEME_HANDLE, child_theme_minify_css( $css ) );
+		wp_add_inline_style( sanitize_title_with_dashes( CHILD_THEME_NAME ), child_theme_minify_css( $css ) );
 
 	}
 

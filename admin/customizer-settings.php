@@ -31,14 +31,13 @@ add_action( 'customize_register', 'child_theme_customize_register' );
  *
  * @return void
  */
-function customize_register( $wp_customize ) {
+function child_theme_customize_register( $wp_customize ) {
 
 	global $wp_customize;
 
 	$wp_customize->remove_control( 'background_color' );
 	$wp_customize->remove_control( 'header_textcolor' );
 
-	$prefix = str_replace( '-', '_', CHILD_THEME_HANDLE );
 	$colors = child_theme_get_config( 'colors' );
 
 	/*
@@ -47,21 +46,21 @@ function customize_register( $wp_customize ) {
 	| ------------------------------------------------------------------
 	*/
 	$wp_customize->add_setting(
-		$prefix . '_logo_size',
+		'child_theme_logo_size',
 		array(
 			'capability'        => 'edit_theme_options',
 			'default'           => 100,
-			'sanitize_callback' => $prefix . '_sanitize_number',
+			'sanitize_callback' => 'child_theme_sanitize_number',
 		)
 	);
 
 	$wp_customize->add_control( new WP_Customize_Control(
 		$wp_customize,
-		$prefix . '_logo_size',
+		'child_theme_logo_size',
 		array(
 			'label'       => __( 'Logo Size', CHILD_THEME_HANDLE ),
 			'description' => __( 'Set the logo size in pixels. Default is 100.', CHILD_THEME_HANDLE ),
-			'settings'    => $prefix . '_logo_size',
+			'settings'    => 'child_theme_logo_size',
 			'section'     => 'title_tagline',
 			'type'        => 'number',
 			'priority'    => 8,
@@ -74,7 +73,7 @@ function customize_register( $wp_customize ) {
 	| ------------------------------------------------------------------
 	*/
 	$wp_customize->add_setting(
-		$prefix . '_fixed_header',
+		'child_theme_fixed_header',
 		array(
 			'capability' => 'edit_theme_options',
 			'default'    => false,
@@ -84,10 +83,10 @@ function customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		new WP_Customize_Control(
 		$wp_customize,
-		$prefix . '_fixed_header',
+		'child_theme_fixed_header',
 		array(
 			'label'    => __( 'Enable fixed header', CHILD_THEME_HANDLE ),
-			'settings' => $prefix . '_fixed_header',
+			'settings' => 'child_theme_fixed_header',
 			'section'  => 'genesis_layout',
 			'type'     => 'checkbox',
 		)
@@ -98,16 +97,16 @@ function customize_register( $wp_customize ) {
 	| Colors
 	| ------------------------------------------------------------------
 	*/
-	foreach ( $colors as $id => $rgba ) {
+	foreach ( $colors as $color => $settings ) {
 
-		$setting = $prefix . "_{$id}_color";
-		$label   = ucwords( str_replace( '_', ' ', $id ) ) . __( ' Color', CHILD_THEME_HANDLE );
+		$setting = "child_theme_{$color}_color";
+		$label   = ucwords( str_replace( '_', ' ', $color ) ) . __( ' Color', CHILD_THEME_HANDLE );
 
 		$wp_customize->add_setting(
 			$setting,
 			array(
-				'default'           => $rgba,
-				'sanitize_callback' => 'sanitize_rgba_color',
+				'default'           => $settings['value'],
+				'sanitize_callback' => 'child_theme_sanitize_rgba_color',
 			)
 		);
 
