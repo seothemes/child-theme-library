@@ -18,130 +18,86 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_filter( 'body_class', 'child_theme_body_class' );
+add_filter( 'genesis_markup_title-area_close', 'child_theme_after_title_area', 10, 2 );
 /**
- * Add fixed header class.
+ * Appends HTML to the closing markup for .title-area.
  *
- * Checks if theme supports a fixed header and if so, adds a 'fixed-header'
- * class to the body. To enable a fixed header simply add theme support e.g:
- * `add_theme_support( 'fixed-header' );`
+ * Adding something between the title + description and widget area used to require
+ * re-building genesis_do_header(). However, since the title-area closing markup
+ * now goes through genesis_markup(), it means we now have some extra filters
+ * to play with. This function makes use of this and adds in an extra hook
+ * after the title-area used for displaying the primary navigation menu.
  *
- * @since  2.0.0
+ * @since  0.1.0
  *
- * @param  array $classes Body classes.
+ * @param  string $close_html HTML tag being processed by the API.
+ * @param  array  $args       Array with markup arguments.
  *
- * @return array
+ * @return string
  */
-function child_theme_body_class( $classes ) {
+function child_theme_after_title_area( $close_html, $args ) {
 
-	if ( current_theme_supports( 'fixed-header' ) ) {
+	if ( $close_html ) {
 
-		$classes[] = 'has-fixed-header';
+		ob_start();
+
+		do_action( 'genesis_after_title_area' );
+
+		$close_html = $close_html . ob_get_clean();
 
 	}
 
-	if ( has_nav_menu( 'secondary' ) ) {
+	return $close_html;
 
-		$classes[] = 'has-nav-secondary';
+}
+
+add_action( 'init', 'child_theme_structural_wrap_hooks' );
+/**
+ * Add hooks immediately before and after Genesis structural wraps.
+ *
+ * @since   1.0.0
+ *
+ * @version 1.1.0
+ * @author  Tim Jensen
+ * @link    https://timjensen.us/add-hooks-before-genesis-structural-wraps
+ *
+ * @return void
+ */
+function child_theme_structural_wrap_hooks() {
+
+	$wraps = get_theme_support( 'genesis-structural-wraps' );
+
+	foreach ( $wraps[0] as $context ) {
+
+		/**
+		 * Inserts an action hook before the opening div and after the closing div
+		 * for each of the structural wraps.
+		 *
+		 * @param string $output   HTML for opening or closing the structural wrap.
+		 * @param string $original Either 'open' or 'close'.
+		 *
+		 * @return string
+		 */
+		add_filter( "genesis_structural_wrap-{$context}", function ( $output, $original ) use ( $context ) {
+
+			$position = ( 'open' === $original ) ? 'before' : 'after';
+
+			ob_start();
+
+			do_action( "genesis_{$position}_{$context}_wrap" );
+
+			if ( 'open' === $original ) {
+
+				return ob_get_clean() . $output;
+
+			} else {
+
+				return $output . ob_get_clean();
+
+			}
+
+		}, 10, 2 );
 
 	}
-
-	if ( is_active_sidebar( 'before-header' ) ) {
-
-		$classes[] = 'has-before-header';
-
-	}
-
-	if ( is_page_template( 'page-blog.php' ) ) {
-
-		$classes[] = 'blog';
-		$classes = array_diff( $classes, [ 'page' ] );
-
-	}
-
-	$classes[] = str_replace( '.php', '', get_page_template_slug() );
-
-	return $classes;
-
-}
-
-add_filter( 'genesis_attr_title-area', 'child_theme_title_area_schema' );
-/**
- * Add schema microdata to title-area.
- *
- * @since  2.2.1
- *
- * @param  array $attr Array of attributes.
- *
- * @return array
- */
-function child_theme_title_area_schema( $attr ) {
-
-	$attr['itemscope'] = 'itemscope';
-	$attr['itemtype']  = 'http://schema.org/Organization';
-
-	return $attr;
-
-}
-
-add_filter( 'genesis_attr_site-title', 'child_theme_site_title_schema' );
-/**
- * Correct site title schema.
- *
- * @since  2.2.1
- *
- * @param  array $attr Array of attributes.
- *
- * @return array
- */
-function child_theme_site_title_schema( $attr ) {
-
-	$attr['itemprop'] = 'name';
-
-	return $attr;
-}
-
-add_filter( 'genesis_attr_hero-section', 'child_theme_hero_section_attr' );
-/**
- * Callback for dynamic Genesis 'genesis_attr_$context' filter.
- *
- * Add custom attributes for the custom filter.
- *
- * @since  3.0.0
- *
- * @param  array $attr The element attributes.
- *
- * @return array
- */
-function child_theme_hero_section_attr( $attr ) {
-
-	$attr['id']   = 'hero-section';
-	$attr['role'] = 'banner';
-
-	return $attr;
-
-}
-
-add_filter( 'genesis_attr_entry', 'child_theme_entry_attr' );
-/**
- * Add itemref attribute to link entry-title.
- *
- * Since the entry-title is repositioned outside of the entry article, we need
- * to add some additional microdata so that it is still picked up as a part
- * of the entry. By adding the itemref attribute, we are telling search
- * engines to check the hero-section element for additional elements.
- *
- * @since  2.2.4
- *
- * @link   https://www.w3.org/TR/microdata/#dfn-itemref
- * @param  array $atts Entry attributes.
- *
- * @return array
- */
-function child_theme_entry_attr( $atts ) {
-
-	$atts['itemref'] = 'hero-section';
-
-	return $atts;
 
 }

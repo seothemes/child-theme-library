@@ -29,6 +29,8 @@ add_filter( 'theme_page_templates', 'child_theme_add_page_templates' );
  *
  * @param  array $page_templates The existing page templates.
  *
+ * @throws \Exception If no sub-config found.
+ *
  * @return array
  */
 function child_theme_add_page_templates( $page_templates ) {
@@ -52,6 +54,8 @@ add_filter( 'template_include', 'child_theme_set_page_template' );
  *
  * @param  string $template The path to the template being included.
  *
+ * @throws \Exception If no sub-config found.
+ *
  * @return string
  */
 function child_theme_set_page_template( $template ) {
@@ -72,7 +76,7 @@ function child_theme_set_page_template( $template ) {
 
 	}
 
-	$template_override = CHILD_THEME_DIR . '/views/' . $current_template;
+	$template_override = CHILD_THEME_DIR . '/templates/' . $current_template;
 
 	if ( file_exists( $template_override ) ) {
 

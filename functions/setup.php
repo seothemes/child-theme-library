@@ -19,29 +19,35 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Add theme textdomain.
+ * Add theme text domain.
  *
- * @since 1.0.0
+ * @since  1.0.0
+ *
+ * @param  array      $config Config to consume.
+ *
+ * @throws \Exception if no sub-config found.
  *
  * @return void
  */
-function child_theme_add_textdomain() {
+function child_theme_add_textdomain( $config ) {
 
 	// Set Localization (do not remove).
-	load_child_theme_textdomain( CHILD_THEME_HANDLE, apply_filters( 'child_theme_textdomain', CHILD_THEME_LIB . '/languages', CHILD_THEME_HANDLE ) );
+	load_child_theme_textdomain( $config['domain'], $config['path'] );
 
 }
 
 /**
- * Adds theme supports.
+ * Add theme supports.
  *
- * @since  2.6.0
+ * @since  1.0.0
  *
- * @param  array $config Theme supports configuration.
+ * @param  array      $config Config to consume.
+ *
+ * @throws \Exception if no sub-config found.
  *
  * @return void
  */
-function child_theme_add_theme_supports( array $config ) {
+function child_theme_add_theme_supports( $config ) {
 
 	foreach ( $config as $feature => $args ) {
 
@@ -52,15 +58,17 @@ function child_theme_add_theme_supports( array $config ) {
 }
 
 /**
- * Register theme layouts.
+ * Add theme layouts.
  *
- * @since 1.0.0
+ * @since  1.0.0
  *
- * @param array $config Theme layouts configuration.
+ * @param  array      $config Config to consume.
+ *
+ * @throws \Exception if no sub-config found.
  *
  * @return void
  */
-function child_theme_add_layouts( array $config ) {
+function child_theme_add_layouts( $config ) {
 
 	foreach ( $config as $layout ) {
 
@@ -71,46 +79,17 @@ function child_theme_add_layouts( array $config ) {
 }
 
 /**
- * Register widget areas.
- *
- * @since  1.0.0
- *
- * @param  array $config Theme widget areas configuration.
- *
- * @return void
- */
-function child_theme_add_widget_areas( $config ) {
-
-	unregister_sidebar( 'after-entry' );
-	unregister_sidebar( 'header-right' );
-	unregister_sidebar( 'sidebar' );
-	unregister_sidebar( 'sidebar-alt' );
-
-	foreach ( $config as $widget_area ) {
-
-		$name        = ucwords( str_replace( '-', ' ', $widget_area ) );
-		$description = $name . ' widget area';
-
-		genesis_register_sidebar( array(
-			'name'        => $name,
-			'description' => $description,
-			'id'          => $widget_area,
-		));
-
-	}
-
-}
-
-/**
  * Add new image sizes.
  *
  * @since  1.0.0
  *
- * @param  array $config Theme image size configuration.
+ * @param  array      $config Config to consume.
+ *
+ * @throws \Exception if no sub-config found.
  *
  * @return void
  */
-function child_theme_add_image_sizes( array $config ) {
+function child_theme_add_image_sizes( $config ) {
 
 	foreach ( $config as $name => $args ) {
 
@@ -127,16 +106,31 @@ function child_theme_add_image_sizes( array $config ) {
  *
  * @since  1.0.0
  *
- * @param  array $config Theme image size configuration.
+ * @param  array      $config Config to consume.
+ *
+ * @throws \Exception if no sub-config found.
  *
  * @return void
  */
-function child_theme_add_post_type_supports( array $config ) {
+function child_theme_add_post_type_supports( $config ) {
 
 	foreach ( $config as $post_type => $support ) {
 
 		add_post_type_support( $post_type, $support );
 
 	}
+
+}
+
+/**
+ * Add default header image.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function child_theme_add_default_headers( $config ) {
+
+	register_default_headers( $config );
 
 }

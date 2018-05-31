@@ -71,7 +71,7 @@ class Child_Theme_RGBA_Customizer_Control extends WP_Customize_Control {
 
 		wp_enqueue_script(
 			'rgba-color-picker',
-			CHILD_THEME_URI . '/assets/scripts/min/customize.min.js',
+			CHILD_THEME_LIB . '/js/customize.js',
 			array( 'jquery', 'wp-color-picker' ),
 			'1.0.0',
 			true
@@ -79,7 +79,7 @@ class Child_Theme_RGBA_Customizer_Control extends WP_Customize_Control {
 
 		wp_enqueue_style(
 			'rgba-color-picker',
-			CHILD_THEME_URI . '/assets/styles/min/customize.min.css',
+			CHILD_THEME_LIB . '/css/customize.css',
 			array( 'wp-color-picker' ),
 			'1.0.0'
 		);

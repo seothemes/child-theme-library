@@ -10,7 +10,7 @@
  * @license   GPL-2.0+
  */
 
-add_action( 'genesis_before', 'child_theme_setup_hero_section' );
+add_action( 'genesis_before', 'child_theme_hero_section_setup' );
 /**
  * Set up hero section.
  *
@@ -149,7 +149,7 @@ function child_theme_hero_section_title() {
 
 		do_action( 'genesis_archive_title_descriptions', get_the_title(), '', 'posts-page-description' );
 
-	} elseif ( is_single() || is_singular() ) {
+	} elseif ( is_singular() ) {
 
 		genesis_do_post_title();
 
@@ -196,7 +196,7 @@ function child_theme_hero_section_excerpt() {
 			printf( '<p itemprop="description">%s</p>', do_shortcode( get_the_excerpt( $id ) ) );
 
 		}
-	} elseif ( ( is_single() || is_singular() ) && ! is_singular( 'product' ) && has_excerpt() ) {
+	} elseif ( ( is_singular() ) && ! is_singular( 'product' ) && has_excerpt() ) {
 
 		printf( '<p itemprop="description">%s</p>', do_shortcode( get_the_excerpt() ) );
 

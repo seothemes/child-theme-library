@@ -22,18 +22,40 @@ add_action( 'wp_enqueue_scripts', 'child_theme_load_styles', 99 );
 /**
  * Enqueue theme scripts and styles.
  *
+ * @since  1.0.0
+ *
+ * @throws \Exception If no sub-config is found.
+ *
  * @return void
  */
 function child_theme_load_styles() {
 
-	// Google fonts.
-	wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700', array(), CHILD_THEME_VERSION );
+	$config = child_theme_get_config();
 
-	// Conditionally load WooCommerce styles.
-	if ( child_theme_is_woocommerce_page() ) {
+	foreach ( $config['styles'] as $style ) {
 
-		wp_enqueue_style( CHILD_THEME_HANDLE . '-woocommerce', CHILD_THEME_STYLES . '/woocommerce/woocommerce.css', array(), CHILD_THEME_VERSION );
+		if ( ! strpos( $style['handle'], 'woocommerce' ) ) {
+
+			wp_enqueue_style( $style['handle'], $style['src'], $style['deps'], $style['ver'], $style['media'] );
+
+		} else {
+
+			if ( child_theme_is_woocommerce_page() ) {
+
+				wp_enqueue_style( $style['handle'], $style['src'], $style['deps'], $style['ver'], $style['media'] );
+
+			}
+
+		}
 
 	}
+
+	foreach ( $config['google-fonts'] as $google_font ) {
+
+		$google_fonts[] = $google_font;
+
+	}
+
+	wp_enqueue_style( CHILD_THEME_HANDLE . '-google-fonts', '//fonts.googleapis.com/css?family=' . implode( '|', $google_fonts ), array(), CHILD_THEME_VERSION );
 
 }

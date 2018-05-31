@@ -18,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'after_setup_theme', 'child_theme_init', 10 );
+add_action( 'genesis_setup', 'child_theme_init', 10 );
 /**
  * Description of expected behavior.
  *
@@ -29,7 +29,7 @@ add_action( 'after_setup_theme', 'child_theme_init', 10 );
 function child_theme_init() {
 
 	/**
-	 * Hooks.
+	 * Init hook.
 	 *
 	 * @hooked child_theme_constants - 0
 	 * @hooked child_theme_autoload  - 5
@@ -49,18 +49,18 @@ add_action( 'child_theme_init', 'child_theme_constants', 0 );
  */
 function child_theme_constants() {
 
-	define( 'CHILD_THEME_NAME',    wp_get_theme()->get( 'Name' )         );
-	define( 'CHILD_THEME_URL',     wp_get_theme()->get( 'ThemeURI' )     );
-	define( 'CHILD_THEME_VERSION', wp_get_theme()->get( 'Version' )      );
-	define( 'CHILD_THEME_HANDLE',  wp_get_theme()->get( 'TextDomain' )   );
-	define( 'CHILD_THEME_AUTHOR',  wp_get_theme()->get( 'Author' )       );
-	define( 'CHILD_THEME_DIR',     get_stylesheet_directory()            );
-	define( 'CHILD_THEME_URI',     get_stylesheet_directory_uri()        );
-	define( 'CHILD_THEME_LIB',     CHILD_THEME_DIR . '/lib'              );
-	define( 'CHILD_THEME_VIEWS',   CHILD_THEME_LIB . '/views'            );
-	define( 'CHILD_THEME_VENDOR',  CHILD_THEME_DIR . '/vendor'           );
-	define( 'CHILD_THEME_ASSETS',  CHILD_THEME_URI . '/assets'           );
-	define( 'CHILD_THEME_CONFIG',  CHILD_THEME_DIR . '/config/theme.php' );
+	define( 'CHILD_THEME_NAME', wp_get_theme()->get( 'Name' ) );
+	define( 'CHILD_THEME_URL', wp_get_theme()->get( 'ThemeURI' ) );
+	define( 'CHILD_THEME_VERSION', wp_get_theme()->get( 'Version' ) );
+	define( 'CHILD_THEME_HANDLE', wp_get_theme()->get( 'TextDomain' ) );
+	define( 'CHILD_THEME_AUTHOR', wp_get_theme()->get( 'Author' ) );
+	define( 'CHILD_THEME_DIR', get_stylesheet_directory() );
+	define( 'CHILD_THEME_URI', get_stylesheet_directory_uri() );
+	define( 'CHILD_THEME_LIB', CHILD_THEME_DIR . '/lib' );
+	define( 'CHILD_THEME_VIEWS', CHILD_THEME_LIB . '/views' );
+	define( 'CHILD_THEME_VENDOR', CHILD_THEME_DIR . '/vendor' );
+	define( 'CHILD_THEME_ASSETS', CHILD_THEME_URI . '/assets' );
+	define( 'CHILD_THEME_CONFIG', CHILD_THEME_DIR . '/config/config.php' );
 
 }
 
@@ -78,15 +78,9 @@ function child_theme_autoload() {
 
 	require_once CHILD_THEME_LIB . '/functions/autoload.php';
 
-	$dirs = array(
-		'/functions',
-		'/structure',
-		'/admin',
-		'/css',
-		'/js',
-	);
+	$config = require_once apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
 
-	foreach ( $dirs as $dir ) {
+	foreach ( $config['autoload'] as $dir ) {
 
 		child_theme_autoloader( CHILD_THEME_LIB . $dir );
 
@@ -100,15 +94,19 @@ add_action( 'child_theme_init', 'child_theme_setup', 10 );
  *
  * @since 1.0.0
  *
+ * @throws \Exception If no sub-config is found.
+ *
  * @return void
  */
 function child_theme_setup() {
 
-	child_theme_add_textdomain();
-	child_theme_add_theme_supports( child_theme_get_config( 'theme-support' ) );
-	child_theme_add_layouts( child_theme_get_config( 'layouts' ) );
-	child_theme_add_widget_areas( child_theme_get_config( 'widget-areas' ) );
-	child_theme_add_image_sizes( child_theme_get_config( 'image-sizes' ) );
-	child_theme_add_post_type_supports( child_theme_get_config( 'post-type-support' ) );
+	$config = child_theme_get_config();
+
+	child_theme_add_textdomain( $config['textdomain'] );
+	child_theme_add_theme_supports( $config['theme-supports'] );
+	child_theme_add_layouts( $config['layouts'] );
+	child_theme_add_image_sizes( $config['image-sizes'] );
+	child_theme_add_post_type_supports( $config['post-type-supports'] );
+	child_theme_add_default_headers( $config['default-headers'] );
 
 }

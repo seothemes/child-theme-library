@@ -22,8 +22,12 @@ add_action( 'customize_register', 'child_theme_customize_register' );
 /**
  * Sets up the theme customizer sections, controls, and settings.
  *
+ * @since  1.0.0
+ *
  * @access public
  * @param  object $wp_customize Global customizer object.
+ *
+ * @throws \Exception If no sub-config is found.
  *
  * @return void
  */

@@ -18,6 +18,40 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
+add_action( 'genesis_before', 'child_theme_js_nojs_script', 1 );
+/**
+ * Echo out the script that changes 'no-js' class to 'js'.
+ *
+ * Adds a script on the genesis_before hook which immediately changes the
+ * class to js if JavaScript is enabled. This is how WP does things on
+ * the back end, to allow different styles for the same elements
+ * depending if JavaScript is active or not.
+ *
+ * Outputting the script immediately also reduces a flash of incorrectly
+ * styled content, as the page does not load with no-js styles, then
+ * switch to js once everything has finished loading.
+ *
+ * @since  1.0.0
+ *
+ * @author Gary Jones
+ * @link   https://github.com/GaryJones/genesis-js-no-js
+ *
+ * @return void
+ */
+function child_theme_js_nojs_script() {
+	?>
+	<script>
+        //<![CDATA[
+        (function(){
+            var c = document.body.classList;
+            c.remove( 'no-js' );
+            c.add( 'js' );
+        })();
+        //]]>
+	</script>
+	<?php
+}
+
 add_action( 'after_switch_theme', 'child_theme_display_excerpt_metabox' );
 /**
  * Display excerpt metabox by default.
@@ -34,24 +68,19 @@ add_action( 'after_switch_theme', 'child_theme_display_excerpt_metabox' );
  */
 function child_theme_display_excerpt_metabox() {
 
-	// Get current user ID.
 	$user_id = get_current_user_id();
 
-	// Create array of post types to include.
 	$post_types = array(
 		'page',
 		'post',
 		'portfolio',
 	);
 
-	// Loop through each post type and update user meta.
 	foreach ( $post_types as $post_type ) {
 
-		// Create variables.
 		$meta_key   = 'metaboxhidden_' . $post_type;
 		$prev_value = get_user_meta( $user_id, $meta_key, true );
 
-		// Check if value is an array.
 		if ( ! is_array( $prev_value ) ) {
 
 			$prev_value = array(
@@ -67,13 +96,8 @@ function child_theme_display_excerpt_metabox() {
 
 		}
 
-		// Empty array to prevent errors.
-		$meta_value = array();
-
-		// Remove excerpt from array.
 		$meta_value = array_diff( $prev_value, array( 'postexcerpt' ) );
 
-		// Update user meta with new value.
 		update_user_meta( $user_id, $meta_key, $meta_value, $prev_value );
 
 	}

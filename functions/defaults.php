@@ -11,26 +11,6 @@
  * @license   GPL-2.0+
  */
 
-add_action( 'after_setup_theme', 'child_theme_register_default_headers' );
-/**
- * Register default header image.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function child_theme_register_default_headers() {
-
-	register_default_headers( array(
-		'child' => array(
-			'url' => '%2$s/assets/images/hero.jpg',
-			'thumbnail_url' => '%2$s/assets/images/hero.jpg',
-			'description' => __( 'Hero Image', CHILD_THEME_HANDLE ),
-		),
-	) );
-
-}
-
 add_filter( 'genesis_theme_settings_defaults', 'child_theme_set_default_settings' );
 /**
  * Update Theme Settings upon reset.
@@ -38,6 +18,8 @@ add_filter( 'genesis_theme_settings_defaults', 'child_theme_set_default_settings
  * @since  1.0.0
  *
  * @param  array $defaults Default theme settings.
+ *
+ * @throws \Exception If no sub-config found.
  *
  * @return array Custom theme settings.
  */
@@ -57,6 +39,8 @@ add_action( 'after_switch_theme', 'child_theme_update_settings' );
  *
  * @since 1.0.0
  *
+ * @throws \Exception If no sub-config found.
+ *
  * @return void
  */
 function child_theme_update_settings() {
@@ -70,26 +54,5 @@ function child_theme_update_settings() {
 	}
 
 	update_option( 'posts_per_page', $child_theme_config['blog_cat_num'] );
-
-}
-
-
-add_filter( 'simple_social_default_styles', 'child_theme_ssi_default_styles' );
-/**
- * Simple Social Icons default settings.
- *
- * @since  1.0.0
- *
- * @param  array $defaults Default Simple Social Icons settings.
- *
- * @return array Custom settings.
- */
-function child_theme_ssi_default_styles( $defaults ) {
-
-	$child_theme_config = child_theme_get_config();
-
-	$defaults = wp_parse_args( $child_theme_config['simple-social-icons'], $defaults );
-
-	return $defaults;
 
 }

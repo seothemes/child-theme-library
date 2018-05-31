@@ -21,15 +21,23 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Get config.
  *
- * @since  2.0.0
+ * @since  1.0.0
  *
  * @param  string $sub_config The rgba config to sanitize.
+ *
+ * @throws \Exception If no sub-config found.
  *
  * @return mixed
  */
 function child_theme_get_config( $sub_config = '' ) {
 
 	$config = require apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
+
+	if ( $sub_config && false === $config[ $sub_config ] ) {
+
+		throw new \Exception( 'No sub-config found.' );
+
+	}
 
 	if ( $sub_config ) {
 
@@ -70,6 +78,11 @@ function child_theme_sanitize_rgba_color( $color ) {
 		return sanitize_hex_color( $color );
 
 	}
+
+	$red   = '';
+	$green = '';
+	$blue  = '';
+	$alpha = '';
 
 	// Finally, sanitize and return rgba.
 	$color = str_replace( ' ', '', $color );
