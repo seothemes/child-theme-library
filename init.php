@@ -76,7 +76,17 @@ add_action( 'child_theme_init', 'child_theme_autoload', 5 );
  */
 function child_theme_autoload() {
 
-	require_once CHILD_THEME_LIB . '/functions/autoload.php';
+	if ( file_exists( CHILD_THEME_DIR . '/vendor/autoload.php' ) ) {
+
+		require CHILD_THEME_DIR . '/vendor/autoload.php';
+
+	}
+
+	if ( file_exists( CHILD_THEME_LIB . '/functions/autoload.php' ) ) {
+
+		require CHILD_THEME_LIB . '/functions/autoload.php';
+
+	}
 
 	$config = require_once apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
 

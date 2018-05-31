@@ -1,10 +1,10 @@
 {
-    "name": "seothemes/seothemes-library",
-    "type": "project",
+    "name": "seothemes/child-theme-library",
+    "type": "library",
     "description": "A lightweight drop-in library for extending Genesis child themes.",
     "keywords": [
-        "WordPress",
-        "wordpress-theme-development",
+        "wordpress",
+        "wordpress-theme",
         "genesis-framework"
     ],
     "license": "GPL-2.0",
@@ -16,8 +16,8 @@
         }
     ],
 	"support": {
-		"issues": "https://github.com/seothemes/seothemes-library/issues",
-		"source": "https://github.com/seothemes/seothemes-library"
+		"issues": "https://github.com/seothemes/child-theme-library/issues",
+		"source": "https://github.com/seothemes/child-theme-library"
     },
     "require": {},
     "require-dev": {},
