@@ -56,35 +56,50 @@ The Child Theme Library is modular built with configuration architecture that lo
 ```sh
 lib/
 ├── admin/
-│    ├── css-handler.php
-│    └── customizer.php
+│   ├── customizer-output.php
+│   └── customizer-settings.php
 ├── classes/
-│    ├── class-colors.php
-│    ├── class-plugins.php
-│    └── class-rgba.php
+│   ├── class-child-theme-demo-import.php
+│   ├── class-child-theme-rgba-customizer-control.php
+│   └── class-child-theme-tgm-plugin-activation.php
 ├── css/
-│    ├── core.css
-│    └── load-styles.php
+│   ├── customizer.css
+│   └── load-styles.php
 ├── functions/
-│    ├── general.php
-│    ├── head.php
-│    ├── helpers.php
-│    ├── layout.php
-│    ├── markup.php
-│    ├── setup.php
-│    ├── upgrade.php
-│    └── widgetize.php
+│   ├── attributes.php
+│   ├── autoload.php
+│   ├── defaults.php
+│   ├── general.php
+│   ├── hero.php
+│   ├── layout.php
+│   ├── markup.php
+│   ├── plugins.php
+│   ├── setup.php
+│   ├── templates.php
+│   ├── upgrade.php
+│   └── utilities.php
 ├── js/
-│    ├── core.js
-│    └── load-scripts.php
+│   ├── customizer.js
+│   ├── load-scripts.php
+│   └── menus.js
 ├── languages/
-│    └── core.pot
+│   └── genesis-starter-theme.pot
+├── shortcodes/
+│   └── footer.php
 ├── structure/
-│    ├── footer.php
-│    ├── header.php
-│    ├── hero.php
-│    ├── logo.php
-│    └── menu.php
-├── init.php
-└── README.md
+│   ├── footer.php
+│   ├── header.php
+│   └── menu.php
+├── views/
+│   ├── page-grid.php
+│   ├── page-blog.php
+│   ├── page-front.php
+│   ├── page-full.php
+│   ├── page-landing.php
+│   └── page-sitemap.php
+├── widgets/
+│   └── widgets.php
+├── README.md
+├── composer.json
+└── init.php
 ```

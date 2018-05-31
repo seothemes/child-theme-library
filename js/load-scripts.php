@@ -11,10 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions;
-
-use SEOThemes\Library\Functions;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -22,31 +18,42 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\load_scripts', 99 );
+add_action( 'wp_enqueue_scripts', 'child_theme_load_scripts', 99 );
 /**
  * Enqueue theme scripts and styles.
  *
+ * @since  1.0.0
+ *
+ * @throws \Exception If no sub-config is found.
+ *
  * @return void
  */
-function load_scripts() {
+function child_theme_load_scripts() {
 
-	// Enqueue custom theme scripts.
-	wp_enqueue_script( CHILD_THEME_HANDLE, CHILD_THEME_SCRIPTS . '/scripts.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
+	$scripts = child_theme_get_config( 'scripts' );
 
-	// Enqueue responsive menu script.
-	wp_enqueue_script( 'genesis-menus', CHILD_THEME_SCRIPTS . '/menus.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
+	foreach ( $scripts as $script ) {
 
-	// Localize responsive menu script.
-	wp_localize_script( CHILD_THEME_HANDLE, 'genesis_responsive_menu', array(
-		'mainMenu'         => __( 'Menu', CHILD_THEME_HANDLE ),
-		'subMenu'          => __( 'Menu', CHILD_THEME_HANDLE ),
-		'menuIconClass'    => null,
-		'subMenuIconClass' => null,
-		'menuClasses'      => array(
-			'combine' => array(
-				'.nav-primary',
-				'.nav-secondary',
-			),
-		),
-	) );
+		wp_enqueue_script( $script['handle'], $script['src'], $script['deps'], $script['ver'], $script['in_footer'] );
+
+	}
+
+}
+
+add_action( 'wp_enqueue_scripts', 'child_theme_menu_settings', 99 );
+/**
+ * Description of expected behavior.
+ *
+ * @since 1.0.0
+ *
+ * @throws \Exception If no sub-config is found.
+ *
+ * @return void
+ */
+function child_theme_menu_settings() {
+
+	$menu_settings = child_theme_get_config( 'menu-settings' );
+
+	wp_localize_script( CHILD_THEME_HANDLE . '-menu', 'genesis_responsive_menu', $menu_settings );
+
 }

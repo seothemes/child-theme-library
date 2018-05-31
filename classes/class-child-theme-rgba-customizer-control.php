@@ -11,8 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Classes;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -35,7 +33,7 @@ if ( ! is_customize_preview() ) {
  * convert between RGBa and Hex color values as opacity is
  * added to or removed from a color.
  */
-class RGBA_Customize_Control extends \WP_Customize_Control {
+class Child_Theme_RGBA_Customizer_Control extends WP_Customize_Control {
 
 	/**
 	 * Official control name.
@@ -73,7 +71,7 @@ class RGBA_Customize_Control extends \WP_Customize_Control {
 
 		wp_enqueue_script(
 			'rgba-color-picker',
-			CHILD_THEME_URI . '/assets/scripts/min/customize.min.js',
+			CHILD_THEME_LIB . '/js/customizer.js',
 			array( 'jquery', 'wp-color-picker' ),
 			'1.0.0',
 			true
@@ -81,7 +79,7 @@ class RGBA_Customize_Control extends \WP_Customize_Control {
 
 		wp_enqueue_style(
 			'rgba-color-picker',
-			CHILD_THEME_URI . '/assets/styles/min/customize.min.css',
+			CHILD_THEME_LIB . '/css/customizer.css',
 			array( 'wp-color-picker' ),
 			'1.0.0'
 		);

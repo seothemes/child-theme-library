@@ -11,8 +11,6 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Functions\Utils;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 
@@ -23,23 +21,31 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Get config.
  *
- * @since  2.0.0
+ * @since  1.0.0
  *
- * @param  array $sub_config The rgba config to sanitize.
+ * @param  string $sub_config The rgba config to sanitize.
+ *
+ * @throws \Exception If no sub-config found.
  *
  * @return mixed
  */
-function get_config( $sub_config = '' ) {
+function child_theme_get_config( $sub_config = '' ) {
 
-	global $child_theme_config;
+	$config = require apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
+
+	if ( $sub_config && false === $config[ $sub_config ] ) {
+
+		throw new \Exception( 'No sub-config found.' );
+
+	}
 
 	if ( $sub_config ) {
 
-		return $child_theme_config[ $sub_config ];
+		return $config[ $sub_config ];
 
 	} else {
 
-		return $child_theme_config;
+		return $config;
 
 	}
 
@@ -57,7 +63,7 @@ function get_config( $sub_config = '' ) {
  *
  * @return string $color Sanitized value.
  */
-function sanitize_rgba_color( $color ) {
+function child_theme_sanitize_rgba_color( $color ) {
 
 	// Return invisible if empty.
 	if ( empty( $color ) || is_array( $color ) ) {
@@ -72,6 +78,11 @@ function sanitize_rgba_color( $color ) {
 		return sanitize_hex_color( $color );
 
 	}
+
+	$red   = '';
+	$green = '';
+	$blue  = '';
+	$alpha = '';
 
 	// Finally, sanitize and return rgba.
 	$color = str_replace( ' ', '', $color );
@@ -92,7 +103,7 @@ function sanitize_rgba_color( $color ) {
  *
  * @return string Minified CSS.
  */
-function minify_css( $css ) {
+function child_theme_minify_css( $css ) {
 
 	// Normalize whitespace.
 	$css = preg_replace( '/\s+/', ' ', $css );
@@ -137,7 +148,7 @@ function minify_css( $css ) {
  *
  * @return bool
  */
-function is_woocommerce_page() {
+function child_theme_is_woocommerce_page() {
 
 	if ( ! class_exists( 'WooCommerce' ) ) {
 
@@ -171,7 +182,7 @@ function is_woocommerce_page() {
  *
  * @return string
  */
-function custom_header() {
+function child_theme_custom_header() {
 
 	$id = '';
 

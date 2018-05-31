@@ -4,14 +4,12 @@
  *
  * This file adds extra functions used in the Genesis Starter theme.
  *
- * @package   SEOThemes\Library
+ * @package   SEOThemes\Core
  * @link      https://github.com/seothemes/seothemes-library
  * @author    SEO Themes
  * @copyright Copyright © 2017 SEO Themes
  * @license   GPL-2.0+
  */
-
-namespace SEOThemes\Library\Functions;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -20,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-add_filter( 'theme_page_templates', __NAMESPACE__ . '\add_page_templates' );
+add_filter( 'theme_page_templates', 'child_theme_add_page_templates' );
 /**
  * Add page templates.
  *
@@ -31,22 +29,24 @@ add_filter( 'theme_page_templates', __NAMESPACE__ . '\add_page_templates' );
  *
  * @param  array $page_templates The existing page templates.
  *
+ * @throws \Exception If no sub-config found.
+ *
  * @return array
  */
-function add_page_templates( $page_templates ) {
+function child_theme_add_page_templates( $page_templates ) {
 
-	global $child_theme_config;
+	$child_theme_templates = child_theme_get_config( 'page-templates' );
 
 	unset( $page_templates['page_archive.php'] );
 	unset( $page_templates['page_blog.php'] );
 
-	$page_templates = array_merge( $page_templates, $child_theme_config['page-templates'] );
+	$page_templates = array_merge( $page_templates, $child_theme_templates );
 
 	return $page_templates;
 
 }
 
-add_filter( 'template_include', __NAMESPACE__ . '\set_page_template' );
+add_filter( 'template_include', 'child_theme_set_page_template' );
 /**
  * Modify page based on selected page template.
  *
@@ -54,13 +54,13 @@ add_filter( 'template_include', __NAMESPACE__ . '\set_page_template' );
  *
  * @param  string $template The path to the template being included.
  *
+ * @throws \Exception If no sub-config found.
+ *
  * @return string
  */
-function set_page_template( $template ) {
+function child_theme_set_page_template( $template ) {
 
-	global $child_theme_config;
-
-	$page_templates = $child_theme_config['page-templates'];
+	$page_templates = child_theme_get_config( 'page-templates' );
 
 	if ( ! is_singular( 'page' ) ) {
 
@@ -84,7 +84,7 @@ function set_page_template( $template ) {
 
 	} else {
 
-		$template_path = CHILD_THEME_LIB . '/templates/' . $current_template;
+		$template_path = trailingslashit( CHILD_THEME_VIEWS ) . $current_template;
 
 		if ( file_exists( $template_path ) ) {
 

@@ -1,34 +1,16 @@
 <?php
 /**
- * Genesis Starter Theme
+ * Description.
  *
- * This file adds the hero section to the Genesis Starter theme.
- *
- * @package   SEOThemes\Library
- * @link      https://github.com/seothemes/seothemes-library
+ * @package   SEOThemes\Core\Classes
+ * @since     1.0.0
+ * @link      https://github.com/seothemes/genesis-starter
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library\Structure\Hero;
-
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-
-	die;
-
-}
-
-register_default_headers( array(
-	'child' => array(
-		'url'           => '%2$s/assets/images/hero.jpg',
-		'thumbnail_url' => '%2$s/assets/images/hero.jpg',
-		'description'   => __( 'Hero Image', CHILD_THEME_HANDLE ),
-	),
-) );
-
-add_action( 'genesis_before', __NAMESPACE__ . '\hero_section_setup' );
+add_action( 'genesis_before', 'child_theme_hero_section_setup' );
 /**
  * Set up hero section.
  *
@@ -39,9 +21,8 @@ add_action( 'genesis_before', __NAMESPACE__ . '\hero_section_setup' );
  *
  * @return void
  */
-function hero_section_setup() {
+function child_theme_hero_section_setup() {
 
-	// Remove default hero section.
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
@@ -57,20 +38,22 @@ function hero_section_setup() {
 	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
 	remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 
-	// Add custom hero section.
-	add_action( 'genesis_hero_section', 'genesis_do_posts_page_heading' );
-	add_action( 'genesis_hero_section', 'genesis_do_date_archive_title' );
-	add_action( 'genesis_hero_section', 'genesis_do_taxonomy_title_description' );
-	add_action( 'genesis_hero_section', 'genesis_do_author_title_description' );
-	add_action( 'genesis_hero_section', 'genesis_do_cpt_archive_title_description' );
-
-	// Remove search results and shop page titles.
 	add_filter( 'woocommerce_show_page_title', '__return_null' );
 	add_filter( 'genesis_search_title_output', '__return_false' );
 
+	add_action( 'child_theme_hero_section', 'genesis_do_posts_page_heading' );
+	add_action( 'child_theme_hero_section', 'genesis_do_date_archive_title' );
+	add_action( 'child_theme_hero_section', 'genesis_do_taxonomy_title_description' );
+	add_action( 'child_theme_hero_section', 'genesis_do_author_title_description' );
+	add_action( 'child_theme_hero_section', 'genesis_do_cpt_archive_title_description' );
+	add_action( 'child_theme_hero_section', 'child_theme_hero_section_title', 10 );
+	add_action( 'child_theme_hero_section', 'child_theme_hero_section_excerpt', 20 );
+	add_action( 'be_title_toggle_remove', 'child_theme_hero_section_title_toggle' );
+	add_action( 'genesis_before_content', 'child_theme_hero_section_remove_404_title' );
+	add_action( 'genesis_before_content_sidebar_wrap', 'child_theme_hero_section_display' );
+
 }
 
-add_action( 'genesis_before_content', __NAMESPACE__ . '\remove_404_title' );
 /**
  * Remove default title of 404 pages.
  *
@@ -78,7 +61,7 @@ add_action( 'genesis_before_content', __NAMESPACE__ . '\remove_404_title' );
  *
  * @return void
  */
-function remove_404_title() {
+function child_theme_hero_section_remove_404_title() {
 
 	if ( is_404() ) {
 
@@ -90,7 +73,6 @@ function remove_404_title() {
 
 }
 
-add_action( 'be_title_toggle_remove', __NAMESPACE__ . '\title_toggle' );
 /**
  * Integrate with Genesis Title Toggle plugin
  *
@@ -101,14 +83,13 @@ add_action( 'be_title_toggle_remove', __NAMESPACE__ . '\title_toggle' );
  *
  * @return void
  */
-function title_toggle() {
+function child_theme_hero_section_title_toggle() {
 
-	remove_action( 'genesis_hero_section', __NAMESPACE__ . '\page_title', 10 );
-	remove_action( 'genesis_hero_section', __NAMESPACE__ . '\page_excerpt', 20 );
+	remove_action( 'child_theme_hero_section', 'child_theme_hero_section_title', 10 );
+	remove_action( 'child_theme_hero_section', 'child_theme_hero_section_excerpt', 20 );
 
 }
 
-add_action( 'genesis_hero_section', __NAMESPACE__ . '\page_title', 10 );
 /**
  * Display title in hero section.
  *
@@ -117,11 +98,9 @@ add_action( 'genesis_hero_section', __NAMESPACE__ . '\page_title', 10 );
  *
  * @since  2.2.4
  *
- * @todo   Update 404 title when Genesis 2.6 is released.
- *
  * @return void
  */
-function page_title() {
+function child_theme_hero_section_title() {
 
 	// Add post titles back inside posts loop.
 	if ( is_home() || is_archive() || is_category() || is_tag() || is_tax() || is_search() || is_page_template( 'page_blog.php' ) ) {
@@ -144,7 +123,7 @@ function page_title() {
 		genesis_markup( array(
 			'open'    => '<h1 %s>',
 			'close'   => '</h1>',
-			'content' => apply_filters( 'genesis_starter_latest_posts_title', __( 'Latest Posts', CHILD_THEME_HANDLE ) ),
+			'content' => apply_filters( 'child_theme_latest_posts_title', __( 'Latest Posts', CHILD_THEME_HANDLE ) ),
 			'context' => 'entry-title',
 		) );
 
@@ -170,7 +149,7 @@ function page_title() {
 
 		do_action( 'genesis_archive_title_descriptions', get_the_title(), '', 'posts-page-description' );
 
-	} elseif ( is_single() || is_singular() ) {
+	} elseif ( is_singular() ) {
 
 		genesis_do_post_title();
 
@@ -178,7 +157,6 @@ function page_title() {
 
 }
 
-add_action( 'genesis_hero_section', __NAMESPACE__ . '\page_excerpt', 20 );
 /**
  * Display page excerpt.
  *
@@ -190,7 +168,7 @@ add_action( 'genesis_hero_section', __NAMESPACE__ . '\page_excerpt', 20 );
  *
  * @return void
  */
-function page_excerpt() {
+function child_theme_hero_section_excerpt() {
 
 	if ( class_exists( 'WooCommerce' ) && is_shop() ) {
 
@@ -218,14 +196,13 @@ function page_excerpt() {
 			printf( '<p itemprop="description">%s</p>', do_shortcode( get_the_excerpt( $id ) ) );
 
 		}
-	} elseif ( ( is_single() || is_singular() ) && ! is_singular( 'product' ) && has_excerpt() ) {
+	} elseif ( ( is_singular() ) && ! is_singular( 'product' ) && has_excerpt() ) {
 
 		printf( '<p itemprop="description">%s</p>', do_shortcode( get_the_excerpt() ) );
 
 	}
 }
 
-add_action( 'genesis_before_content_sidebar_wrap', __NAMESPACE__ . '\hero_section' );
 /**
  * Display the hero section.
  *
@@ -236,7 +213,7 @@ add_action( 'genesis_before_content_sidebar_wrap', __NAMESPACE__ . '\hero_sectio
  *
  * @return void
  */
-function hero_section() {
+function child_theme_hero_section_display() {
 
 	// Output hero section markup.
 	genesis_markup( array(
@@ -247,8 +224,8 @@ function hero_section() {
 	/**
 	 * Do hero section hook.
 	 *
-	 * @hooked genesis_starter_page_title - 10
-	 * @hooked genesis_starter_page_excerpt - 20
+	 * @hooked child_theme_hero_section_title - 10
+	 * @hooked child_theme_hero_section_excerpt - 20
 	 * @hooked genesis_do_posts_page_heading
 	 * @hooked genesis_do_date_archive_title
 	 * @hooked genesis_do_blog_template_heading
@@ -256,7 +233,7 @@ function hero_section() {
 	 * @hooked genesis_do_author_title_description
 	 * @hooked genesis_do_cpt_archive_title_description
 	 */
-	do_action( 'genesis_hero_section' );
+	do_action( 'child_theme_hero_section' );
 
 	// Output hero section markup.
 	genesis_markup( array(

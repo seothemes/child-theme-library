@@ -11,9 +11,7 @@
  * @license   GPL-2.0+
  */
 
-namespace SEOThemes\Library;
-
-add_filter( 'genesis_theme_settings_defaults', __NAMESPACE__ . '\set_theme_default_settings' );
+add_filter( 'genesis_theme_settings_defaults', 'child_theme_set_default_settings' );
 /**
  * Update Theme Settings upon reset.
  *
@@ -21,11 +19,13 @@ add_filter( 'genesis_theme_settings_defaults', __NAMESPACE__ . '\set_theme_defau
  *
  * @param  array $defaults Default theme settings.
  *
+ * @throws \Exception If no sub-config found.
+ *
  * @return array Custom theme settings.
  */
-function set_theme_default_settings( array $defaults ) {
+function child_theme_set_default_settings( array $defaults ) {
 
-	global $child_theme_config;
+	$child_theme_config = child_theme_get_config();
 
 	$defaults = wp_parse_args( $child_theme_config['genesis-settings'], $defaults );
 
@@ -33,17 +33,19 @@ function set_theme_default_settings( array $defaults ) {
 
 }
 
-add_action( 'after_switch_theme', __NAMESPACE__ . '\update_theme_settings' );
+add_action( 'after_switch_theme', 'child_theme_update_settings' );
 /**
  * Update Theme Settings upon activation.
  *
  * @since 1.0.0
  *
+ * @throws \Exception If no sub-config found.
+ *
  * @return void
  */
-function update_theme_settings() {
+function child_theme_update_settings() {
 
-	global $child_theme_config;
+	$child_theme_config = child_theme_get_config();
 
 	if ( function_exists( 'genesis_update_settings' ) ) {
 
@@ -52,26 +54,5 @@ function update_theme_settings() {
 	}
 
 	update_option( 'posts_per_page', $child_theme_config['blog_cat_num'] );
-
-}
-
-
-add_filter( 'simple_social_default_styles', __NAMESPACE__ . '\ssi_default_styles' );
-/**
- * Simple Social Icons default settings.
- *
- * @since  1.0.0
- *
- * @param  array $defaults Default Simple Social Icons settings.
- *
- * @return array Custom settings.
- */
-function ssi_default_styles( $defaults ) {
-
-	global $child_theme_config;
-
-	$defaults = wp_parse_args( $child_theme_config['simple-social-icons'], $defaults );
-
-	return $defaults;
 
 }
