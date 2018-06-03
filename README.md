@@ -17,7 +17,7 @@ cd wp-content/themes/my-theme
 Clone from Github into the `lib` directory. This creates a submodule:
 
 ```sh
-git submodule add https://github.com/seothemes/seothemes-library.git lib
+git submodule add https://github.com/seothemes/child-theme-library.git lib
 ```
 
 Include the library from your `functions.php` file by placing the following line **after** the Genesis Framework has loaded:
@@ -29,7 +29,7 @@ require_once get_stylesheet_directory() . '/lib/init.php';
 
 ### Manually
 
-Download the zip file from Github [here](https://github.com/seothemes/seothemes-library/archive/master.zip).
+Download the zip file from Github [here](https://github.com/seothemes/child-theme-library/archive/master.zip).
 
 Upload the file to your theme's main directory and unzip the contents.
 
