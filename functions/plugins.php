@@ -158,6 +158,42 @@ function child_theme_simple_social_icons_css() {
 
 }
 
+add_filter( 'genesis_widget_column_classes', 'child_theme_widget_columns' );
+/**
+ * Add additional column class to plugin.
+ *
+ * @since  1.0.0
+ *
+ * @param  array $column_classes Array of column classes.
+ *
+ * @return array Modified column classes.
+ */
+function child_theme_widget_columns( $column_classes ) {
+
+	$column_classes[] = 'full-width';
+
+	return $column_classes;
+
+}
+
+add_filter( 'gsw_settings_defaults', 'child_theme_testimonial_defaults' );
+/**
+ * Filter the default Genesis Testimonial Slider settings.
+ *
+ * @since  1.0.0
+ *
+ * @param  array $defaults Default plugin settings.
+ *
+ * @return array
+ */
+function child_theme_testimonial_defaults( $defaults ) {
+
+	$config = child_theme_get_config( 'testimonial-slider' );
+
+	return ( $config ? $config : $defaults );
+
+}
+
 add_filter( 'agm_custom_styles', 'child_theme_map_styles' );
 /**
  * Add custom Google Map style.

@@ -32,17 +32,17 @@ function child_theme_load_styles() {
 
 	$config = child_theme_get_config();
 
-	foreach ( $config['styles'] as $style ) {
+	foreach ( $config['styles'] as $style => $params ) {
 
-		if ( ! strpos( $style['handle'], 'woocommerce' ) ) {
+		if ( ! strpos( $style, 'woocommerce' ) ) {
 
-			wp_enqueue_style( $style['handle'], $style['src'], $style['deps'], $style['ver'], $style['media'] );
+			wp_enqueue_style( 'child-theme-' . $style, $params['src'], $params['deps'], $params['ver'], $params['media'] );
 
 		} else {
 
 			if ( child_theme_is_woocommerce_page() ) {
 
-				wp_enqueue_style( $style['handle'], $style['src'], $style['deps'], $style['ver'], $style['media'] );
+				wp_enqueue_style( 'child-theme-' . $style, $params['src'], $params['deps'], $params['ver'], $params['media'] );
 
 			}
 
@@ -56,6 +56,6 @@ function child_theme_load_styles() {
 
 	}
 
-	wp_enqueue_style( CHILD_THEME_HANDLE . '-google-fonts', '//fonts.googleapis.com/css?family=' . implode( '|', $google_fonts ), array(), CHILD_THEME_VERSION );
+	wp_enqueue_style( 'child-theme-google-fonts', '//fonts.googleapis.com/css?family=' . implode( '|', $google_fonts ), array(), CHILD_THEME_VERSION );
 
 }

@@ -43,7 +43,7 @@ function child_theme_unregister_widgets() {
 
 }
 
-add_action( 'after_setup_theme', 'child_theme_add_widget_areas' );
+add_action( 'after_setup_theme', 'child_theme_add_widget_areas', 11 );
 /**
  * Add custom widget areas.
  *
@@ -63,22 +63,33 @@ function child_theme_add_widget_areas() {
 	unregister_sidebar( 'sidebar' );
 	unregister_sidebar( 'sidebar-alt' );
 
-	foreach ( $config as $widget_area ) {
+	foreach ( $config as $id => $location ) {
 
-		if ( is_numeric( str_replace( 'footer-', '', $widget_area ) ) ) {
+		if ( is_numeric( str_replace( 'footer-', '', $id ) ) ) {
 
 			add_theme_support( 'genesis-footer-widgets', $footer_widgets++ );
 
 		} else {
 
-			$name        = ucwords( str_replace( '-', ' ', $widget_area ) );
+			$name        = ucwords( str_replace( '-', ' ', $id ) );
 			$description = $name . ' widget area';
 
 			genesis_register_sidebar( array(
 				'name'        => $name,
 				'description' => $description,
-				'id'          => $widget_area,
+				'id'          => $id,
 			) );
+
+			if ( ! empty( $location ) ) {
+
+				add_action( $location, function() use ($id) {
+					genesis_widget_area( $id, array(
+						'before' => '<div class="' . $id . ' widget-area"><div class="wrap">',
+						'after'  => '</div></div>',
+					) );
+				} );
+
+			}
 
 		}
 
