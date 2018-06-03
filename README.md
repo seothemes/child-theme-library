@@ -6,38 +6,9 @@ A configuration based drop-in library for extending Genesis child themes.
 
 The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's config. Using this approach, we are able to use a single codebase which can be heavily customized by passing in a configuration file.
 
-### How does it work?
-
-
-
 ## Installation
 
-### Git
-
-The Child Theme Library can be installed as a Git Submodule. This allows the library to receive future updates with ease. If you are not familiar with Git Submodules please read [this article](https://gist.github.com/gitaarik/8735255).
-
-From the terminal, navigate to your project directory:
-
-```sh
-cd wp-content/themes/my-theme
-```
-
-Clone from Github into the `lib` directory. This creates a submodule:
-
-```sh
-git submodule add https://github.com/seothemes/child-theme-library.git lib
-```
-
-Include the library from your `functions.php` file by placing the following line **after** the Genesis Framework has loaded:
-
-```php
-// Load Child Theme Library (do not remove).
-require_once get_stylesheet_directory() . '/lib/init.php';
-```
-
 ### Composer (recommended)
-
-[Example](https://github.com/seothemes/genesis-starter/composer.json)
 
 Include the package and the custom directory installer package in your child theme's `composer.json` file
 
@@ -67,6 +38,31 @@ While the child theme library is in beta, you will also need to add the reposito
     "url": "https://github.com/seothemes/child-theme-library.git"
   }
 ],
+```
+
+An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter/composer.json)
+
+### Git
+
+The Child Theme Library can be installed as a Git Submodule. This allows the library to receive future updates with ease. If you are not familiar with Git Submodules please read [this article](https://gist.github.com/gitaarik/8735255).
+
+From the terminal, navigate to your project directory:
+
+```sh
+cd wp-content/themes/my-theme
+```
+
+Clone from Github into the `lib` directory. This creates a submodule:
+
+```sh
+git submodule add https://github.com/seothemes/child-theme-library.git lib
+```
+
+Include the library from your `functions.php` file by placing the following line **after** the Genesis Framework has loaded:
+
+```php
+// Load Child Theme Library (do not remove).
+require_once get_stylesheet_directory() . '/lib/init.php';
 ```
 
 ### Manually
