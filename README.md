@@ -1,6 +1,14 @@
 # Child Theme Library
 
-A lightweight drop-in library for extending Genesis child themes.
+A configuration based drop-in library for extending Genesis child themes.
+
+### Why was the Child Theme Library built?
+
+The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's config. Using this approach, we are able to use a single codebase which can be heavily customized by passing in a configuration file.
+
+### How does it work?
+
+
 
 ## Installation
 
@@ -23,8 +31,42 @@ git submodule add https://github.com/seothemes/child-theme-library.git lib
 Include the library from your `functions.php` file by placing the following line **after** the Genesis Framework has loaded:
 
 ```php
-// Load child theme's lib (do not remove).
+// Load Child Theme Library (do not remove).
 require_once get_stylesheet_directory() . '/lib/init.php';
+```
+
+### Composer (recommended)
+
+[Example](https://github.com/seothemes/genesis-starter/composer.json)
+
+Include the package and the custom directory installer package in your child theme's `composer.json` file
+
+```json
+"require":{
+  "mnsami/composer-custom-directory-installer": "1.1.*",
+  "seothemes/child-theme-library": "dev-master"
+}
+```
+
+In the `extra` section define the custom directory you want the package to be installed in:
+
+```json
+"extra":{
+  "installer-paths":{
+    "./lib/": ["seothemes/child-theme-library"]
+  }
+},
+```
+
+While the child theme library is in beta, you will also need to add the repository details:
+
+```json
+"repositories": [
+  {
+    "type": "git",
+    "url": "https://github.com/seothemes/child-theme-library.git"
+  }
+],
 ```
 
 ### Manually
@@ -43,15 +85,19 @@ require_once get_template_directory() . '/lib/init.php';
 require_once get_stylesheet_directory() . '/lib/init.php';
 ```
 
-### Composer
+## Setup
 
-Coming soon.
+Once the library has been included in your theme, it is ready to accept your config file. By default, this should be placed in `./config/config.php`, however this location can be changed by using the config path filter, e.g:
 
-## Features
+```php
+add_filter( 'child_theme_config', get_stylesheet_directory() . 'my-config.php' );
+```
+
+A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/genesis-starter/composer.json).
 
 ## Structure
 
-The Child Theme Library is modular built with configuration architecture that loosely follows the Genesis Framework file structure:
+The Child Theme Library loosely resembles the current Genesis Framework file structure:
 
 ```sh
 lib/
@@ -59,16 +105,17 @@ lib/
 │   ├── customizer-output.php
 │   └── customizer-settings.php
 ├── classes/
-│   ├── class-child-theme-demo-import.php
 │   ├── class-child-theme-rgba-customizer-control.php
 │   └── class-child-theme-tgm-plugin-activation.php
 ├── css/
 │   ├── customizer.css
+│   ├── library.css
 │   └── load-styles.php
 ├── functions/
 │   ├── attributes.php
 │   ├── autoload.php
 │   ├── defaults.php
+│   ├── demo.php
 │   ├── general.php
 │   ├── hero.php
 │   ├── layout.php
@@ -80,10 +127,10 @@ lib/
 │   └── utilities.php
 ├── js/
 │   ├── customizer.js
-│   ├── load-scripts.php
-│   └── menus.js
+│   ├── library.js
+│   └── load-scripts.php
 ├── languages/
-│   └── genesis-starter-theme.pot
+│   └── child-theme-library.pot
 ├── shortcodes/
 │   └── footer.php
 ├── structure/
@@ -99,7 +146,8 @@ lib/
 │   └── page-sitemap.php
 ├── widgets/
 │   └── widgets.php
-├── README.md
+├── .gitattributes
 ├── composer.json
+├── README.md
 └── init.php
 ```
