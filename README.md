@@ -147,3 +147,34 @@ lib/
 ├── README.md
 └── init.php
 ```
+
+## Support
+
+Please visit https://github.com/seothemes/child-theme-library/issues/ to open a new issue.
+
+## Authors
+
+- **Lee Anthony** - [SEO Themes](https://seothemes.com/)
+
+See also the list of [contributors](https://github.com/seothemes/child-theme-library/graphs/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the GNU General Public License - see the LICENSE.md file for details.
+
+## Acknowledgments
+
+A shout out to anyone who's code was used:
+
+- Gary Jones
+- Craig Simpson
+- Tim Jensen
+- Craig Watson
+- Sridhar Katakam
+- Bill Erickson
+- Chinmoy Paul
+- Nathan Rice
+- Calvin Koepke
+- Jen Baumann
+- Brian Gardner
+- Robin Cornett
