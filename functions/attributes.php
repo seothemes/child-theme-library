@@ -33,9 +33,9 @@ add_filter( 'body_class', 'child_theme_body_class' );
  */
 function child_theme_body_class( $classes ) {
 
-	if ( current_theme_supports( 'fixed-header' ) ) {
+	if ( get_theme_mod( 'child_theme_sticky_header' ) ) {
 
-		$classes[] = 'has-fixed-header';
+		$classes[] = 'has-sticky-header';
 
 	}
 

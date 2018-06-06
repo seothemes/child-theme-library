@@ -10,7 +10,6 @@
      */
     $( window ).scroll( function() {
         var scroll = $( window ).scrollTop();
-        var height = $( '.hero-section' ).outerHeight();
         var header = $( '.site-header' ).outerHeight();
         if ( scroll >= header ) {
             $( '.site-header' ).addClass( 'shrink' );
