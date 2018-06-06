@@ -13,6 +13,20 @@
  * @license   GPL-2.0+
  */
 
+add_action( 'genesis_setup', 'child_theme_plugin_activation_class' );
+/**
+ * Instantiate the plugin activation class.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_plugin_activation_class() {
+
+	new TGM_Plugin_Activation();
+
+}
+
 add_action( 'tgmpa_register', 'child_theme_required_plugins' );
 /**
  * Register required plugins.

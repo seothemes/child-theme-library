@@ -20,5 +20,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-// Display custom logo in site title area.
-add_action( 'genesis_site_title', 'the_custom_logo', 0 );
+add_action( 'genesis_setup', 'child_theme_display_custom_logo' );
+/**
+ * Display custom logo in site title area.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_display_custom_logo() {
+
+	add_action( 'genesis_site_title', 'the_custom_logo', 0 );
+
+}
+

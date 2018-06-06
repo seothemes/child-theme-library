@@ -35,7 +35,7 @@ if ( ! is_customize_preview() ) {
  * convert between RGBa and Hex color values as opacity is
  * added to or removed from a color.
  */
-class Child_Theme_RGBA_Customizer_Control extends WP_Customize_Control {
+class RGBA_Customizer_Control extends WP_Customize_Control {
 
 	/**
 	 * Official control name.

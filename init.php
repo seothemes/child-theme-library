@@ -53,7 +53,7 @@ function child_theme_init() {
 
 	foreach ( $config['autoload'] as $dir ) {
 
-		child_theme_autoload_dir( CHILD_THEME_LIB . $dir );
+		child_theme_autoload_dir( CHILD_THEME_DIR . $dir );
 
 	}
 

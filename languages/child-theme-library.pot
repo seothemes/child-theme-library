@@ -13,39 +13,39 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/config.php:122
+#: config/config.php:121
 msgid "Hero Image"
 msgstr ""
 
-#: config/config.php:253
+#: config/config.php:268
 msgid "Blog"
 msgstr ""
 
-#: config/config.php:254, lib/views/page-front.php:9
+#: config/config.php:269, lib/views/page-front.php:9
 msgid "Front Page"
 msgstr ""
 
-#: config/config.php:255, lib/views/page-full.php:9
+#: config/config.php:270, lib/views/page-full.php:9
 msgid "Full Width"
 msgstr ""
 
-#: config/config.php:256, lib/views/page-landing.php:9
+#: config/config.php:271, lib/views/page-landing.php:9
 msgid "Landing Page"
 msgstr ""
 
-#: config/config.php:257, lib/views/page-sitemap.php:9
+#: config/config.php:272, lib/views/page-sitemap.php:9
 msgid "Sitemap"
 msgstr ""
 
-#: config/config.php:324, config/config.php:325
+#: config/config.php:344, config/config.php:345
 msgid "Menu"
 msgstr ""
 
-#: config/config.php:516
+#: config/config.php:541
 msgid "Header Menu"
 msgstr ""
 
-#: config/config.php:517
+#: config/config.php:542
 msgid "After Header Menu"
 msgstr ""
 

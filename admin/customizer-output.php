@@ -44,7 +44,7 @@ function child_theme_customizer_output() {
 
 		$custom_color = get_theme_mod( "child_theme_{$color}_color", $settings['value'] );
 
-		if ( $color !== $custom_color ) {
+		if ( $settings['value'] !== $custom_color ) {
 
 			foreach ( $settings['css'] as $rule ) {
 

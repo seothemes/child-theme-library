@@ -20,6 +20,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-// Reposition footer widgets inside site footer.
-remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
-add_action( 'genesis_before_footer_wrap', 'genesis_footer_widget_areas', 5 );
+add_action( 'genesis_setup', 'child_theme_reposition_footer_widgets' );
+/**
+ * Reposition footer widgets inside site footer.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_reposition_footer_widgets() {
+
+	remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
+	add_action( 'genesis_before_footer_wrap', 'genesis_footer_widget_areas', 5 );
+
+}

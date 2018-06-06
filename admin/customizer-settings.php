@@ -128,7 +128,7 @@ function child_theme_customize_register( $wp_customize ) {
 		);
 
 		$wp_customize->add_control(
-			new Child_Theme_RGBA_Customizer_Control(
+			new RGBA_Customizer_Control(
 				$wp_customize,
 				$setting,
 				array(
