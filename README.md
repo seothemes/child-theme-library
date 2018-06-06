@@ -101,15 +101,14 @@ lib/
 │   ├── customizer-output.php
 │   └── customizer-settings.php
 ├── classes/
-│   ├── class-child-theme-rgba-customizer-control.php
-│   └── class-child-theme-tgm-plugin-activation.php
+│   ├── class-rgba-customizer-control.php
+│   └── class-tgm-plugin-activation.php
 ├── css/
 │   ├── customizer.css
 │   ├── library.css
 │   └── load-styles.php
 ├── functions/
 │   ├── attributes.php
-│   ├── autoload.php
 │   ├── defaults.php
 │   ├── demo.php
 │   ├── general.php
@@ -124,6 +123,7 @@ lib/
 ├── js/
 │   ├── customizer.js
 │   ├── library.js
+│   ├── menu.js
 │   └── load-scripts.php
 ├── languages/
 │   └── child-theme-library.pot
@@ -134,8 +134,6 @@ lib/
 │   ├── header.php
 │   └── menu.php
 ├── views/
-│   ├── page-grid.php
-│   ├── page-blog.php
 │   ├── page-front.php
 │   ├── page-full.php
 │   ├── page-landing.php
@@ -145,6 +143,7 @@ lib/
 ├── .gitattributes
 ├── composer.json
 ├── README.md
+├── autoload.php
 └── init.php
 ```
 
@@ -164,13 +163,14 @@ This project is licensed under the GNU General Public License - see the LICENSE.
 
 ## Acknowledgments
 
-A shout out to anyone who's code was used:
+A shout out to anyone who's code was used in or provided inspiration to this project:
 
 - Gary Jones
 - Craig Simpson
 - Tim Jensen
 - Craig Watson
 - Sridhar Katakam
+- Christoph Herr
 - Bill Erickson
 - Chinmoy Paul
 - Nathan Rice
