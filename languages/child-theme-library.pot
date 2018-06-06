@@ -13,18 +13,66 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/views/page-front.php:7
+#: config/config.php:122
+msgid "Hero Image"
+msgstr ""
+
+#: config/config.php:253
+msgid "Blog"
+msgstr ""
+
+#: config/config.php:254, lib/views/page-front.php:9
 msgid "Front Page"
 msgstr ""
 
-#: lib/views/page-full.php:7
+#: config/config.php:255, lib/views/page-full.php:9
 msgid "Full Width"
 msgstr ""
 
-#: lib/views/page-grid.php:7
-msgid "Blog Grid"
+#: config/config.php:256, lib/views/page-landing.php:9
+msgid "Landing Page"
 msgstr ""
 
-#: lib/views/page-landing.php:7
-msgid "Landing Page"
+#: config/config.php:257, lib/views/page-sitemap.php:9
+msgid "Sitemap"
+msgstr ""
+
+#: config/config.php:324, config/config.php:325
+msgid "Menu"
+msgstr ""
+
+#: config/config.php:516
+msgid "Header Menu"
+msgstr ""
+
+#: config/config.php:517
+msgid "After Header Menu"
+msgstr ""
+
+#: lib/admin/customizer-settings.php:68
+msgid "Logo Size"
+msgstr ""
+
+#: lib/admin/customizer-settings.php:69
+msgid "Set the logo size in pixels. Default is 100."
+msgstr ""
+
+#: lib/admin/customizer-settings.php:100
+msgid "Enable sticky header"
+msgstr ""
+
+#: lib/admin/customizer-settings.php:120
+msgid " Color"
+msgstr ""
+
+#: lib/functions/hero.php:136
+msgid "Latest Posts"
+msgstr ""
+
+#: lib/functions/hero.php:145
+msgid "Not found, error 404"
+msgstr ""
+
+#: lib/functions/hero.php:154
+msgid "Search results for: "
 msgstr ""

@@ -11,7 +11,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Views
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -22,17 +22,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-// Get site-header.
-get_header();
+// Force full-width-content layout.
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 
-// Custom loop, remove all hooks except entry content.
-if ( have_posts() ) :
+// Remove hero section.
+remove_theme_support( 'hero-section' );
 
-	the_post();
+// Remove content-sidebar-wrap.
+add_filter( 'genesis_markup_content-sidebar-wrap', '__return_null' );
 
-	do_action( 'genesis_entry_content' );
+// Remove default loop.
+remove_action( 'genesis_loop', 'genesis_do_loop' );
+add_action( 'genesis_loop', 'child_theme_front_page_widgets' );
 
-endif;
+/**
+ * Front page widgets.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_front_page_widgets() {
 
-// Get site-footer.
-get_footer();
+	do_action( 'front_page_widgets' );
+
+}
+
+// Run Genesis.
+genesis();

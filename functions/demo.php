@@ -23,18 +23,9 @@ add_filter( 'pt-ocdi/import_files', 'child_theme_demo_import_settings' );
  */
 function child_theme_demo_import_settings() {
 
-	return array(
-		array(
-			'local_import_file'            => CHILD_THEME_DIR . '/sample.xml',
-			'local_import_widget_file'     => CHILD_THEME_DIR . '/widgets.wie',
-			'local_import_customizer_file' => CHILD_THEME_DIR . '/customizer.dat',
-			'import_file_name'             => 'Demo Import',
-			'categories'                   => false,
-			'local_import_redux'           => false,
-			'import_preview_image_url'     => false,
-			'import_notice'                => false,
-		),
-	);
+	$config = child_theme_get_config( 'demo-import' );
+
+	return array( $config );
 
 }
 

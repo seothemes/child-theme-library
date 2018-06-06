@@ -9,7 +9,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Functions
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -20,70 +20,61 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
+add_action( 'genesis_setup', 'child_theme_add_textdomain' );
 /**
  * Add theme text domain.
  *
  * @since  1.0.0
  *
- * @param  array $config Config to consume.
- *
  * @return void
  */
-function child_theme_add_textdomain( $config ) {
+function child_theme_add_textdomain() {
 
-	// Set Localization (do not remove).
+	$config = child_theme_get_config( 'textdomain' );
+
 	load_child_theme_textdomain( $config['domain'], $config['path'] );
 
 }
 
+add_action( 'genesis_setup', 'child_theme_add_theme_supports' );
 /**
  * Add theme supports.
  *
  * @since  1.0.0
  *
- * @param  array $config Config to consume.
- *
  * @return void
  */
-function child_theme_add_theme_supports( $config ) {
+function child_theme_add_theme_supports() {
+
+	$config = child_theme_get_config( 'theme-supports' );
 
 	foreach ( $config as $feature => $args ) {
 
-		add_theme_support( $feature, $args );
+		if ( is_array( $args ) ) {
+
+			add_theme_support( $feature, $args );
+
+		} else {
+
+			add_theme_support( $args );
+
+		}
 
 	}
 
 }
 
-/**
- * Add theme layouts.
- *
- * @since  1.0.0
- *
- * @param  array $config Config to consume.
- *
- * @return void
- */
-function child_theme_add_layouts( $config ) {
-
-	foreach ( $config as $layout ) {
-
-		genesis_register_layout( $layout );
-
-	}
-
-}
-
+add_action( 'genesis_setup', 'child_theme_add_image_sizes' );
 /**
  * Add new image sizes.
  *
  * @since  1.0.0
  *
- * @param  array $config Config to consume.
- *
  * @return void
  */
-function child_theme_add_image_sizes( $config ) {
+function child_theme_add_image_sizes() {
+
+	$config = child_theme_get_config( 'image-sizes' );
 
 	foreach ( $config as $name => $args ) {
 
@@ -95,16 +86,17 @@ function child_theme_add_image_sizes( $config ) {
 
 }
 
+add_action( 'genesis_setup', 'child_theme_add_post_type_supports' );
 /**
  * Add post type supports.
  *
  * @since  1.0.0
  *
- * @param  array $config Config to consume.
- *
  * @return void
  */
-function child_theme_add_post_type_supports( $config ) {
+function child_theme_add_post_type_supports() {
+
+	$config = child_theme_get_config( 'post-type-supports' );
 
 	foreach ( $config as $post_type => $support ) {
 
@@ -114,6 +106,7 @@ function child_theme_add_post_type_supports( $config ) {
 
 }
 
+add_action( 'genesis_setup', 'child_theme_add_default_headers' );
 /**
  * Add default header image.
  *
@@ -121,7 +114,9 @@ function child_theme_add_post_type_supports( $config ) {
  *
  * @return void
  */
-function child_theme_add_default_headers( $config ) {
+function child_theme_add_default_headers() {
+
+	$config = child_theme_get_config( 'default-headers' );
 
 	register_default_headers( $config );
 

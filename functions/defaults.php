@@ -9,7 +9,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Functions
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -25,9 +25,9 @@ add_filter( 'genesis_theme_settings_defaults', 'child_theme_set_default_settings
  */
 function child_theme_set_default_settings( array $defaults ) {
 
-	$child_theme_config = child_theme_get_config();
+	$config = child_theme_get_config( 'genesis-settings' );
 
-	$defaults = wp_parse_args( $child_theme_config['genesis-settings'], $defaults );
+	$defaults = wp_parse_args( $config, $defaults );
 
 	return $defaults;
 
@@ -43,14 +43,14 @@ add_action( 'after_switch_theme', 'child_theme_update_settings' );
  */
 function child_theme_update_settings() {
 
-	$child_theme_config = child_theme_get_config();
+	$config = child_theme_get_config();
 
 	if ( function_exists( 'genesis_update_settings' ) ) {
 
-		genesis_update_settings( $child_theme_config['genesis-settings'] );
+		genesis_update_settings( $config['genesis-settings'] );
 
 	}
 
-	update_option( 'posts_per_page', $child_theme_config['blog_cat_num'] );
+	update_option( 'posts_per_page', $config['blog_cat_num'] );
 
 }

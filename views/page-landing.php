@@ -11,7 +11,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Views
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -22,13 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'genesis_starter_dequeue_skip_links' );
+add_action( 'wp_enqueue_scripts', 'child_theme_dequeue_skip_links' );
 /**
  * Dequeue Skip Links Script.
  *
  * @return void
  */
-function genesis_starter_dequeue_skip_links() {
+function child_theme_dequeue_skip_links() {
 
 	wp_dequeue_script( 'skip-links' );
 
@@ -46,10 +46,7 @@ remove_action( 'genesis_header', 'genesis_do_header' );
 remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
 
 // Remove default hero section.
-remove_action( 'genesis_before_content_sidebar_wrap', 'genesis_starter_hero_section' );
-
-// Add title back (removed in /includes/header.php).
-add_action( 'genesis_entry_header', 'genesis_do_post_title' );
+remove_theme_support('hero-section' );
 
 // Remove navigation.
 remove_theme_support( 'genesis-menus' );

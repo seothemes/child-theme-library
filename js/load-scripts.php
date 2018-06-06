@@ -9,7 +9,7 @@
  * @package   SEOThemes\ChildThemeLibrary\JS
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -52,7 +52,7 @@ function child_theme_menu_settings() {
 
 	$menu_settings = child_theme_get_config( 'responsive-menu' );
 
-	wp_localize_script( CHILD_THEME_HANDLE . '-menu', 'genesis_responsive_menu', $menu_settings );
+	wp_localize_script( 'child-theme-menu', 'genesis_responsive_menu', $menu_settings );
 
 }
 

@@ -27,6 +27,12 @@ add_action( 'genesis_before', 'child_theme_hero_section_setup' );
  */
 function child_theme_hero_section_setup() {
 
+	if ( ! current_theme_supports( 'hero-section' ) ) {
+
+		return;
+
+	}
+
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
@@ -127,7 +133,7 @@ function child_theme_hero_section_title() {
 		genesis_markup( array(
 			'open'    => '<h1 %s>',
 			'close'   => '</h1>',
-			'content' => apply_filters( 'child_theme_latest_posts_title', __( 'Latest Posts', CHILD_THEME_HANDLE ) ),
+			'content' => apply_filters( 'child_theme_latest_posts_title', __( 'Latest Posts', 'child-theme-library' ) ),
 			'context' => 'entry-title',
 		) );
 
@@ -136,7 +142,7 @@ function child_theme_hero_section_title() {
 		genesis_markup( array(
 			'open'    => '<h1 %s>',
 			'close'   => '</h1>',
-			'content' => apply_filters( 'genesis_404_entry_title', __( 'Not found, error 404', CHILD_THEME_HANDLE ) ),
+			'content' => apply_filters( 'genesis_404_entry_title', __( 'Not found, error 404', 'child-theme-library' ) ),
 			'context' => 'entry-title',
 		) );
 
@@ -145,7 +151,7 @@ function child_theme_hero_section_title() {
 		genesis_markup( array(
 			'open'    => '<h1 %s>',
 			'close'   => '</h1>',
-			'content' => apply_filters( 'genesis_search_title_text', __( 'Search results for: ', CHILD_THEME_HANDLE ) ) . get_search_query(),
+			'content' => apply_filters( 'genesis_search_title_text', __( 'Search results for: ', 'child-theme-library' ) ) . get_search_query(),
 			'context' => 'entry-title',
 		) );
 

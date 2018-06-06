@@ -9,7 +9,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Functions
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -35,12 +35,25 @@ add_filter( 'theme_page_templates', 'child_theme_add_page_templates' );
  */
 function child_theme_add_page_templates( $page_templates ) {
 
-	$child_theme_templates = child_theme_get_config( 'page-templates' );
+	$config = child_theme_get_config( 'page-templates' );
 
-	unset( $page_templates['page_archive.php'] );
-	unset( $page_templates['page_blog.php'] );
+	if ( array_key_exists( 'page-blog.php', $config ) ) {
 
-	$page_templates = array_merge( $page_templates, $child_theme_templates );
+		unset( $config['page-blog.php'] );
+
+	} else {
+
+		unset( $page_templates['page_blog.php'] );
+
+	}
+
+	if ( array_key_exists( 'page-sitemap.php', $config ) ) {
+
+		unset( $page_templates['page_archive.php'] );
+
+	}
+
+	$page_templates = array_merge( $page_templates, $config );
 
 	return $page_templates;
 
@@ -58,7 +71,7 @@ add_filter( 'template_include', 'child_theme_set_page_template' );
  */
 function child_theme_set_page_template( $template ) {
 
-	$page_templates = child_theme_get_config( 'page-templates' );
+	$config = child_theme_get_config( 'page-templates' );
 
 	if ( ! is_singular( 'page' ) ) {
 
@@ -68,7 +81,15 @@ function child_theme_set_page_template( $template ) {
 
 	$current_template = get_post_meta( get_the_ID(), '_wp_page_template', true );
 
-	if ( ! array_key_exists( $current_template, $page_templates ) ) {
+	if ( 'page-blog.php' === $current_template ) {
+
+		$template = get_template_directory() . '/page_blog.php';
+
+		return $template;
+
+	}
+
+	if ( ! array_key_exists( $current_template, $config ) ) {
 
 		return $template;
 

@@ -9,7 +9,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Widgets
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'widgets_init', 'child_theme_unregister_widgets' );
 /**
- * Unregisters widgets defined in the config.
+ * Unregister widgets defined in the config.
  *
  * @since  1.0.0
  *
@@ -40,57 +40,16 @@ function child_theme_unregister_widgets() {
 
 }
 
-add_action( 'after_setup_theme', 'child_theme_add_widget_areas', 11 );
+add_action( 'after_setup_theme', 'child_theme_widget_shortcodes' );
 /**
- * Add custom widget areas defined in config.
+ * Enables shortcodes in text widgets.
  *
  * @since  1.0.0
  *
  * @return void
  */
-function child_theme_add_widget_areas() {
+function child_theme_widget_shortcodes() {
 
-	$config         = child_theme_get_config( 'widget-areas' );
-	$footer_widgets = 1;
-
-	unregister_sidebar( 'after-entry' );
-	unregister_sidebar( 'header-right' );
-	unregister_sidebar( 'sidebar' );
-	unregister_sidebar( 'sidebar-alt' );
-
-	foreach ( $config as $id => $location ) {
-
-		if ( is_numeric( str_replace( 'footer-', '', $id ) ) ) {
-
-			add_theme_support( 'genesis-footer-widgets', $footer_widgets++ );
-
-		} else {
-
-			$name        = ucwords( str_replace( '-', ' ', $id ) );
-			$description = $name . ' widget area';
-
-			genesis_register_sidebar( array(
-				'name'        => $name,
-				'description' => $description,
-				'id'          => $id,
-			) );
-
-			if ( ! empty( $location ) ) {
-
-				add_action( $location, function() use ($id) {
-					genesis_widget_area( $id, array(
-						'before' => '<div class="' . $id . ' widget-area"><div class="wrap">',
-						'after'  => '</div></div>',
-					) );
-				} );
-
-			}
-
-		}
-
-	}
+	add_filter( 'widget_text', 'do_shortcode' );
 
 }
-
-// Enable shortcodes in text widgets.
-add_filter( 'widget_text', 'do_shortcode' );

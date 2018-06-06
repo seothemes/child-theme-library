@@ -100,6 +100,7 @@ function child_theme_site_title_schema( $attr ) {
 	$attr['itemprop'] = 'name';
 
 	return $attr;
+
 }
 
 add_filter( 'genesis_attr_hero-section', 'child_theme_hero_section_attr' );
@@ -141,7 +142,11 @@ add_filter( 'genesis_attr_entry', 'child_theme_entry_attr' );
  */
 function child_theme_entry_attr( $atts ) {
 
-	$atts['itemref'] = 'hero-section';
+	if ( current_theme_supports( 'hero-section' ) && is_singular() ) {
+
+		$atts['itemref'] = 'hero-section';
+
+	}
 
 	return $atts;
 

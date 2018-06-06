@@ -9,7 +9,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Admin
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -65,8 +65,8 @@ function child_theme_customize_register( $wp_customize ) {
 		$wp_customize,
 		'child_theme_logo_size',
 		array(
-			'label'       => __( 'Logo Size', CHILD_THEME_HANDLE ),
-			'description' => __( 'Set the logo size in pixels. Default is 100.', CHILD_THEME_HANDLE ),
+			'label'       => __( 'Logo Size', 'child-theme-library' ),
+			'description' => __( 'Set the logo size in pixels. Default is 100.', 'child-theme-library' ),
 			'settings'    => 'child_theme_logo_size',
 			'section'     => 'title_tagline',
 			'type'        => 'number',
@@ -97,7 +97,7 @@ function child_theme_customize_register( $wp_customize ) {
 		$wp_customize,
 		'child_theme_sticky_header',
 		array(
-			'label'    => __( 'Enable sticky header', CHILD_THEME_HANDLE ),
+			'label'    => __( 'Enable sticky header', 'child-theme-library' ),
 			'settings' => 'child_theme_sticky_header',
 			'section'  => 'genesis_layout',
 			'type'     => 'checkbox',
@@ -117,7 +117,7 @@ function child_theme_customize_register( $wp_customize ) {
 	foreach ( $colors as $color => $settings ) {
 
 		$setting = "child_theme_{$color}_color";
-		$label   = ucwords( str_replace( '_', ' ', $color ) ) . __( ' Color', CHILD_THEME_HANDLE );
+		$label   = ucwords( str_replace( '_', ' ', $color ) ) . __( ' Color', 'child-theme-library' );
 
 		$wp_customize->add_setting(
 			$setting,

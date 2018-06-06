@@ -9,7 +9,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Functions
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -20,25 +20,73 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
+add_action( 'after_setup_theme', 'child_theme_add_layouts' );
+/**
+ * Add theme layouts.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_add_layouts() {
+
+	$config = child_theme_get_config( 'layouts' );
+
+	$initial_layouts = array(
+		'full-width-content',
+		'content-sidebar',
+		'sidebar-content',
+		'content-sidebar-sidebar',
+		'sidebar-sidebar-content',
+		'sidebar-content-sidebar',
+	);
+
+	$layouts_to_remove = array_diff( $initial_layouts, $config );
+	$custom_layouts    = array_diff( $config, $initial_layouts );
+
+	foreach ( $layouts_to_remove as $layout_to_remove ) {
+
+		genesis_unregister_layout( $layout_to_remove );
+
+	}
+
+	foreach ( $custom_layouts as $custom_layout ) {
+
+		genesis_register_layout( $custom_layout, array(
+			'label' => ucwords( str_replace( '-', ' ', $custom_layout ) ),
+			'img'   => CHILD_THEME_ASSETS . '/images/' . $custom_layout . '.gif',
+		) );
+
+	}
+
+}
+
 add_filter( 'genesis_site_layout', 'child_theme_search_page_layout' );
 /**
  * Gets a custom page layout for the search results page.
  *
  * @since  1.0.0
  *
+ * @param  string $layout Layout to return.
+ *
  * @return string
  */
-function child_theme_search_page_layout() {
+function child_theme_search_page_layout( $layout ) {
 
 	if ( is_search() ) {
 
-		$page   = get_page_by_path( 'search' );
-		$field  = genesis_get_custom_field( '_genesis_layout', $page->ID );
-		$layout = $field ? $field : genesis_get_option( 'site_layout' );
+		$page = get_page_by_path( 'search' );
 
-		return $layout;
+		if ( $page ) {
+
+			$field  = genesis_get_custom_field( '_genesis_layout', $page->ID );
+			$layout = $field ? $field : genesis_get_option( 'site_layout' );
+
+		}
 
 	}
+
+	return $layout;
 
 }
 
@@ -48,18 +96,47 @@ add_filter( 'genesis_site_layout', 'child_theme_error_404_page_layout' );
  *
  * @since  1.0.0
  *
+ * @param  string $layout Layout to return.
+ *
  * @return string
  */
-function child_theme_error_404_page_layout() {
+function child_theme_error_404_page_layout( $layout ) {
 
 	if ( is_404() ) {
 
-		$page   = get_page_by_path( 'error-404' );
-		$field  = genesis_get_custom_field( '_genesis_layout', $page->ID );
-		$layout = $field ? $field : genesis_get_option( 'site_layout' );
+		$page = get_page_by_path( 'error-404' );
 
-		return $layout;
+		if ( $page ) {
+
+			$field  = genesis_get_custom_field( '_genesis_layout', $page->ID );
+			$layout = $field ? $field : genesis_get_option( 'site_layout' );
+
+		}
 
 	}
+
+	return $layout;
+
+}
+
+add_action( 'genesis_before', 'child_theme_remove_narrow_sidebars' );
+/**
+ * Remove sidebars for narrow layout.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_remove_narrow_sidebars() {
+
+	$site_layout = genesis_site_layout();
+
+	if ( 'narrow-content' !== $site_layout ) {
+
+		return;
+
+	}
+
+	add_filter( 'genesis_site_layout', '__genesis_return_full_width_content' );
 
 }

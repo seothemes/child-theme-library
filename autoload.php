@@ -9,7 +9,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Functions
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
@@ -17,6 +17,24 @@
 if ( ! defined( 'ABSPATH' ) ) {
 
 	die;
+
+}
+
+add_action( 'genesis_setup', 'child_theme_composer_autoload' );
+/**
+ * Includes the composer autoloader.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_composer_autoload() {
+
+	if ( file_exists( CHILD_THEME_DIR . '/vendor/autoload.php' ) ) {
+
+		require CHILD_THEME_DIR . '/vendor/autoload.php';
+
+	}
 
 }
 
@@ -53,8 +71,10 @@ function child_theme_spl_autoload_register( $class ) {
  * @param  string $directory Directory of files to autoload.
  *
  * @throws Exception If too many files are loaded.
+ *
+ * @return void
  */
-function child_theme_autoloader( $directory ) {
+function child_theme_autoload_dir( $directory ) {
 
 	// Get a listing of the current directory.
 	$scanned_dir = scandir( $directory );

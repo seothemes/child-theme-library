@@ -9,7 +9,7 @@
  * @package   SEOThemes\ChildThemeLibrary\Structure
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
- * @copyright Copyright © 2017 SEO Themes
+ * @copyright Copyright © 2018 SEO Themes
  * @license   GPL-2.0+
  */
 
