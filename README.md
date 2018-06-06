@@ -1,10 +1,10 @@
 # Child Theme Library
 
-A configuration based drop-in library for extending Genesis child themes.
+A configuration based drop-in library for extending Genesis child themes. See an example of how to integrate the library [here](https://github.com/seothemes/genesis-starter) or check out the [live demo](https://demo.seothemes.com/genesis-starter). 
 
 ### Why was the Child Theme Library built?
 
-The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's config. Using this approach, we are able to use a single codebase which can be heavily customized by passing in a configuration file.
+The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's configuration. Using this approach, we are able to use a single codebase which can be heavily customized by passing in different configs.
 
 ## Installation
 
