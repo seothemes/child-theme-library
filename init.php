@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'genesis_setup', 'child_theme_init' );
+add_action( 'genesis_setup', 'child_theme_init', 5 );
 /**
  * Initializes the child theme library.
  *
@@ -47,7 +47,7 @@ function child_theme_init() {
 	define( 'CHILD_THEME_ASSETS', CHILD_THEME_URI . '/assets' );
 	define( 'CHILD_THEME_CONFIG', CHILD_THEME_DIR . '/config/config.php' );
 
-	$config = require_once apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
+	$config = require apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
 
 	require_once CHILD_THEME_LIB . '/autoload.php';
 
