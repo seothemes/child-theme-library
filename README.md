@@ -71,12 +71,9 @@ Download the zip file from Github [here](https://github.com/seothemes/child-them
 
 Upload the file to your theme's main directory and unzip the contents.
 
-Include the library from your `functions.php` file, **AFTER** the Genesis Framework has loaded, e.g:
+Include the library from your `functions.php` file, before any custom code is loaded e.g:
 
 ```php
-// Load Genesis Framework (do not remove).
-require_once get_template_directory() . '/lib/init.php';
-
 // Load child theme's lib (do not remove).
 require_once get_stylesheet_directory() . '/lib/init.php';
 ```
