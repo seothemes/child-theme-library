@@ -35,8 +35,6 @@ add_action( 'customize_register', 'child_theme_customize_register' );
  */
 function child_theme_customize_register( $wp_customize ) {
 
-	global $wp_customize;
-
 	$wp_customize->remove_control( 'background_color' );
 	$wp_customize->remove_control( 'header_textcolor' );
 
