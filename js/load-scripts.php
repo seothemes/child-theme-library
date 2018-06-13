@@ -34,7 +34,7 @@ function child_theme_load_scripts() {
 
 	foreach ( $scripts as $script => $params ) {
 
-		wp_enqueue_script( 'child-theme-' . $script, $params['src'], $params['deps'], $params['ver'], $params['in_footer'] );
+		wp_enqueue_script( 'child-theme-' . $script, $params['src'], explode( ',',  $params['deps'] ), $params['ver'], $params['in_footer'] );
 
 	}
 

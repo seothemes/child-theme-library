@@ -225,16 +225,31 @@ function child_theme_map_styles( $json ) {
 
 	$config = child_theme_get_config( 'map-style' );
 
-	$config['style'] = json_decode( file_get_contents( $config['style'] ), true );
-
 	if ( ! is_readable( $config['style'] ) ) {
 
 		return $json;
 
 	}
 
+	$config['style'] = json_decode( file_get_contents( $config['style'] ), true );
+
 	array_push( $json, $config );
 
 	return $json;
+
+}
+
+add_action( 'wp_enqueue_scripts', 'child_theme_remove_plugin_css' );
+/**
+ * Disable third party CSS that is included in theme.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_remove_plugin_css() {
+
+	add_filter( 'gs_faq_print_styles', '__return_false' );
+	add_filter( 'genesis_portfolio_load_default_styles', '__return_false' );
 
 }

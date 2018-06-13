@@ -30,8 +30,8 @@ add_action( 'after_setup_theme', 'child_theme_remove_widget_areas', 0 );
  */
 function child_theme_remove_widget_areas() {
 
-	$config   = child_theme_get_config( 'widget-areas' );
-	$config   = array_fill_keys( array_keys( $config ), null );
+	$config = child_theme_get_config( 'widget-areas' );
+	$config = array_fill_keys( array_keys( $config ), null );
 
 	$defaults = array(
 		'after-entry'  => null,
@@ -81,11 +81,25 @@ function child_theme_add_widget_areas() {
 			$name        = ucwords( str_replace( '-', ' ', $id ) );
 			$description = $name . ' widget area';
 
-			genesis_register_sidebar( array(
-				'name'        => $name,
-				'description' => $description,
-				'id'          => $id,
-			) );
+			if ( 'front-page-1' === $id ) {
+
+				genesis_register_sidebar( array(
+					'name'         => $name,
+					'description'  => $description,
+					'id'           => $id,
+					'before_title' => '<h1 itemprop="headline">',
+					'after_title'  => '</h1>',
+				) );
+
+			} else {
+
+				genesis_register_sidebar( array(
+					'name'        => $name,
+					'description' => $description,
+					'id'          => $id,
+				) );
+
+			}
 
 			if ( ! empty( $location ) ) {
 
@@ -98,8 +112,10 @@ function child_theme_add_widget_areas() {
 						$custom_header = ob_get_clean();
 
 						genesis_widget_area( $id, array(
-							'before' => '<div class="' . $id . ' widget-area" role="banner">' . $custom_header . '<div class="wrap">',
-							'after'  => '</div></div>',
+							'before'       => '<div class="' . $id . ' widget-area hero-section" role="banner">' . $custom_header . '<div class="wrap">',
+							'after'        => '</div></div>',
+							'before_title' => '<h1 itemprop="headline">',
+							'after_title'  => '</h1>',
 						) );
 
 					} else {
@@ -118,5 +134,55 @@ function child_theme_add_widget_areas() {
 		}
 
 	}
+
+}
+
+add_action( 'genesis_meta', 'child_theme_front_page_widgets' );
+/**
+ * Display front page widget areas if active.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_front_page_widgets() {
+
+	if ( ! is_front_page() || ! child_theme_has_front_page_widgets() ) {
+
+		return;
+
+	}
+
+	add_filter( 'genesis_site_layout', '__genesis_return_full_width_content' );
+	add_filter( 'genesis_markup_content-sidebar-wrap', '__return_null' );
+
+	remove_theme_support( 'hero-section' );
+
+	remove_action( 'genesis_loop', 'genesis_do_loop' );
+	add_action( 'genesis_loop', function () {
+
+		do_action( 'front_page_widgets' );
+
+	} );
+
+}
+
+add_action( 'genesis_before', 'child_theme_footer_credits_widget' );
+/**
+ * Display footer credits widget area if active.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function child_theme_footer_credits_widget() {
+
+	if ( ! is_active_sidebar( 'footer-credits' ) ) {
+
+		return;
+
+	}
+
+	remove_action( 'genesis_footer', 'genesis_do_footer' );
 
 }

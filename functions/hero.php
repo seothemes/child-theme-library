@@ -184,9 +184,9 @@ function child_theme_hero_section_excerpt() {
 
 		woocommerce_result_count();
 
-	} elseif ( is_home() ) {
+	} elseif ( 'posts' === get_option( 'show_on_front' ) && is_home() ) {
 
-		printf( '<p itemprop="description">%s</p>', do_shortcode( get_the_excerpt( get_option( 'page_for_posts' ) ) ) );
+		printf( '<p itemprop="description">%s</p>', apply_filters( 'child_theme_latest_posts_excerpt', 'Showing the latest posts' ) );
 
 	} elseif ( is_search() ) {
 
