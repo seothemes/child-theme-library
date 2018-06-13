@@ -25,6 +25,8 @@ function child_theme_plugin_activation_class() {
 
 	new TGM_Plugin_Activation();
 
+	add_filter( 'pt-ocdi/disable_pt_branding', '__return_true' );
+
 }
 
 add_action( 'tgmpa_register', 'child_theme_required_plugins' );
