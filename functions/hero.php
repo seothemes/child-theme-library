@@ -128,7 +128,7 @@ function child_theme_hero_section_title() {
 			'context' => 'entry-title',
 		) );
 
-	} elseif ( 'posts' === get_option( 'show_on_front' ) && is_home() ) {
+	} elseif ( is_home() && 'posts' === get_option( 'show_on_front' ) ) {
 
 		genesis_markup( array(
 			'open'    => '<h1 %s>',
@@ -184,7 +184,7 @@ function child_theme_hero_section_excerpt() {
 
 		woocommerce_result_count();
 
-	} elseif ( 'posts' === get_option( 'show_on_front' ) && is_home() ) {
+	} elseif ( is_home() && 'posts' === get_option( 'show_on_front' ) ) {
 
 		printf( '<p itemprop="description">%s</p>', apply_filters( 'child_theme_latest_posts_excerpt', 'Showing the latest posts' ) );
 
