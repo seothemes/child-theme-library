@@ -131,7 +131,7 @@ function child_theme_remove_narrow_sidebars() {
 
 	$site_layout = genesis_site_layout();
 
-	if ( 'narrow-content' !== $site_layout ) {
+	if ( 'center-content' !== $site_layout ) {
 
 		return;
 

@@ -45,11 +45,11 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
-#: config/config.php:546
+#: config/config.php:545
 msgid "Header Menu"
 msgstr ""
 
-#: config/config.php:547
+#: config/config.php:546
 msgid "After Header Menu"
 msgstr ""
 

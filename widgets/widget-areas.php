@@ -101,7 +101,7 @@ function child_theme_add_widget_areas() {
 
 			}
 
-			if ( ! empty( $location ) ) {
+			if ( ! empty( $location ) && true === apply_filters( "child_theme_{$id}", true ) ) {
 
 				add_action( $location, function () use ( $id ) {
 
