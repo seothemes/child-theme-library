@@ -34,19 +34,7 @@ function child_theme_load_styles() {
 
 	foreach ( $config['styles'] as $style => $params ) {
 
-		if ( ! strpos( $style, 'woocommerce' ) ) {
-
-			wp_enqueue_style( 'child-theme-' . $style, $params['src'], $params['deps'], $params['ver'], $params['media'] );
-
-		} else {
-
-			if ( child_theme_is_woocommerce_page() ) {
-
-				wp_enqueue_style( 'child-theme-' . $style, $params['src'], $params['deps'], $params['ver'], $params['media'] );
-
-			}
-
-		}
+		wp_enqueue_style( 'child-theme-' . $style, $params['src'], $params['deps'], $params['ver'], $params['media'] );
 
 	}
 
@@ -57,5 +45,7 @@ function child_theme_load_styles() {
 	}
 
 	wp_enqueue_style( 'child-theme-google-fonts', '//fonts.googleapis.com/css?family=' . implode( '|', $google_fonts ), array(), CHILD_THEME_VERSION );
+
+	add_filter( 'genesis_portfolio_load_default_styles', '__return_false' );
 
 }
