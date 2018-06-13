@@ -31,6 +31,6 @@ add_action( 'genesis_setup', 'child_theme_reposition_footer_widgets' );
 function child_theme_reposition_footer_widgets() {
 
 	remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
-	add_action( 'genesis_before_footer_wrap', 'genesis_footer_widget_areas', 5 );
+	add_action( 'genesis_before_footer_wrap', 'genesis_footer_widget_areas', 15 );
 
 }
