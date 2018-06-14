@@ -182,6 +182,10 @@ add_filter( 'genesis_widget_column_classes', 'child_theme_widget_columns' );
 function child_theme_widget_columns( $column_classes ) {
 
 	$column_classes[] = 'full-width';
+	$column_classes[] = 'one-fifth';
+	$column_classes[] = 'two-fifths';
+	$column_classes[] = 'three-fifths';
+	$column_classes[] = 'four-fifths';
 
 	return $column_classes;
 
