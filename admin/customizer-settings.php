@@ -27,6 +27,7 @@ add_action( 'customize_register', 'child_theme_customize_register' );
  * @since  1.0.0
  *
  * @access public
+ *
  * @param  object $wp_customize Global customizer object.
  *
  * @throws \Exception If no sub-config is found.
@@ -59,18 +60,20 @@ function child_theme_customize_register( $wp_customize ) {
 		)
 	);
 
-	$wp_customize->add_control( new WP_Customize_Control(
-		$wp_customize,
-		'child_theme_logo_size',
-		array(
-			'label'       => __( 'Logo Size', 'child-theme-library' ),
-			'description' => __( 'Set the logo size in pixels. Default is 100.', 'child-theme-library' ),
-			'settings'    => 'child_theme_logo_size',
-			'section'     => 'title_tagline',
-			'type'        => 'number',
-			'priority'    => 8,
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'child_theme_logo_size',
+			array(
+				'label'       => __( 'Logo Size', 'child-theme-library' ),
+				'description' => __( 'Set the logo size in pixels. Default is 100.', 'child-theme-library' ),
+				'settings'    => 'child_theme_logo_size',
+				'section'     => 'title_tagline',
+				'type'        => 'number',
+				'priority'    => 8,
+			)
 		)
-	) );
+	);
 
 	/*
 	| ------------------------------------------------------------------
@@ -82,25 +85,29 @@ function child_theme_customize_register( $wp_customize ) {
 	| that remains at the top of the screen viewport on scroll.
 	|
 	*/
-	$wp_customize->add_setting(
-		'child_theme_sticky_header',
-		array(
-			'capability' => 'edit_theme_options',
-			'default'    => false,
-		)
-	);
+	if ( current_theme_supports( 'sticky-header' ) ) {
 
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-		$wp_customize,
-		'child_theme_sticky_header',
-		array(
-			'label'    => __( 'Enable sticky header', 'child-theme-library' ),
-			'settings' => 'child_theme_sticky_header',
-			'section'  => 'genesis_layout',
-			'type'     => 'checkbox',
-		)
-	) );
+		$wp_customize->add_setting(
+			'child_theme_sticky_header',
+			array(
+				'capability' => 'edit_theme_options',
+				'default'    => false,
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'child_theme_sticky_header',
+				array(
+					'label'    => __( 'Enable sticky header', 'child-theme-library' ),
+					'settings' => 'child_theme_sticky_header',
+					'section'  => 'genesis_layout',
+					'type'     => 'checkbox',
+				)
+			)
+		);
+	}
 
 	/*
 	| ------------------------------------------------------------------
