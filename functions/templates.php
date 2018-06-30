@@ -53,6 +53,12 @@ function child_theme_add_page_templates( $page_templates ) {
 
 	}
 
+	if ( ! current_theme_supports( 'hero-section' ) ) {
+
+		unset( $config['page-contact.php'] );
+
+	}
+
 	$page_templates = array_merge( $page_templates, $config );
 
 	return $page_templates;
