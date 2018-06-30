@@ -219,7 +219,11 @@ function child_theme_custom_header() {
 
 	}
 
-	return printf( '<style type="text/css">.hero-section{background-image: url(%s);}</style>' . "\n", esc_url( $url ) );
+	$config   = child_theme_get_config( 'theme-supports' );
+
+	$selector = ( $config['custom-header']['header-selector'] ? $config['custom-header']['header-selector'] : '.hero-section' );
+
+	return printf( '<style type="text/css">' . $selector . '{background-image: url(%s);}</style>' . "\n", esc_url( $url ) );
 
 }
 
