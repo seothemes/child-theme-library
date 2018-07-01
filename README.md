@@ -64,17 +64,6 @@ In the `extra` section define the custom directory you want the package to be in
 },
 ```
 
-While the child theme library is in beta, you will also need to add the repository details:
-
-```json
-"repositories": [
-  {
-    "type": "git",
-    "url": "https://github.com/seothemes/child-theme-library.git"
-  }
-],
-```
-
 An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json)
 
 ### Git
