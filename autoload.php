@@ -65,7 +65,7 @@ add_action( 'genesis_setup', 'child_theme_autoload_files', 6 );
 /**
  * Autoload files.
  *
- * @since  1.0.0
+ * @since  1.1.0
  *
  * @return void
  */

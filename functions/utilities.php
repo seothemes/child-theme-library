@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Get config.
  *
- * @since  1.0.0
+ * @since  1.1.0
  *
  * @param  string $sub_config The rgba config to sanitize.
  *

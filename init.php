@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Initializes the child theme library.
  *
- * @since  1.0.0
+ * @since  1.1.0
  *
  * @return void
  */
