@@ -15,6 +15,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\Views;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 

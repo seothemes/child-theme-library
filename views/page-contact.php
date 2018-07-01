@@ -15,6 +15,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\Views;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -22,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_filter( 'body_class', 'child_theme_add_contact_body_class' );
+add_filter( 'body_class', __NAMESPACE__ . '\add_contact_body_class' );
 /**
  * Add contact page body class to the head.
  *
@@ -32,7 +34,7 @@ add_filter( 'body_class', 'child_theme_add_contact_body_class' );
  *
  * @return array
  */
-function child_theme_add_contact_body_class( $classes ) {
+function add_contact_body_class( $classes ) {
 
 	$classes[] = 'contact-page';
 
@@ -40,7 +42,7 @@ function child_theme_add_contact_body_class( $classes ) {
 
 }
 
-add_filter( 'genesis_markup_hero-section_open', 'child_theme_contact_page_map' );
+add_filter( 'genesis_markup_hero-section_open', __NAMESPACE__ . '\contact_page_map' );
 /**
  * Display Google map shortcode.
  *
@@ -48,7 +50,7 @@ add_filter( 'genesis_markup_hero-section_open', 'child_theme_contact_page_map' )
  *
  * @return void
  */
-function child_theme_contact_page_map( $markup ) {
+function contact_page_map( $markup ) {
 
 	$markup = str_replace( '<div', do_shortcode( '[ank_google_map]' ) . '<div', $markup );
 

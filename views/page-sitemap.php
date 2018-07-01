@@ -15,6 +15,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\Views;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -26,8 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 remove_action( 'genesis_post_content', 'genesis_do_post_content' );
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
-add_action( 'genesis_entry_content', 'child_theme_page_archive_content' );
-add_action( 'genesis_post_content', 'child_theme_page_archive_content' );
+add_action( 'genesis_entry_content', __NAMESPACE__ . '\sitemap_content' );
+add_action( 'genesis_post_content', __NAMESPACE__ . '\sitemap_content' );
 
 
 /**
@@ -38,7 +40,7 @@ add_action( 'genesis_post_content', 'child_theme_page_archive_content' );
  *
  * @return void
  */
-function child_theme_page_archive_content() {
+function sitemap_content() {
 
 	$heading = ( genesis_a11y( 'headings' ) ? 'h2' : 'h4' );
 

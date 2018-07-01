@@ -15,6 +15,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\Views;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -22,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_filter( 'body_class', 'child_theme_add_boxed_body_class' );
+add_filter( 'body_class', __NAMESPACE__ . '\add_boxed_body_class' );
 /**
  * Add contact page body class to the head.
  *
@@ -32,7 +34,7 @@ add_filter( 'body_class', 'child_theme_add_boxed_body_class' );
  *
  * @return array
  */
-function child_theme_add_boxed_body_class( $classes ) {
+function add_boxed_body_class( $classes ) {
 
 	$classes[] = 'boxed-page';
 

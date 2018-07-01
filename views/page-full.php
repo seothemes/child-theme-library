@@ -15,6 +15,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\Views;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -23,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Remove default hero section.
-remove_action( 'genesis_before_content_sidebar_wrap', 'genesis_starter_hero_section' );
+remove_theme_support( 'hero-section' );
 
 // Get site-header.
 get_header();

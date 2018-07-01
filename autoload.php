@@ -13,6 +13,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -20,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-spl_autoload_register( 'child_theme_autoload_classes' );
+spl_autoload_register( __NAMESPACE__ . '\autoload_classes' );
 /**
  * Register class autoloader.
  *
@@ -30,9 +32,19 @@ spl_autoload_register( 'child_theme_autoload_classes' );
  *
  * @return void
  */
-function child_theme_autoload_classes( $class ) {
+function autoload_classes( $class ) {
 
-	$file_name = str_replace( '_', '-', strtolower( $class ) );
+	$search = array(
+		'SEOThemes\ChildThemeLibrary\Classes\\',
+		'_',
+	);
+
+	$replace = array(
+		'',
+		'-',
+	);
+
+	$file_name = str_replace( $search, $replace, strtolower( $class ) );
 
 	$file = CHILD_THEME_LIB . "/classes/class-{$file_name}.php";
 
@@ -43,7 +55,7 @@ function child_theme_autoload_classes( $class ) {
 	}
 }
 
-add_action( 'genesis_setup', 'child_theme_autoload_composer' );
+add_action( 'genesis_setup', __NAMESPACE__ . '\autoload_composer' );
 /**
  * Includes the composer autoloader.
  *
@@ -51,7 +63,7 @@ add_action( 'genesis_setup', 'child_theme_autoload_composer' );
  *
  * @return void
  */
-function child_theme_autoload_composer() {
+function autoload_composer() {
 
 	if ( file_exists( CHILD_THEME_DIR . '/vendor/autoload.php' ) ) {
 
@@ -61,7 +73,7 @@ function child_theme_autoload_composer() {
 
 }
 
-add_action( 'genesis_setup', 'child_theme_autoload_files', 6 );
+add_action( 'genesis_setup', __NAMESPACE__ . '\autoload_files', 6 );
 /**
  * Autoload files.
  *
@@ -69,7 +81,7 @@ add_action( 'genesis_setup', 'child_theme_autoload_files', 6 );
  *
  * @return void
  */
-function child_theme_autoload_files() {
+function autoload_files() {
 
 	$config = require_once CHILD_THEME_CONFIG;
 

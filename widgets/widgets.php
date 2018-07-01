@@ -13,6 +13,10 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\Widgets;
+
+use function SEOThemes\ChildThemeLibrary\Utilities\get_config;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -20,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'widgets_init', 'child_theme_unregister_widgets' );
+add_action( 'widgets_init', __NAMESPACE__ . '\unregister' );
 /**
  * Unregister widgets defined in the config.
  *
@@ -28,9 +32,9 @@ add_action( 'widgets_init', 'child_theme_unregister_widgets' );
  *
  * @return void
  */
-function child_theme_unregister_widgets() {
+function unregister() {
 
-	$config = child_theme_get_config( 'widgets' );
+	$config = get_config( 'widgets' );
 
 	foreach ( $config as $widget ) {
 
@@ -40,7 +44,7 @@ function child_theme_unregister_widgets() {
 
 }
 
-add_action( 'after_setup_theme', 'child_theme_widget_shortcodes' );
+add_action( 'after_setup_theme', __NAMESPACE__ . '\enable_shortcodes' );
 /**
  * Enables shortcodes in text widgets.
  *
@@ -48,7 +52,7 @@ add_action( 'after_setup_theme', 'child_theme_widget_shortcodes' );
  *
  * @return void
  */
-function child_theme_widget_shortcodes() {
+function enable_shortcodes() {
 
 	add_filter( 'widget_text', 'do_shortcode' );
 

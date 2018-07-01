@@ -13,6 +13,10 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\JS;
+
+use function SEOThemes\ChildThemeLibrary\Utilities\get_config;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -20,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'child_theme_load_scripts', 99 );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\load', 99 );
 /**
  * Enqueue theme scripts.
  *
@@ -28,19 +32,19 @@ add_action( 'wp_enqueue_scripts', 'child_theme_load_scripts', 99 );
  *
  * @return void
  */
-function child_theme_load_scripts() {
+function load() {
 
-	$scripts = child_theme_get_config( 'scripts' );
+	$scripts = get_config( 'scripts' );
 
 	foreach ( $scripts as $script => $params ) {
 
-		wp_enqueue_script( 'child-theme-' . $script, $params['src'], explode( ',',  $params['deps'] ), $params['ver'], $params['in_footer'] );
+		wp_enqueue_script( 'child-theme-' . $script, $params['src'], explode( ',', $params['deps'] ), $params['ver'], $params['in_footer'] );
 
 	}
 
 }
 
-add_action( 'wp_enqueue_scripts', 'child_theme_menu_settings', 99 );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\menu_settings', 99 );
 /**
  * Localizes the responsive menu script
  *
@@ -48,15 +52,15 @@ add_action( 'wp_enqueue_scripts', 'child_theme_menu_settings', 99 );
  *
  * @return void
  */
-function child_theme_menu_settings() {
+function menu_settings() {
 
-	$menu_settings = child_theme_get_config( 'responsive-menu' );
+	$menu_settings = get_config( 'responsive-menu' );
 
 	wp_localize_script( 'child-theme-menu', 'genesis_responsive_menu', $menu_settings );
 
 }
 
-add_action( 'genesis_before', 'child_theme_js_nojs_script', 1 );
+add_action( 'genesis_before', __NAMESPACE__ . '\js_nojs', 1 );
 /**
  * Echo out the script that changes 'no-js' class to 'js'.
  *
@@ -76,16 +80,16 @@ add_action( 'genesis_before', 'child_theme_js_nojs_script', 1 );
  *
  * @return void
  */
-function child_theme_js_nojs_script() {
+function js_nojs() {
 	?>
 	<script>
-        //<![CDATA[
-        (function(){
-            var c = document.body.classList;
-            c.remove( 'no-js' );
-            c.add( 'js' );
-        })();
-        //]]>
+		//<![CDATA[
+		(function () {
+			var c = document.body.classList;
+			c.remove('no-js');
+			c.add('js');
+		})();
+		//]]>
 	</script>
 	<?php
 }

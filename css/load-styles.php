@@ -13,6 +13,10 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\CSS;
+
+use function SEOThemes\ChildThemeLibrary\Utilities\get_config;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -24,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 remove_action( 'genesis_meta', 'genesis_load_stylesheet' );
 add_action( 'wp_enqueue_scripts', 'genesis_enqueue_main_stylesheet', 99 );
 
-add_action( 'wp_enqueue_scripts', 'child_theme_load_styles', 99 );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\load', 99 );
 /**
  * Enqueue theme styles.
  *
@@ -32,9 +36,9 @@ add_action( 'wp_enqueue_scripts', 'child_theme_load_styles', 99 );
  *
  * @return void
  */
-function child_theme_load_styles() {
+function load() {
 
-	$config = child_theme_get_config();
+	$config = get_config();
 
 	foreach ( $config['styles'] as $style => $params ) {
 
@@ -49,7 +53,5 @@ function child_theme_load_styles() {
 	}
 
 	wp_enqueue_style( 'child-theme-google-fonts', '//fonts.googleapis.com/css?family=' . implode( '|', $google_fonts ), array(), CHILD_THEME_VERSION );
-
-	add_filter( 'genesis_portfolio_load_default_styles', '__return_false' );
 
 }
