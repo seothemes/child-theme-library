@@ -1,6 +1,6 @@
 # Child Theme Library
 
-A configuration based drop-in library for extending Genesis child themes. See an example of how to integrate the library [here](https://github.com/seothemes/genesis-starter) or check out the [live demo](https://demo.seothemes.com/genesis-starter). 
+A configuration based drop-in library for extending Genesis child themes. See an example of how to integrate the library [here](https://github.com/seothemes/genesis-starter-theme) or check out the [live demo](https://demo.seothemes.com/genesis-starter). 
 
 ### Why was the Child Theme Library built?
 
@@ -40,7 +40,7 @@ While the child theme library is in beta, you will also need to add the reposito
 ],
 ```
 
-An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter/composer.json)
+An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json)
 
 ### Git
 
@@ -86,7 +86,7 @@ Once the library has been included in your theme, it is ready to accept your con
 add_filter( 'child_theme_config', get_stylesheet_directory() . 'my-config.php' );
 ```
 
-A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/genesis-starter/composer.json).
+A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json).
 
 ## Structure
 
@@ -165,16 +165,12 @@ This project is licensed under the GNU General Public License - see the LICENSE.
 
 A shout out to anyone who's code was used in or provided inspiration to this project:
 
-- Gary Jones
-- Craig Simpson
-- Tim Jensen
-- Craig Watson
-- Sridhar Katakam
-- Christoph Herr
-- Bill Erickson
-- Chinmoy Paul
-- Nathan Rice
-- Calvin Koepke
-- Jen Baumann
-- Brian Gardner
-- Robin Cornett
+<a href="https://github.com/garyjones/" target="_blank">Gary Jones</a>, 
+<a href="https://github.com/craigsimps/" target="_blank">Craig Simpson</a>, 
+<a href="https://github.com/christophherr/" target="_blank">Christoph Herr</a>, 
+<a href="https://github.com/timothyjensen/" target="_blank">Tim Jensen</a>, 
+<a href="https://github.com/billerickson/" target="_blank">Bill Erickson</a>, 
+<a href="https://github.com/srikat/" target="_blank">Sridhar Katakam</a>, 
+<a href="https://github.com/cpaul007/" target="_blank">Chinmoy Paul</a>, 
+<a href="https://github.com/nathanrice/" target="_blank">Nathan Rice</a>, 
+<a href="https://github.com/bgardner/" target="_blank">Brian Gardner</a>
