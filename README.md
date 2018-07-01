@@ -102,7 +102,6 @@ lib/
 │   └── class-tgm-plugin-activation.php
 ├── css/
 │   ├── customizer.css
-│   ├── library.css
 │   └── load-styles.php
 ├── functions/
 │   ├── attributes.php
@@ -119,7 +118,6 @@ lib/
 │   └── utilities.php
 ├── js/
 │   ├── customizer.js
-│   ├── library.js
 │   ├── menu.js
 │   └── load-scripts.php
 ├── languages/
@@ -131,14 +129,19 @@ lib/
 │   ├── header.php
 │   └── menu.php
 ├── views/
-│   ├── page-front.php
+│   ├── page-blog.php
+│   ├── page-boxed.php
+│   ├── page-contact.php
 │   ├── page-full.php
 │   ├── page-landing.php
 │   └── page-sitemap.php
 ├── widgets/
+│   ├── widget-areas.php
 │   └── widgets.php
 ├── .gitattributes
+├── .gitmodules
 ├── composer.json
+├── LICENSE.md
 ├── README.md
 ├── autoload.php
 └── init.php

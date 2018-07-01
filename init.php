@@ -20,13 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'genesis_setup', 'child_theme_init', 5 );
 /**
  * Initializes the child theme library.
  *
  * @since  1.0.0
- *
- * @throws Exception If too many files are loaded.
  *
  * @return void
  */
@@ -47,14 +44,8 @@ function child_theme_init() {
 	define( 'CHILD_THEME_ASSETS', CHILD_THEME_URI . '/assets' );
 	define( 'CHILD_THEME_CONFIG', CHILD_THEME_DIR . '/config/config.php' );
 
-	$config = require apply_filters( 'child_theme_config', CHILD_THEME_CONFIG );
-
 	require_once CHILD_THEME_LIB . '/autoload.php';
 
-	foreach ( $config['autoload'] as $dir ) {
-
-		child_theme_autoload_dir( CHILD_THEME_DIR . $dir );
-
-	}
-
 }
+
+child_theme_init();
