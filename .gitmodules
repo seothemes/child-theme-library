@@ -1,0 +1,4 @@
+[submodule "kirki"]
+	path = kirki
+	url = https://github.com/aristath/kirki.git
+	branch = master
