@@ -6,6 +6,41 @@ A configuration based drop-in library for extending Genesis child themes. See an
 
 The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's configuration. Using this approach, we are able to use a single codebase which can be heavily customized by passing in different configs.
 
+
+### Requirements
+
+<table width="100%">
+	<thead>
+		<tr>
+			<th align="left" width="25%">Requirement</th>
+			<th align="left" width="25%">How to Check</th>
+			<th align="left" width="50%">How to Install</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>PHP >= 5.3</td>
+			<td><code>php -v</code></td>
+			<td><a href="http://php.net/manual/en/install.php" target="_blank">php.net</a></td>
+		</tr>
+		<tr>
+            <td>WordPress >= 4.8</td>
+            <td><code>Admin Footer</code></td>
+            <td><a href="https://codex.wordpress.org/Installing_WordPress" target="_blank">wordpress.org</a></td>
+        </tr>
+        <tr>
+            <td>Genesis >= 2.6</td>
+            <td><code>Theme Page</code></td>
+            <td><a href="http://www.shareasale.com/r.cfm?b=346198&u=1459023&m=28169&urllink=&afftrack=" target="_blank">studiopress.com</a></td>
+        </tr>
+        <tr>
+			<td>Composer >= 1.5.0</td>
+			<td><code>composer --version</code></td>
+			<td><a href="https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx" target="_blank">getcomposer.org</a></td>
+		</tr>
+	</tbody>
+</table>
+
 ## Installation
 
 ### Composer (recommended)
