@@ -13,71 +13,71 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/config.php:136
+#: config/config.php:151
 msgid "Hero Image"
 msgstr ""
 
-#: config/config.php:298
+#: config/config.php:313
 msgid "Blog"
 msgstr ""
 
-#: config/config.php:299, lib/views/page-contact.php:9
+#: config/config.php:314, lib/views/page-contact.php:9
 msgid "Contact Page"
 msgstr ""
 
-#: config/config.php:300, lib/views/page-boxed.php:9
+#: config/config.php:315, lib/views/page-boxed.php:9
 msgid "Boxed Template"
 msgstr ""
 
-#: config/config.php:301, lib/views/page-full.php:9
+#: config/config.php:316, lib/views/page-full.php:9
 msgid "Full Width"
 msgstr ""
 
-#: config/config.php:302, lib/views/page-landing.php:9
+#: config/config.php:317, lib/views/page-landing.php:9
 msgid "Landing Page"
 msgstr ""
 
-#: config/config.php:303, lib/views/page-sitemap.php:9
+#: config/config.php:318, lib/views/page-sitemap.php:9
 msgid "Sitemap"
 msgstr ""
 
-#: config/config.php:385, config/config.php:386
+#: config/config.php:400, config/config.php:401
 msgid "Menu"
 msgstr ""
 
-#: config/config.php:570
+#: config/config.php:585
 msgid "Header Menu"
 msgstr ""
 
-#: config/config.php:571
+#: config/config.php:586
 msgid "After Header Menu"
 msgstr ""
 
-#: lib/admin/customizer-settings.php:66
+#: lib/admin/customizer-settings.php:72
 msgid "Logo Size"
 msgstr ""
 
-#: lib/admin/customizer-settings.php:67
+#: lib/admin/customizer-settings.php:73
 msgid "Set the logo size in pixels. Default is 100."
 msgstr ""
 
-#: lib/admin/customizer-settings.php:98
+#: lib/admin/customizer-settings.php:107
 msgid "Enable sticky header"
 msgstr ""
 
-#: lib/admin/customizer-settings.php:118
+#: lib/admin/customizer-settings.php:129
 msgid " Color"
 msgstr ""
 
-#: lib/functions/hero.php:136
+#: lib/functions/hero.php:138
 msgid "Latest Posts"
 msgstr ""
 
-#: lib/functions/hero.php:145
+#: lib/functions/hero.php:147
 msgid "Not found, error 404"
 msgstr ""
 
-#: lib/functions/hero.php:154
+#: lib/functions/hero.php:156
 msgid "Search results for: "
 msgstr ""
 
