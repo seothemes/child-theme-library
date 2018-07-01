@@ -15,6 +15,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\Views;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -22,13 +24,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'child_theme_dequeue_skip_links' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\dequeue_skip_links' );
 /**
  * Dequeue Skip Links Script.
  *
  * @return void
  */
-function child_theme_dequeue_skip_links() {
+function dequeue_skip_links() {
 
 	wp_dequeue_script( 'skip-links' );
 

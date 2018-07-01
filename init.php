@@ -13,6 +13,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -27,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return void
  */
-function child_theme_init() {
+function init() {
 
 	$child_theme = wp_get_theme();
 
@@ -48,4 +50,4 @@ function child_theme_init() {
 
 }
 
-child_theme_init();
+init();

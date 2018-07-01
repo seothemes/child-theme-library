@@ -13,7 +13,9 @@
  * @license   GPL-2.0+
  */
 
-add_shortcode( 'footer_backtotop', 'child_theme_footer_backtotop' );
+namespace SEOThemes\ChildThemeLibrary\Shortcodes;
+
+add_shortcode( 'footer_backtotop', __NAMESPACE__ . '\footer_backtotop' );
 /**
  * Produces the "Return to Top" link.
  *
@@ -33,7 +35,7 @@ add_shortcode( 'footer_backtotop', 'child_theme_footer_backtotop' );
  *
  * @return string Output for `footer_backtotop` shortcode.
  */
-function child_theme_footer_backtotop( $atts ) {
+function footer_backtotop( $atts ) {
 
 	$defaults = array(
 		'after'    => '',

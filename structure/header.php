@@ -13,6 +13,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\Structure;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -20,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'genesis_setup', 'child_theme_display_custom_logo' );
+add_action( 'genesis_setup', __NAMESPACE__ . '\display_custom_logo' );
 /**
  * Display custom logo in site title area.
  *
@@ -28,7 +30,7 @@ add_action( 'genesis_setup', 'child_theme_display_custom_logo' );
  *
  * @return void
  */
-function child_theme_display_custom_logo() {
+function display_custom_logo() {
 
 	add_action( 'genesis_site_title', 'the_custom_logo', 0 );
 

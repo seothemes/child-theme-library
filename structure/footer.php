@@ -13,6 +13,8 @@
  * @license   GPL-2.0+
  */
 
+namespace SEOThemes\ChildThemeLibrary\Structure;
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -20,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'genesis_setup', 'child_theme_reposition_footer_widgets' );
+add_action( 'genesis_setup', __NAMESPACE__ . '\reposition_footer_widgets' );
 /**
  * Reposition footer widgets inside site footer.
  *
@@ -28,9 +30,9 @@ add_action( 'genesis_setup', 'child_theme_reposition_footer_widgets' );
  *
  * @return void
  */
-function child_theme_reposition_footer_widgets() {
+function reposition_footer_widgets() {
 
 	remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
-	add_action( 'genesis_before_footer_wrap', 'genesis_footer_widget_areas', 15 );
+	add_action( 'child_theme_before_footer_wrap', 'genesis_footer_widget_areas', 15 );
 
 }
