@@ -142,7 +142,6 @@ lib/
 │   └── utilities.php
 ├── js/
 │   ├── customizer.js
-│   ├── menu.js
 │   └── load-scripts.php
 ├── languages/
 │   └── child-theme-library.pot
@@ -155,8 +154,8 @@ lib/
 ├── views/
 │   ├── page-blog.php
 │   ├── page-boxed.php
+│   ├── page-builder.php
 │   ├── page-contact.php
-│   ├── page-full.php
 │   ├── page-landing.php
 │   └── page-sitemap.php
 ├── widgets/
@@ -165,6 +164,7 @@ lib/
 ├── .gitattributes
 ├── .gitmodules
 ├── composer.json
+├── CHANGELOG.md
 ├── LICENSE.md
 ├── README.md
 ├── autoload.php
@@ -175,15 +175,15 @@ lib/
 
 Please visit https://github.com/seothemes/child-theme-library/issues/ to open a new issue.
 
+## License
+
+This project is licensed under the GNU General Public License - see the LICENSE.md file for details.
+
 ## Authors
 
 - **Lee Anthony** - [SEO Themes](https://seothemes.com/)
 
 See also the list of [contributors](https://github.com/seothemes/child-theme-library/graphs/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the GNU General Public License - see the LICENSE.md file for details.
 
 ## Acknowledgments
 
