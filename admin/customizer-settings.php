@@ -10,7 +10,7 @@
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
  * @copyright Copyright © 2018 SEO Themes
- * @license   GPL-2.0+
+ * @license   GPL-2.0-or-later
  */
 
 namespace SEOThemes\ChildThemeLibrary\Customizer;
@@ -28,13 +28,9 @@ add_action( 'customize_register', __NAMESPACE__ . '\settings' );
 /**
  * Sets up the theme customizer sections, controls, and settings.
  *
- * @since  1.0.0
- *
- * @access public
+ * @since  1.2.0
  *
  * @param  object $wp_customize Global customizer object.
- *
- * @throws \Exception If no sub-config is found.
  *
  * @return void
  */

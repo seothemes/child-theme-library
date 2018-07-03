@@ -12,7 +12,7 @@
  * @link      http://tgmpluginactivation.com/
  * @author    Thomas Griffin, Gary Jones, Juliette Reinders Folmer
  * @copyright Copyright (c) 2011, Thomas Griffin
- * @license   GPL-2.0+
+ * @license   GPL-2.0-or-later
  */
 
 /*

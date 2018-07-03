@@ -10,7 +10,7 @@
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
  * @copyright Copyright © 2018 SEO Themes
- * @license   GPL-2.0+
+ * @license   GPL-2.0-or-later
  */
 
 namespace SEOThemes\ChildThemeLibrary\Customizer;
@@ -29,7 +29,7 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\output', 100 );
 /**
  * Logic to output customizer styles.
  *
- * @since  1.0.0
+ * @since  1.2.0
  *
  * @return void
  */

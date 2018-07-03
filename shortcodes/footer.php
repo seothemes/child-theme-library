@@ -10,7 +10,7 @@
  * @link      https://github.com/seothemes/child-theme-library
  * @author    SEO Themes
  * @copyright Copyright © 2018 SEO Themes
- * @license   GPL-2.0+
+ * @license   GPL-2.0-or-later
  */
 
 namespace SEOThemes\ChildThemeLibrary\Shortcodes;
