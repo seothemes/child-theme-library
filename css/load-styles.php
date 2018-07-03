@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 remove_action( 'genesis_meta', 'genesis_load_stylesheet' );
 add_action( 'wp_enqueue_scripts', 'genesis_enqueue_main_stylesheet', 99 );
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\load', 99 );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\load', 10 );
 /**
  * Enqueue theme styles.
  *

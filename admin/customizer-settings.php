@@ -43,76 +43,6 @@ function settings( $wp_customize ) {
 	$wp_customize->remove_control( 'background_color' );
 	$wp_customize->remove_control( 'header_textcolor' );
 
-	$colors = get_config( 'colors' );
-
-	/*
-	| ------------------------------------------------------------------
-	| Logo Size
-	| ------------------------------------------------------------------
-	|
-	| Adds the logo size setting to the Customizer. The logo size
-	| setting adds a number field control which outputs inline
-	| CSS to change the width of the site logo in the theme.
-	|
-	*/
-	$wp_customize->add_setting(
-		'child_theme_logo_size',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => 100,
-			'sanitize_callback' => 'SEOThemes\ChildThemeLibrary\Utilities\sanitize_number',
-		)
-	);
-
-	$wp_customize->add_control(
-		new \WP_Customize_Control(
-			$wp_customize,
-			'child_theme_logo_size',
-			array(
-				'label'       => __( 'Logo Size', 'child-theme-library' ),
-				'description' => __( 'Set the logo size in pixels. Default is 100.', 'child-theme-library' ),
-				'settings'    => 'child_theme_logo_size',
-				'section'     => 'title_tagline',
-				'type'        => 'number',
-				'priority'    => 8,
-			)
-		)
-	);
-
-	/*
-	| ------------------------------------------------------------------
-	| Sticky Header
-	| ------------------------------------------------------------------
-	|
-	| Adds the sticky header setting to the Customizer. This setting
-	| provides users with the option to have a sticky site header
-	| that remains at the top of the screen viewport on scroll.
-	|
-	*/
-	if ( current_theme_supports( 'sticky-header' ) ) {
-
-		$wp_customize->add_setting(
-			'child_theme_sticky_header',
-			array(
-				'capability' => 'edit_theme_options',
-				'default'    => false,
-			)
-		);
-
-		$wp_customize->add_control(
-			new \WP_Customize_Control(
-				$wp_customize,
-				'child_theme_sticky_header',
-				array(
-					'label'    => __( 'Enable sticky header', 'child-theme-library' ),
-					'settings' => 'child_theme_sticky_header',
-					'section'  => 'genesis_layout',
-					'type'     => 'checkbox',
-				)
-			)
-		);
-	}
-
 	/*
 	| ------------------------------------------------------------------
 	| Colors
@@ -123,6 +53,8 @@ function settings( $wp_customize ) {
 	| file to output a new setting and control for each one.
 	|
 	*/
+	$colors = get_config( 'colors' );
+
 	foreach ( $colors as $color => $settings ) {
 
 		$setting = "child_theme_{$color}_color";
@@ -131,7 +63,7 @@ function settings( $wp_customize ) {
 		$wp_customize->add_setting(
 			$setting,
 			array(
-				'default'           => $settings['value'],
+				'default'           => $settings['default'],
 				'sanitize_callback' => 'SEOThemes\ChildThemeLibrary\Utilities\sanitize_rgba_color',
 			)
 		);

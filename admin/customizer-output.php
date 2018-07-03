@@ -35,47 +35,39 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\output', 100 );
  */
 function output() {
 
-	$css       = '';
-	$colors    = get_config( 'colors' );
-	$logo_size = get_theme_mod( 'child_theme_logo_size', '170' );
-
-	$css .= ( '170' !== $logo_size ) ? sprintf( '
-		.wp-custom-logo .title-area {
-			width: %1$spx;
-		}
-	', $logo_size ) : '';
+	$css    = '';
+	$colors = get_config( 'colors' );
 
 	foreach ( $colors as $color => $settings ) {
 
-		$custom_color = get_theme_mod( "child_theme_{$color}_color", $settings['value'] );
+		$custom_color = get_theme_mod( "child_theme_{$color}_color",
+			$settings['default'] );
 
-		if ( $settings['value'] !== $custom_color ) {
+		if ( $settings['default'] !== $custom_color ) {
 
-			foreach ( $settings['css'] as $rule ) {
+			foreach ( $settings['output'] as $rule ) {
 
 				$counter = 0;
 
-				foreach ( $rule['selectors'] as $selector ) {
+				foreach ( $rule['elements'] as $element ) {
 
-					$comma = ( $counter++ === 0 ? '' : ',' );
-					$css  .= $comma . $selector;
+					$comma = ( $counter ++ === 0 ? '' : ',' );
+					$css   .= $comma . $element;
 
 				}
 
 				$css .= '{';
 
-				foreach ( $rule['properties'] as $property ) {
+				foreach ( $rule['properties'] as $property => $pattern ) {
 
-					$css .= $property . ':' . $custom_color . ';';
+					$css .= $property . ':' . sprintf( $pattern, $custom_color ) . ';';
 
 				}
 
 				$css .= '}';
 
 			}
-
 		}
-
 	}
 
 	if ( ! empty( $css ) ) {

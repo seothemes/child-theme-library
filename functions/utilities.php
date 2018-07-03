@@ -222,11 +222,17 @@ function custom_header() {
 
 	}
 
-	$config   = get_config( 'theme-supports' );
+	$config          = get_config( 'theme-supports' );
+	$header_selector = $config['custom-header']['header-selector'];
+	$selector        = ( $header_selector ? $header_selector : '.hero-section' );
 
-	$selector = ( $config['custom-header']['header-selector'] ? $config['custom-header']['header-selector'] : '.hero-section' );
+	if ( current_theme_supports( 'hero-section' ) || is_front_page() ) {
 
-	return printf( '<style type="text/css">' . $selector . '{background-image: url(%s);}</style>' . "\n", esc_url( $url ) );
+		return printf( '<style type="text/css">' . $selector . '{background-image: url(%s);}</style>' . "\n", esc_url( $url ) );
+
+	}
+
+	return '';
 
 }
 
