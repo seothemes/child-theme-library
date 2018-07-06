@@ -55,25 +55,7 @@ function autoload_classes( $class ) {
 	}
 }
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\autoload_composer' );
-/**
- * Includes the composer autoloader.
- *
- * @since  1.0.0
- *
- * @return void
- */
-function autoload_composer() {
-
-	if ( file_exists( CHILD_THEME_DIR . '/vendor/autoload.php' ) ) {
-
-		require_once CHILD_THEME_DIR . '/vendor/autoload.php';
-
-	}
-
-}
-
-add_action( 'genesis_setup', __NAMESPACE__ . '\autoload_files', 6 );
+add_action( 'genesis_setup', __NAMESPACE__ . '\autoload', 6 );
 /**
  * Autoload files.
  *
@@ -81,7 +63,7 @@ add_action( 'genesis_setup', __NAMESPACE__ . '\autoload_files', 6 );
  *
  * @return void
  */
-function autoload_files() {
+function autoload() {
 
 	$config = require_once CHILD_THEME_CONFIG;
 
