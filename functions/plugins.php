@@ -18,7 +18,7 @@ namespace SEOThemes\ChildThemeLibrary\Plugins;
 use function SEOThemes\ChildThemeLibrary\Utilities\get_config;
 use function SEOThemes\ChildThemeLibrary\Utilities\minify_css;
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\activation' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\activation' );
 /**
  * Instantiate the plugin activation class.
  *

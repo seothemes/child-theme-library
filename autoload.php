@@ -55,7 +55,7 @@ function autoload_classes( $class ) {
 	}
 }
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\autoload', 6 );
+add_action( 'child_theme_init', __NAMESPACE__ . '\autoload', 3 );
 /**
  * Autoload files.
  *

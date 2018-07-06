@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'after_setup_theme', __NAMESPACE__ . '\remove', 0 );
+add_action( 'child_theme_init', __NAMESPACE__ . '\remove' );
 /**
  * Removes default widget areas.
  *
@@ -63,7 +63,7 @@ function remove() {
 
 }
 
-add_action( 'after_setup_theme', __NAMESPACE__ . '\add' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\add' );
 /**
  * Add custom widget areas defined in config.
  *

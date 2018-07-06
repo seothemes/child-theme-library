@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\add_textdomain' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\add_text_domain' );
 /**
  * Add theme text domain.
  *
@@ -32,7 +32,7 @@ add_action( 'genesis_setup', __NAMESPACE__ . '\add_textdomain' );
  *
  * @return void
  */
-function add_textdomain() {
+function add_text_domain() {
 
 	$config = get_config( 'textdomain' );
 
@@ -40,7 +40,7 @@ function add_textdomain() {
 
 }
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\add_theme_supports' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\add_theme_supports' );
 /**
  * Add theme supports.
  *
@@ -68,7 +68,7 @@ function add_theme_supports() {
 
 }
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\add_image_sizes' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\add_image_sizes' );
 /**
  * Add new image sizes.
  *
@@ -90,7 +90,7 @@ function add_image_sizes() {
 
 }
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\add_post_type_supports' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\add_post_type_supports' );
 /**
  * Add post type supports.
  *
@@ -110,7 +110,7 @@ function add_post_type_supports() {
 
 }
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\add_default_headers' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\add_default_headers' );
 /**
  * Add default header image.
  *

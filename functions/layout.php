@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'after_setup_theme', __NAMESPACE__ . '\register' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\register' );
 /**
  * Register theme layouts.
  *

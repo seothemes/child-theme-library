@@ -22,32 +22,59 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
+add_action( 'child_theme_init', __NAMESPACE__ . '\constants', 1 );
 /**
- * Initializes the child theme library.
+ * Initialize the Child Theme Library.
  *
- * @since  1.1.0
+ * @since  1.3.0
  *
  * @return void
  */
-function init() {
+function constants() {
 
 	$child_theme = wp_get_theme();
 
-	define( 'CHILD_THEME_NAME', $child_theme->get( 'Name' ) );
-	define( 'CHILD_THEME_URL', $child_theme->get( 'ThemeURI' ) );
-	define( 'CHILD_THEME_VERSION', $child_theme->get( 'Version' ) );
-	define( 'CHILD_THEME_HANDLE', $child_theme->get( 'TextDomain' ) );
-	define( 'CHILD_THEME_AUTHOR', $child_theme->get( 'Author' ) );
-	define( 'CHILD_THEME_DIR', get_stylesheet_directory() );
-	define( 'CHILD_THEME_URI', get_stylesheet_directory_uri() );
-	define( 'CHILD_THEME_LIB', CHILD_THEME_DIR . '/lib' );
-	define( 'CHILD_THEME_VIEWS', CHILD_THEME_LIB . '/views' );
-	define( 'CHILD_THEME_VENDOR', CHILD_THEME_DIR . '/vendor' );
-	define( 'CHILD_THEME_ASSETS', CHILD_THEME_URI . '/assets' );
-	define( 'CHILD_THEME_CONFIG', CHILD_THEME_DIR . '/config/config.php' );
+	$constants = apply_filters( 'child_theme_constants', [
+		'CHILD_THEME_NAME'    => $child_theme->get( 'Name' ),
+		'CHILD_THEME_URL'     => $child_theme->get( 'ThemeURI' ),
+		'CHILD_THEME_VERSION' => $child_theme->get( 'Version' ),
+		'CHILD_THEME_HANDLE'  => $child_theme->get( 'TextDomain' ),
+		'CHILD_THEME_AUTHOR'  => $child_theme->get( 'Author' ),
+		'CHILD_THEME_DIR'     => get_stylesheet_directory(),
+		'CHILD_THEME_LIB'     => get_stylesheet_directory() . '/lib',
+		'CHILD_THEME_VIEWS'   => get_stylesheet_directory() . '/lib/views',
+		'CHILD_THEME_VENDOR'  => get_stylesheet_directory() . '/vendor',
+		'CHILD_THEME_CONFIG'  => get_stylesheet_directory() . '/config/config.php',
+		'CHILD_THEME_URI'     => get_stylesheet_directory_uri(),
+		'CHILD_THEME_ASSETS'  => get_stylesheet_directory_uri() . '/assets',
+	] );
 
+	foreach ( $constants as $name => $value ) {
+
+		if ( ! defined( $name ) ) {
+
+			define( $name, $value );
+
+		}
+
+	}
+
+}
+
+add_action( 'child_theme_init', __NAMESPACE__ . '\load', 2 );
+/**
+ * Load Genesis Framework and child theme autoloader.
+ *
+ * @since  1.3.0
+ *
+ * @return void
+ */
+function load() {
+
+	require_once get_template_directory() . '/lib/init.php';
 	require_once CHILD_THEME_LIB . '/autoload.php';
 
 }
 
-init();
+// Fires during initialization.
+do_action( 'child_theme_init' );

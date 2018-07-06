@@ -44,7 +44,7 @@ function unregister() {
 
 }
 
-add_action( 'after_setup_theme', __NAMESPACE__ . '\enable_shortcodes' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\enable_shortcodes' );
 /**
  * Enables shortcodes in text widgets.
  *

@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\reposition_footer_widgets' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\reposition_footer_widgets' );
 /**
  * Reposition footer widgets inside site footer.
  *

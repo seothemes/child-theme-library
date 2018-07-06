@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-add_action( 'genesis_setup', __NAMESPACE__ . '\reposition_menus' );
+add_action( 'child_theme_init', __NAMESPACE__ . '\reposition_menus' );
 /**
  * Reposition navigation menus.
  *
