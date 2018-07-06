@@ -78,3 +78,6 @@ function load() {
 
 // Fires during initialization.
 do_action( 'child_theme_init' );
+
+// Fires after initialization.
+do_action( 'child_theme_setup' );
