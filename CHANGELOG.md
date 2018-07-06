@@ -1,5 +1,9 @@
 # Child Theme Library Changelog
 
+## [1.3.0] - 2018-07-06
+* Add child_theme_init and child_theme_setup hooks
+* Remove composer autoload function
+
 ## [1.2.0] - 2018-07-03
 * Add PHP namespace to all files
 * Add changelog and update readme

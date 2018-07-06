@@ -28,7 +28,7 @@ add_action( 'child_theme_init', __NAMESPACE__ . '\add_text_domain' );
 /**
  * Add theme text domain.
  *
- * @since  1.0.0
+ * @since  1.3.0
  *
  * @return void
  */
