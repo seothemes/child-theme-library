@@ -155,42 +155,20 @@ lib/
 
 ## Code Reference
 
-### Constants
+### Hooks
 
-| Name                  | Description                                |
-| :-------------------- | :----------------------------------------- |
-| `CHILD_THEME_NAME`    | Returns the child theme's name             |
-| `CHILD_THEME_URL`     | Returns the child theme's URL              |
-| `CHILD_THEME_VERSION` | Returns the child theme's version          |
-| `CHILD_THEME_HANDLE`  | Returns the child theme's text domain      |
-| `CHILD_THEME_AUTHOR`  | Returns the child theme's author           |
-| `CHILD_THEME_DIR`     | Returns the child theme's directory path   |
-| `CHILD_THEME_LIB`     | Returns the child theme's library path     |
-| `CHILD_THEME_VIEWS`   | Returns the child theme's views path       |
-| `CHILD_THEME_VENDOR`  | Returns the child theme's vendor path      |
-| `CHILD_THEME_CONFIG`  | Returns the child theme's config file path |
-| `CHILD_THEME_URI`     | Returns the child theme's URI              |
-| `CHILD_THEME_ASSETS`  | Returns the child theme's assets URI       |
-
-### Action Hooks
-
-| Name                             | Description                     |
-| :------------------------------- | :------------------------------ |
-| `child_theme_init`               | Runs during initialization      |
-| `child_theme_setup`              | Runs after initialization       |
-| `child_theme_after_title_area`   | Runs after the title area       |
-| `child_theme_hero_section`       | Runs during the hero section    |
-| `child_theme_front_page_widgets` | Runs during the front page loop |
-
-## Filter Hooks
-
-| Name                               | Description                      |
-| :--------------------------------- | :------------------------------- |
-| `child_theme_constants`            | Filters the array of constants   |
-| `child_theme_config`               | Filters the path to the config   |
-| `child_theme_latest_posts_title`   | Filters the latest posts title   |
-| `child_theme_latest_posts_excerpt` | Filters the latest posts excerpt |
-| `child_theme_footer_backtotop`     | Filters the backtotop shortcode  |
+| Name                               | Type     | Description                      |
+| :--------------------------------- | :------- | :------------------------------- |
+| `child_theme_init`                 | *action* | Runs during initialization       |
+| `child_theme_setup`                | *action* | Runs after initialization        |
+| `child_theme_after_title_area`     | *action* | Runs after the title area        |
+| `child_theme_hero_section`         | *action* | Runs during the hero section     |
+| `child_theme_front_page_widgets`   | *action* | Runs during the front page loop  |
+| `child_theme_constants`            | *filter* | Filters the array of constants   |
+| `child_theme_config`               | *filter* | Filters the path to the config   |
+| `child_theme_latest_posts_title`   | *filter* | Filters the latest posts title   |
+| `child_theme_latest_posts_excerpt` | *filter* | Filters the latest posts excerpt |
+| `child_theme_footer_backtotop`     | *filter* | Filters the backtotop shortcode  |
 
 ## Support
 
