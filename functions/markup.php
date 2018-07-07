@@ -82,25 +82,27 @@ function structural_wrap_hooks() {
 		 *
 		 * @return string
 		 */
-		add_filter( "genesis_structural_wrap-{$context}", function ( $output, $original ) use ( $context ) {
+		add_filter(
+			"genesis_structural_wrap-{$context}", function ( $output, $original ) use ( $context ) {
 
-			$position = ( 'open' === $original ) ? 'before' : 'after';
+				$position = ( 'open' === $original ) ? 'before' : 'after';
 
-			ob_start();
+				ob_start();
 
-			do_action( "child_theme_{$position}_{$context}_wrap" );
+				do_action( "child_theme_{$position}_{$context}_wrap" );
 
-			if ( 'open' === $original ) {
+				if ( 'open' === $original ) {
 
-				return ob_get_clean() . $output;
+					return ob_get_clean() . $output;
 
-			} else {
+				} else {
 
-				return $output . ob_get_clean();
+					return $output . ob_get_clean();
 
-			}
+				}
 
-		}, 10, 2 );
+			}, 10, 2
+		);
 
 	}
 

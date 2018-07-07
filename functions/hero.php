@@ -123,39 +123,47 @@ function title() {
 
 	if ( class_exists( 'WooCommerce' ) && is_shop() ) {
 
-		genesis_markup( array(
-			'open'    => '<h1 %s>',
-			'close'   => '</h1>',
-			'content' => get_the_title( wc_get_page_id( 'shop' ) ),
-			'context' => 'entry-title',
-		) );
+		genesis_markup(
+			array(
+				'open'    => '<h1 %s>',
+				'close'   => '</h1>',
+				'content' => get_the_title( wc_get_page_id( 'shop' ) ),
+				'context' => 'entry-title',
+			)
+		);
 
 	} elseif ( is_home() && 'posts' === get_option( 'show_on_front' ) ) {
 
-		genesis_markup( array(
-			'open'    => '<h1 %s>',
-			'close'   => '</h1>',
-			'content' => apply_filters( 'child_theme_latest_posts_title', __( 'Latest Posts', 'child-theme-library' ) ),
-			'context' => 'entry-title',
-		) );
+		genesis_markup(
+			array(
+				'open'    => '<h1 %s>',
+				'close'   => '</h1>',
+				'content' => apply_filters( 'child_theme_latest_posts_title', __( 'Latest Posts', 'child-theme-library' ) ),
+				'context' => 'entry-title',
+			)
+		);
 
 	} elseif ( is_404() ) {
 
-		genesis_markup( array(
-			'open'    => '<h1 %s>',
-			'close'   => '</h1>',
-			'content' => apply_filters( 'genesis_404_entry_title', __( 'Not found, error 404', 'child-theme-library' ) ),
-			'context' => 'entry-title',
-		) );
+		genesis_markup(
+			array(
+				'open'    => '<h1 %s>',
+				'close'   => '</h1>',
+				'content' => apply_filters( 'genesis_404_entry_title', __( 'Not found, error 404', 'child-theme-library' ) ),
+				'context' => 'entry-title',
+			)
+		);
 
 	} elseif ( is_search() ) {
 
-		genesis_markup( array(
-			'open'    => '<h1 %s>',
-			'close'   => '</h1>',
-			'content' => apply_filters( 'genesis_search_title_text', __( 'Search results for: ', 'child-theme-library' ) ) . get_search_query(),
-			'context' => 'entry-title',
-		) );
+		genesis_markup(
+			array(
+				'open'    => '<h1 %s>',
+				'close'   => '</h1>',
+				'content' => apply_filters( 'genesis_search_title_text', __( 'Search results for: ', 'child-theme-library' ) ) . get_search_query(),
+				'context' => 'entry-title',
+			)
+		);
 
 	} elseif ( is_page_template( 'page_blog.php' ) ) {
 
@@ -228,10 +236,12 @@ function excerpt() {
 function display() {
 
 	// Output hero section markup.
-	genesis_markup( array(
-		'open'    => '<section %s><div class="wrap">',
-		'context' => 'hero-section',
-	) );
+	genesis_markup(
+		array(
+			'open'    => '<section %s><div class="wrap">',
+			'context' => 'hero-section',
+		)
+	);
 
 	/**
 	 * Do hero section hook.
@@ -248,9 +258,11 @@ function display() {
 	do_action( 'child_theme_hero_section' );
 
 	// Output hero section markup.
-	genesis_markup( array(
-		'close'   => '</div></section>',
-		'context' => 'hero-section',
-	) );
+	genesis_markup(
+		array(
+			'close'   => '</div></section>',
+			'context' => 'hero-section',
+		)
+	);
 
 }

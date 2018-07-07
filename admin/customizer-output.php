@@ -40,8 +40,10 @@ function output() {
 
 	foreach ( $colors as $color => $settings ) {
 
-		$custom_color = get_theme_mod( "child_theme_{$color}_color",
-			$settings['default'] );
+		$custom_color = get_theme_mod(
+			"child_theme_{$color}_color",
+			$settings['default']
+		);
 
 		if ( $settings['default'] !== $custom_color ) {
 
@@ -51,7 +53,7 @@ function output() {
 
 				foreach ( $rule['elements'] as $element ) {
 
-					$comma = ( $counter ++ === 0 ? '' : ',' );
+					$comma = ( 0 === $counter ++ ? '' : ',' );
 					$css   .= $comma . $element;
 
 				}

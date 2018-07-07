@@ -45,7 +45,7 @@ remove_action( 'genesis_header', 'genesis_do_header' );
 remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
 
 // Remove default hero section.
-remove_theme_support('hero-section' );
+remove_theme_support( 'hero-section' );
 
 // Remove navigation.
 remove_theme_support( 'genesis-menus' );

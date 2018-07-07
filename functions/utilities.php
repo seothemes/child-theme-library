@@ -228,7 +228,7 @@ function custom_header() {
 
 	if ( current_theme_supports( 'hero-section' ) || is_front_page() ) {
 
-		return printf( '<style type="text/css">' . $selector . '{background-image: url(%s);}</style>' . "\n", esc_url( $url ) );
+		return printf( '<style type="text/css">' . esc_attr( $selector ) . '{background-image: url(%s);}</style>' . "\n", esc_url( $url ) );
 
 	}
 
@@ -256,9 +256,7 @@ function has_front_page_widgets() {
 				return true;
 
 			}
-
 		}
-
 	}
 
 	return false;

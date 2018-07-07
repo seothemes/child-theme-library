@@ -48,7 +48,9 @@ add_filter( 'genesis_markup_hero-section_open', __NAMESPACE__ . '\contact_page_m
  *
  * @since  1.0.0
  *
- * @return void
+ * @param  string $markup Google map shortcode markup.
+ *
+ * @return string
  */
 function contact_page_map( $markup ) {
 

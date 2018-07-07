@@ -56,9 +56,7 @@ function remove() {
 				remove_theme_support( 'genesis-after-entry-widget-area' );
 
 			}
-
 		}
-
 	}
 
 }
@@ -88,56 +86,64 @@ function add() {
 
 			if ( 'front-page-1' === $id ) {
 
-				genesis_register_sidebar( array(
-					'name'         => $name,
-					'description'  => $description,
-					'id'           => $id,
-					'before_title' => '<h1 itemprop="headline">',
-					'after_title'  => '</h1>',
-				) );
+				genesis_register_sidebar(
+					array(
+						'name'         => $name,
+						'description'  => $description,
+						'id'           => $id,
+						'before_title' => '<h1 itemprop="headline">',
+						'after_title'  => '</h1>',
+					)
+				);
 
 			} else {
 
-				genesis_register_sidebar( array(
-					'name'        => $name,
-					'description' => $description,
-					'id'          => $id,
-				) );
+				genesis_register_sidebar(
+					array(
+						'name'        => $name,
+						'description' => $description,
+						'id'          => $id,
+					)
+				);
 
 			}
 
 			if ( ! empty( $location ) && true === apply_filters( "child_theme_{$id}", true ) ) {
 
-				add_action( $location, function () use ( $id ) {
+				add_action(
+					$location, function () use ( $id ) {
 
-					if ( 'front-page-1' === $id ) {
+						if ( 'front-page-1' === $id ) {
 
-						ob_start();
-						the_custom_header_markup();
-						$custom_header = ob_get_clean();
+							ob_start();
+							the_custom_header_markup();
+							$custom_header = ob_get_clean();
 
-						genesis_widget_area( $id, array(
-							'before'       => '<div class="' . $id . ' widget-area hero-section" role="banner">' . $custom_header . '<div class="wrap">',
-							'after'        => '</div></div>',
-							'before_title' => '<h1 itemprop="headline">',
-							'after_title'  => '</h1>',
-						) );
+							genesis_widget_area(
+								$id, array(
+									'before'       => '<div class="' . $id . ' widget-area hero-section" role="banner">' . $custom_header . '<div class="wrap">',
+									'after'        => '</div></div>',
+									'before_title' => '<h1 itemprop="headline">',
+									'after_title'  => '</h1>',
+								)
+							);
 
-					} else {
+						} else {
 
-						genesis_widget_area( $id, array(
-							'before' => '<div class="' . $id . ' widget-area"><div class="wrap">',
-							'after'  => '</div></div>',
-						) );
+							genesis_widget_area(
+								$id, array(
+									'before' => '<div class="' . $id . ' widget-area"><div class="wrap">',
+									'after'  => '</div></div>',
+								)
+							);
+
+						}
 
 					}
-
-				} );
+				);
 
 			}
-
 		}
-
 	}
 
 }
@@ -164,11 +170,13 @@ function front_page() {
 	remove_theme_support( 'hero-section' );
 
 	remove_action( 'genesis_loop', 'genesis_do_loop' );
-	add_action( 'genesis_loop', function () {
+	add_action(
+		'genesis_loop', function () {
 
-		do_action( 'front_page_widgets' );
+			do_action( 'child_theme_front_page_widgets' );
 
-	} );
+		}
+	);
 
 }
 

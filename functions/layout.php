@@ -56,10 +56,12 @@ function register() {
 
 	foreach ( $custom_layouts as $custom_layout ) {
 
-		genesis_register_layout( $custom_layout, array(
-			'label' => ucwords( str_replace( '-', ' ', $custom_layout ) ),
-			'img'   => CHILD_THEME_ASSETS . '/images/' . $custom_layout . '.gif',
-		) );
+		genesis_register_layout(
+			$custom_layout, array(
+				'label' => ucwords( str_replace( '-', ' ', $custom_layout ) ),
+				'img'   => CHILD_THEME_ASSETS . '/images/' . $custom_layout . '.gif',
+			)
+		);
 
 	}
 
@@ -87,7 +89,6 @@ function search_page( $layout ) {
 			$layout = $field ? $field : genesis_get_option( 'site_layout' );
 
 		}
-
 	}
 
 	return $layout;
@@ -116,7 +117,6 @@ function error_404( $layout ) {
 			$layout = $field ? $field : genesis_get_option( 'site_layout' );
 
 		}
-
 	}
 
 	return $layout;

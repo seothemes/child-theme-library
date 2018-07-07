@@ -55,9 +55,11 @@ function after_import() {
 
 	if ( $menu ) {
 
-		set_theme_mod( 'nav_menu_locations', array(
-			'primary' => $menu->term_id,
-		) );
+		set_theme_mod(
+			'nav_menu_locations', array(
+				'primary' => $menu->term_id,
+			)
+		);
 
 	}
 

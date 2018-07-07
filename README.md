@@ -6,40 +6,18 @@ A configuration based drop-in library for extending Genesis child themes. See an
 
 The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's configuration. Using this approach, we are able to use a single codebase which can be heavily customized by passing in different configs.
 
-
 ### Requirements
 
-<table width="100%">
-	<thead>
-		<tr>
-			<th align="left" width="25%">Requirement</th>
-			<th align="left" width="25%">How to Check</th>
-			<th align="left" width="50%">How to Install</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>PHP >= 5.3</td>
-			<td><code>php -v</code></td>
-			<td><a href="http://php.net/manual/en/install.php" target="_blank">php.net</a></td>
-		</tr>
-		<tr>
-            <td>WordPress >= 4.8</td>
-            <td><code>Admin Footer</code></td>
-            <td><a href="https://codex.wordpress.org/Installing_WordPress" target="_blank">wordpress.org</a></td>
-        </tr>
-        <tr>
-            <td>Genesis >= 2.6</td>
-            <td><code>Theme Page</code></td>
-            <td><a href="http://www.shareasale.com/r.cfm?b=346198&u=1459023&m=28169&urllink=&afftrack=" target="_blank">studiopress.com</a></td>
-        </tr>
-        <tr>
-			<td>Composer >= 1.5.0</td>
-			<td><code>composer --version</code></td>
-			<td><a href="https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx" target="_blank">getcomposer.org</a></td>
-		</tr>
-	</tbody>
-</table>
+| Requirement | How to Check | How to Install |
+| :---------- | :----------- | :------------- |
+| PHP >= 5.3 | `php -v` | [php.net](http://php.net/manual/en/install.php) |
+| WordPress >= 4.8 | `Admin Footer` | [wordpress.org](https://codex.wordpress.org/Installing_WordPress) |
+| Genesis >= 2.6 | `Theme Page` | [studiopress.com](http://www.shareasale.com/r.cfm?b=346198&u=1459023&m=28169&urllink=&afftrack=) |
+| Composer >= 1.5.0 | `composer --version` | [getcomposer.org](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) |
+| Node >= 9.10.1 | `node -v` | [nodejs.org](https://nodejs.org/) |
+| NPM >= 5.6.0 | `npm -v` | [npm.js](https://www.npmjs.com/) |
+| Gulp CLI >= 1.3.0 | `gulp -v` | [gulp.js](https://gulpjs.com/) |
+| Gulp = 3.9.1 | `gulp -v` | [gulp.js](https://gulpjs.com/) |
 
 ## Installation
 
@@ -64,6 +42,13 @@ In the `extra` section define the custom directory you want the package to be in
 },
 ```
 
+Include the library from your `functions.php` file, before any custom code is loaded e.g:
+
+```php
+// Load Child Theme Library (do not remove).
+require_once get_stylesheet_directory() . '/lib/init.php';
+```
+
 An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json)
 
 ### Git
@@ -82,7 +67,7 @@ Clone from Github into the `lib` directory. This creates a submodule:
 git submodule add https://github.com/seothemes/child-theme-library.git lib
 ```
 
-Include the library from your `functions.php` file by placing the following line **after** the Genesis Framework has loaded:
+Include the library from your `functions.php` file, before any custom code is loaded e.g:
 
 ```php
 // Load Child Theme Library (do not remove).
@@ -143,8 +128,6 @@ lib/
 ├── js/
 │   ├── customizer.js
 │   └── load-scripts.php
-├── languages/
-│   └── child-theme-library.pot
 ├── shortcodes/
 │   └── footer.php
 ├── structure/
@@ -162,7 +145,6 @@ lib/
 │   ├── widget-areas.php
 │   └── widgets.php
 ├── .gitattributes
-├── .gitmodules
 ├── composer.json
 ├── CHANGELOG.md
 ├── LICENSE.md
@@ -170,6 +152,28 @@ lib/
 ├── autoload.php
 └── init.php
 ```
+
+## Additional Hooks
+
+### Actions
+
+| Name                               | Description                      |
+| :--------------------------------- | :------------------------------- |
+| `child_theme_init`                 | Runs during initialization       |
+| `child_theme_setup`                | Runs after initialization        |
+| `child_theme_after_title_area`     | Runs after the title area        |
+| `child_theme_hero_section`         | Runs during the hero section     |
+| `child_theme_front_page_widgets`   | Runs during the front page loop  |
+
+## Filters
+
+| Name                               | Description                      |
+| :--------------------------------- | :------------------------------- |
+| `child_theme_constants`            | Filters the array of constants   |
+| `child_theme_config`               | Filters the path to the config   |
+| `child_theme_latest_posts_title`   | Filters the latest posts title   |
+| `child_theme_latest_posts_excerpt` | Filters the latest posts excerpt |
+| `child_theme_footer_backtotop`     | Filters the backtotop shortcode  |
 
 ## Support
 

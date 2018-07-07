@@ -34,29 +34,30 @@ function constants() {
 
 	$child_theme = wp_get_theme();
 
-	$constants = apply_filters( 'child_theme_constants', [
-		'CHILD_THEME_NAME'    => $child_theme->get( 'Name' ),
-		'CHILD_THEME_URL'     => $child_theme->get( 'ThemeURI' ),
-		'CHILD_THEME_VERSION' => $child_theme->get( 'Version' ),
-		'CHILD_THEME_HANDLE'  => $child_theme->get( 'TextDomain' ),
-		'CHILD_THEME_AUTHOR'  => $child_theme->get( 'Author' ),
-		'CHILD_THEME_DIR'     => get_stylesheet_directory(),
-		'CHILD_THEME_LIB'     => get_stylesheet_directory() . '/lib',
-		'CHILD_THEME_VIEWS'   => get_stylesheet_directory() . '/lib/views',
-		'CHILD_THEME_VENDOR'  => get_stylesheet_directory() . '/vendor',
-		'CHILD_THEME_CONFIG'  => get_stylesheet_directory() . '/config/config.php',
-		'CHILD_THEME_URI'     => get_stylesheet_directory_uri(),
-		'CHILD_THEME_ASSETS'  => get_stylesheet_directory_uri() . '/assets',
-	] );
+	$constants = apply_filters(
+		'child_theme_constants', [
+			'CHILD_THEME_NAME'    => $child_theme->get( 'Name' ),
+			'CHILD_THEME_URL'     => $child_theme->get( 'ThemeURI' ),
+			'CHILD_THEME_VERSION' => $child_theme->get( 'Version' ),
+			'CHILD_THEME_HANDLE'  => $child_theme->get( 'TextDomain' ),
+			'CHILD_THEME_AUTHOR'  => $child_theme->get( 'Author' ),
+			'CHILD_THEME_DIR'     => get_stylesheet_directory(),
+			'CHILD_THEME_LIB'     => get_stylesheet_directory() . '/lib',
+			'CHILD_THEME_VIEWS'   => get_stylesheet_directory() . '/lib/views',
+			'CHILD_THEME_VENDOR'  => get_stylesheet_directory() . '/vendor',
+			'CHILD_THEME_CONFIG'  => get_stylesheet_directory() . '/config/config.php',
+			'CHILD_THEME_URI'     => get_stylesheet_directory_uri(),
+			'CHILD_THEME_ASSETS'  => get_stylesheet_directory_uri() . '/assets',
+		]
+	);
 
 	foreach ( $constants as $name => $value ) {
 
 		if ( ! defined( $name ) ) {
 
-			define( $name, $value );
+			define( $name, $value ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Dynamically defined constants.
 
 		}
-
 	}
 
 }

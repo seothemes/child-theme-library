@@ -35,7 +35,7 @@ if ( have_posts() ) :
 
 	the_post();
 
-	do_action( 'genesis_entry_content' );
+	do_action( 'genesis_entry_content' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Invoked by parent theme.
 
 endif;
 

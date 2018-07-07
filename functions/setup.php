@@ -63,7 +63,6 @@ function add_theme_supports() {
 			add_theme_support( $args );
 
 		}
-
 	}
 
 }
