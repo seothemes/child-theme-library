@@ -69,7 +69,7 @@ function autoload() {
 
 	foreach ( $config['autoload'] as $file ) {
 
-		$file_name = CHILD_THEME_DIR . '/' . $file . '.php';
+		$file_name = CHILD_THEME_LIB . '/' . $file . '.php';
 
 		if ( file_exists( $file_name ) ) {
 

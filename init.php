@@ -42,8 +42,8 @@ function constants() {
 			'CHILD_THEME_HANDLE'  => $child_theme->get( 'TextDomain' ),
 			'CHILD_THEME_AUTHOR'  => $child_theme->get( 'Author' ),
 			'CHILD_THEME_DIR'     => get_stylesheet_directory(),
-			'CHILD_THEME_LIB'     => get_stylesheet_directory() . '/lib',
-			'CHILD_THEME_VIEWS'   => get_stylesheet_directory() . '/lib/views',
+			'CHILD_THEME_LIB'     => get_stylesheet_directory() . '/vendor/seothemes/child-theme-library',
+			'CHILD_THEME_VIEWS'   => get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/views',
 			'CHILD_THEME_VENDOR'  => get_stylesheet_directory() . '/vendor',
 			'CHILD_THEME_CONFIG'  => get_stylesheet_directory() . '/config/config.php',
 			'CHILD_THEME_URI'     => get_stylesheet_directory_uri(),
@@ -73,7 +73,7 @@ add_action( 'child_theme_init', __NAMESPACE__ . '\load', 2 );
 function load() {
 
 	require_once get_template_directory() . '/lib/init.php';
-	require_once CHILD_THEME_LIB . '/autoload.php';
+	require_once dirname( __FILE__ ) . '/autoload.php';
 
 }
 
