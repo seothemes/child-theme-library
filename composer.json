@@ -27,6 +27,9 @@
     "wp-coding-standards/wpcs": "^0.14.1",
     "roave/security-advisories": "dev-master"
   },
+  "autoload": {
+    "files": ["init.php"]
+  },
   "suggest": {
     "kint-php/kint": "^2.2",
     "filp/whoops": "^2.1"
