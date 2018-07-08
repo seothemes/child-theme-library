@@ -146,8 +146,8 @@ function add_simple_social_inline_css() {
 
 	foreach ( $all_instances as $key => $options ) :
 
-		$instance = wp_parse_args( $all_instances[ $key ] );
-		$font_size = round( (int) $instance['size'] / 2 );
+		$instance     = wp_parse_args( $all_instances[ $key ] );
+		$font_size    = round( (int) $instance['size'] / 2 );
 		$icon_padding = round( (int) $font_size / 2 );
 
 		$css = '#' . $obj->id_base . '-' . $key . ' ul li a,
@@ -168,7 +168,7 @@ function add_simple_social_inline_css() {
 
 		$css = minify_css( $css );
 
-		printf( '<style type="text/css" media="screen">%s</style>', $css );
+		printf( '<style type="text/css" media="screen">%s</style>', $css ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Input is escaped through plugin.
 
 	endforeach;
 
@@ -240,7 +240,7 @@ function map_styles( $json ) {
 
 	}
 
-	$config['style'] = json_decode( file_get_contents( $config['style'] ), true );
+	$config['style'] = json_decode( file_get_contents( $config['style'] ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions -- Let's keep it simple.
 
 	array_push( $json, $config );
 

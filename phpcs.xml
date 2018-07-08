@@ -6,6 +6,7 @@
 	<!-- Prevent sniffs of some directories. -->
 	<exclude-pattern>node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>classes/class-tgm-plugin-activation.php</exclude-pattern>
 	<!-- Pass flags to PHPCS:
 		 p: Show progress of the run.
 		 s: Show sniff codes in all reports.

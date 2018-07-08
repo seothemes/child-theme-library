@@ -56,7 +56,7 @@ function body_class( $classes ) {
 	if ( is_page_template( 'page-blog.php' ) ) {
 
 		$classes[] = 'blog';
-		$classes = array_diff( $classes, [ 'page' ] );
+		$classes   = array_diff( $classes, [ 'page' ] );
 
 	}
 
