@@ -102,7 +102,7 @@ class Defaults {
 
 		}
 
-		update_option( 'posts_per_page', $config['blog_cat_num'] );
+		update_option( 'posts_per_page', $config['genesis-settings']['blog_cat_num'] );
 
 	}
 
