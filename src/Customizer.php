@@ -141,7 +141,7 @@ class Customizer {
 					foreach ( $rule['elements'] as $element ) {
 
 						$comma = ( 0 === $counter ++ ? '' : ',' );
-						$css   .= $comma . $element;
+						$css  .= $comma . $element;
 
 					}
 

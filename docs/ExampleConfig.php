@@ -28,29 +28,11 @@ return [
 	|--------------------------------------------------------------------------
 	|
 	| List of directories for the Child Theme Library to load automatically.
-	| The Child Theme Library will load every PHP file in the list below.
-	| Note: Removing the default files might cause the theme to break.
+	| File names should be the file path from the theme's root directory,
+	| not including the php extension, E.g: 'directory_name/file_name'.
 	|
 	*/
-	'autoload'            => [
-		'setup',
-		'utilities',
-		'attributes',
-		'defaults',
-		'demo',
-		'hero',
-		'layout',
-		'markup',
-		'plugins',
-		'templates',
-		'enqueue',
-		'shortcodes',
-		'widgets',
-		'widget-areas',
-		'admin',
-		'customizer',
-		'structure',
-	],
+	'autoload'            => [],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -298,6 +280,36 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
+	| Modules
+	|--------------------------------------------------------------------------
+	|
+	| List of Child Theme Library modules to enable/disable. Each module is
+	| independent of other modules however please note that removing the
+	| default modules can cause your site to not function as expected.
+	|
+	*/
+	'modules'             => [
+		'Setup',
+		'Utilities',
+		'Attributes',
+		'Defaults',
+		'DemoImport',
+		'HeroSection',
+		'Layout',
+		'Markup',
+		'Plugins',
+		'Templates',
+		'Enqueue',
+		'Shortcodes',
+		'Widgets',
+		'WidgetAreas',
+		'Admin',
+		'Customizer',
+		'Structure',
+	],
+
+	/*
+	|--------------------------------------------------------------------------
 	| Page Templates
 	|--------------------------------------------------------------------------
 	|
@@ -308,8 +320,6 @@ return [
 	*/
 	'page-templates'      => [
 		'page-blog.php'    => __( 'Blog', 'child-theme-library' ),
-		'page-contact.php' => __( 'Contact Page', 'child-theme-library' ),
-		'page-boxed.php'   => __( 'Boxed Template', 'child-theme-library' ),
 		'page-builder.php' => __( 'Page Builder', 'child-theme-library' ),
 		'page-landing.php' => __( 'Landing Page', 'child-theme-library' ),
 		'page-sitemap.php' => __( 'Sitemap', 'child-theme-library' ),

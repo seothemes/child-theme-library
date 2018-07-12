@@ -50,7 +50,6 @@ class Plugins {
 	public function __construct( $theme ) {
 
 		$this->theme = $theme;
-		$this->tgmpa = $this->tgmpa();
 
 		add_action( 'genesis_setup', [
 			$this,
@@ -86,8 +85,22 @@ class Plugins {
 		] );
 		add_filter( 'agm_custom_styles', [
 			$this,
-			'map_styles'
+			'add_map_styles'
 		] );
+
+	}
+
+	/**
+	 * Disable third party CSS that is included in theme.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return void
+	 */
+	public function remove_plugin_css() {
+
+		add_filter( 'gs_faq_print_styles', '__return_false' );
+		add_filter( 'genesis_portfolio_load_default_styles', '__return_false' );
 
 	}
 
@@ -98,11 +111,11 @@ class Plugins {
 	 *
 	 * @return bool
 	 */
-	public function tgmpa() {
+	public function is_tgmpa_active() {
 
 		$file = $this->theme->vendor . '/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php';
 
-		return ( file_exists( $file ) ? true : false );
+		return ( file_exists( $file ) ? require_once $file : false );
 
 	}
 
@@ -115,7 +128,7 @@ class Plugins {
 	 */
 	public function activation() {
 
-		if ( $this->tgmpa ) {
+		if ( $this->is_tgmpa_active() ) {
 
 			new \TGM_Plugin_Activation();
 
@@ -126,7 +139,7 @@ class Plugins {
 	/**
 	 * Register required plugins.
 	 *
-	 * The variables passed to the `tgmpa()` function should be:
+	 * The variables passed to the `is_tgmpa_active()` function should be:
 	 *
 	 * - an array of plugin arrays;
 	 * - optionally a configuration array.
@@ -144,7 +157,7 @@ class Plugins {
 	 */
 	public function required() {
 
-		if ( ! $this->tgmpa ) {
+		if ( ! $this->is_tgmpa_active() ) {
 
 			return;
 
@@ -263,7 +276,7 @@ class Plugins {
 			color: ' . $instance['icon_color_hover'] . ';
 		}';
 
-			$css = $this->theme->utilities->minify_css( $css );
+			$css = $this->theme->utilities->minify_css( $css ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Input is escaped through plugin.
 
 			printf( '<style type="text/css" media="screen">%s</style>', $css );
 
@@ -326,9 +339,9 @@ class Plugins {
 	 *
 	 * @return array
 	 */
-	public function map_styles( $json ) {
+	public function add_map_styles( $json ) {
 
-		$config = get_config( 'map-style' );
+		$config = $this->theme->config['map-style'];
 
 		if ( ! is_readable( $config['style'] ) ) {
 
@@ -336,25 +349,11 @@ class Plugins {
 
 		}
 
-		$config['style'] = json_decode( file_get_contents( $config['style'] ), true );
+		$config['style'] = json_decode( file_get_contents( $config['style'] ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions -- Let's keep it simple.
 
 		array_push( $json, $config );
 
 		return $json;
-
-	}
-
-	/**
-	 * Disable third party CSS that is included in theme.
-	 *
-	 * @since  1.0.0
-	 *
-	 * @return void
-	 */
-	public function remove_plugin_css() {
-
-		add_filter( 'gs_faq_print_styles', '__return_false' );
-		add_filter( 'genesis_portfolio_load_default_styles', '__return_false' );
 
 	}
 

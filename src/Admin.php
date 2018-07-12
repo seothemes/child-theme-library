@@ -128,17 +128,18 @@ class Admin {
 	 */
 	public function dont_update_theme( $request, $url ) {
 
-		// Not a theme update request. Bail immediately.
 		if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check' ) ) {
+
 			return $request;
+
 		}
 
-		$themes = unserialize( $request['body']['themes'] );
+		$themes = json_decode( $request['body']['themes'] );
 
 		unset( $themes[ get_option( 'template' ) ] );
 		unset( $themes[ get_option( 'stylesheet' ) ] );
 
-		$request['body']['themes'] = serialize( $themes );
+		$request['body']['themes'] = wp_json_encode( $themes );
 
 		return $request;
 
