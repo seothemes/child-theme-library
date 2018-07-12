@@ -51,8 +51,12 @@ class Widgets {
 
 		$this->theme = $theme;
 
-		add_action( 'widgets_init', [ $this, 'unregister' ] );
-		add_action( 'after_setup_theme', [ $this, 'enable_shortcodes' ] );
+		$this->enable_shortcodes();
+
+		add_action( 'widgets_init', [
+			$this,
+			'unregister'
+		] );
 
 	}
 

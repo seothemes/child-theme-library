@@ -51,15 +51,42 @@ class Plugins {
 
 		$this->theme = $theme;
 
-		add_action( 'genesis_setup', [ $this, 'activation' ] );
-		add_action( 'tgmpa_register', [ $this, 'required' ] );
-		add_action( 'wp_head', [ $this, 'remove_simple_social_inline_css' ], 1 );
-		add_action( 'wp_head', [ $this, 'add_simple_social_inline_css' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'remove_plugin_css' ] );
-		add_filter( 'simple_social_default_styles', [ $this, 'simple_social_defaults' ] );
-		add_filter( 'genesis_widget_column_classes', [ $this, 'add_widget_columns' ] );
-		add_filter( 'gsw_settings_defaults', [ $this, 'testimonial_defaults' ] );
-		add_filter( 'agm_custom_styles', [ $this, 'map_styles' ] );
+		add_action( 'genesis_setup', [
+			$this,
+			'activation'
+		] );
+		add_action( 'tgmpa_register', [
+			$this,
+			'required'
+		] );
+		add_action( 'wp_head', [
+			$this,
+			'remove_simple_social_inline_css'
+		], 1 );
+		add_action( 'wp_head', [
+			$this,
+			'add_simple_social_inline_css'
+		] );
+		add_action( 'wp_enqueue_scripts', [
+			$this,
+			'remove_plugin_css'
+		] );
+		add_filter( 'simple_social_default_styles', [
+			$this,
+			'simple_social_defaults'
+		] );
+		add_filter( 'genesis_widget_column_classes', [
+			$this,
+			'add_widget_columns'
+		] );
+		add_filter( 'gsw_settings_defaults', [
+			$this,
+			'testimonial_defaults'
+		] );
+		add_filter( 'agm_custom_styles', [
+			$this,
+			'map_styles'
+		] );
 
 	}
 

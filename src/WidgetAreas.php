@@ -51,10 +51,22 @@ class WidgetAreas {
 
 		$this->theme = $theme;
 
-		add_action( 'after_setup_theme', [ $this, 'remove' ], 0 );
-		add_action( 'after_setup_theme', [ $this, 'add' ] );
-		add_action( 'genesis_meta', [ $this, 'front_page' ] );
-		add_action( 'genesis_before', [ $this, 'footer_credits' ] );
+		add_action( 'after_setup_theme', [
+			$this,
+			'remove'
+		], 0 );
+		add_action( 'after_setup_theme', [
+			$this,
+			'add'
+		] );
+		add_action( 'genesis_meta', [
+			$this,
+			'front_page'
+		] );
+		add_action( 'genesis_before', [
+			$this,
+			'footer_credits'
+		] );
 
 	}
 
@@ -144,33 +156,33 @@ class WidgetAreas {
 					add_action(
 						$location, function () use ( $id ) {
 
-							if ( 'front-page-1' === $id ) {
+						if ( 'front-page-1' === $id ) {
 
-								ob_start();
-								the_custom_header_markup();
-								$custom_header = ob_get_clean();
+							ob_start();
+							the_custom_header_markup();
+							$custom_header = ob_get_clean();
 
-								genesis_widget_area(
-									$id, array(
-										'before'       => '<div class="' . $id . ' widget-area hero-section" role="banner">' . $custom_header . '<div class="wrap">',
-										'after'        => '</div></div>',
-										'before_title' => '<h1 itemprop="headline">',
-										'after_title'  => '</h1>',
-									)
-								);
+							genesis_widget_area(
+								$id, array(
+									'before'       => '<div class="' . $id . ' widget-area hero-section" role="banner">' . $custom_header . '<div class="wrap">',
+									'after'        => '</div></div>',
+									'before_title' => '<h1 itemprop="headline">',
+									'after_title'  => '</h1>',
+								)
+							);
 
-							} else {
+						} else {
 
-								genesis_widget_area(
-									$id, array(
-										'before' => '<div class="' . $id . ' widget-area"><div class="wrap">',
-										'after'  => '</div></div>',
-									)
-								);
-
-							}
+							genesis_widget_area(
+								$id, array(
+									'before' => '<div class="' . $id . ' widget-area"><div class="wrap">',
+									'after'  => '</div></div>',
+								)
+							);
 
 						}
+
+					}
 					);
 
 				}
@@ -203,9 +215,9 @@ class WidgetAreas {
 		add_action(
 			'genesis_loop', function () {
 
-				do_action( 'child_theme_front_page_widgets' );
+			do_action( 'child_theme_front_page_widgets' );
 
-			}
+		}
 		);
 
 	}

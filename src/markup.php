@@ -51,13 +51,19 @@ class Markup {
 
 		$this->theme = $theme;
 
-		add_filter( 'genesis_markup_title-area_close', [ $this, 'after_title_area' ], 10, 2 );
-		add_action( 'init', [ $this, 'structural_wrap_hooks' ] );
+		add_filter( 'genesis_markup_title-area_close', [
+			$this,
+			'after_title_area'
+		], 10, 2 );
+		add_action( 'init', [
+			$this,
+			'structural_wrap_hooks'
+		] );
 
 	}
 
 	/**
-	 * Themeends HTML to the closing markup for .title-area.
+	 * Adds HTML to the closing markup for .title-area.
 	 *
 	 * Adding something between the title + description and widget area used to
 	 * require re-building genesis_do_header(). However, since the title-area
@@ -110,7 +116,7 @@ class Markup {
 			 * Inserts an action hook before the opening div and after the closing div
 			 * for each of the structural wraps.
 			 *
-			 * @param string $output   HTML for opening or closing the structural wrap.
+			 * @param string $output HTML for opening or closing the structural wrap.
 			 * @param string $original Either 'open' or 'close'.
 			 *
 			 * @return string
@@ -118,23 +124,23 @@ class Markup {
 			add_filter(
 				"genesis_structural_wrap-{$context}", function ( $output, $original ) use ( $context ) {
 
-					$position = ( 'open' === $original ) ? 'before' : 'after';
+				$position = ( 'open' === $original ) ? 'before' : 'after';
 
-					ob_start();
+				ob_start();
 
-					do_action( "child_theme_{$position}_{$context}_wrap" );
+				do_action( "child_theme_{$position}_{$context}_wrap" );
 
-					if ( 'open' === $original ) {
+				if ( 'open' === $original ) {
 
-						return ob_get_clean() . $output;
+					return ob_get_clean() . $output;
 
-					} else {
+				} else {
 
-						return $output . ob_get_clean();
+					return $output . ob_get_clean();
 
-					}
+				}
 
-				}, 10, 2
+			}, 10, 2
 			);
 
 		}

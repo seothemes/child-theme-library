@@ -51,9 +51,18 @@ class Structure {
 
 		$this->theme = $theme;
 
-		add_action( 'after_setup_theme', [ $this, 'display_custom_logo' ] );
-		add_action( 'after_setup_theme', [ $this, 'reposition_menus' ] );
-		add_action( 'after_setup_theme', [ $this, 'reposition_footer_widgets' ] );
+		add_action( 'after_setup_theme', [
+			$this,
+			'display_custom_logo'
+		] );
+		add_action( 'after_setup_theme', [
+			$this,
+			'reposition_menus'
+		] );
+		add_action( 'after_setup_theme', [
+			$this,
+			'reposition_footer_widgets'
+		] );
 
 	}
 

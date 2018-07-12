@@ -51,12 +51,8 @@ class DemoImport {
 
 		$this->theme = $theme;
 
-		add_action(
-			'genesis_setup', [
-				$this,
-				'disable_branding',
-			]
-		);
+		$this->disable_branding();
+
 		add_filter(
 			'pt-ocdi/import_files', [
 				$this,
@@ -65,9 +61,9 @@ class DemoImport {
 		);
 		add_filter(
 			'pt-ocdi/after_all_import_execution', [
-				$this,
-				'after_import',
-			], 99
+			$this,
+			'after_import',
+		], 99
 		);
 	}
 

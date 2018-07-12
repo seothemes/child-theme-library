@@ -191,7 +191,7 @@ class Attributes {
 	 */
 	function hero_section( $attr ) {
 
-		$attr['id'] = 'hero-section';
+		$attr['id']   = 'hero-section';
 		$attr['role'] = 'banner';
 
 		return $attr;

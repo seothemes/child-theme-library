@@ -142,7 +142,7 @@ class ChildTheme {
 	 *
 	 * @since  1.4.0
 	 *
-	 * @param  string $config Theme config path.
+	 * @param  string $config Path to theme configuration file.
 	 *
 	 * @return void
 	 */
@@ -152,6 +152,7 @@ class ChildTheme {
 
 		$this->init();
 		$this->bootstrap();
+		$this->autoload();
 
 	}
 
@@ -177,10 +178,11 @@ class ChildTheme {
 		$this->views   = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/resources/views';
 		$this->uri     = get_stylesheet_directory_uri();
 		$this->assets  = get_stylesheet_directory_uri() . '/assets';
+
 	}
 
 	/**
-	 * Bootstrap the child theme library.
+	 * Bootstrap child theme modules.
 	 *
 	 * @since  1.4.0
 	 *
@@ -188,26 +190,47 @@ class ChildTheme {
 	 */
 	public function bootstrap() {
 
-		$this->setup       = new Setup( $this );
-		$this->utilities   = new Utilities( $this );
-		$this->attributes  = new Attributes( $this );
-		$this->defaults    = new Defaults( $this );
-		$this->demoimport  = new DemoImport( $this );
-		$this->herosection = new HeroSection( $this );
-		$this->layout      = new Layout( $this );
-		$this->markup      = new Markup( $this );
-		$this->plugins     = new Plugins( $this );
-		$this->templates   = new Templates( $this );
-		$this->enqueue     = new Enqueue( $this );
-		$this->shortcodes  = new Shortcodes( $this );
-		$this->widgets     = new Widgets( $this );
-		$this->widgetareas = new WidgetAreas( $this );
-		$this->admin       = new Admin( $this );
-		$this->customizer  = new Customizer( $this );
-		$this->structure   = new Structure( $this );
+		$modules = $this->config['modules'];
+
+		foreach ( $modules as $module ) {
+
+			$property  = strtolower( $module );
+			$namespace = __NAMESPACE__ . '\\';
+			$class     = $namespace . $module;
+
+			$this->$property = new $class( $this );
+
+		}
+
+	}
+
+	/**
+	 * Autoloads Genesis and files specified in config.
+	 *
+	 * @since  1.4.0
+	 *
+	 * @return void
+	 */
+	public function autoload() {
+
+		require_once get_template_directory() . '/lib/init.php';
+
+		$files = $this->config['autoload'];
+
+		foreach ( $files as $file ) {
+
+			$file_name = $this->dir . '/' . $file . '.php';
+
+			if ( file_exists( $file_name ) ) {
+
+				require_once $file_name;
+
+			}
+
+		}
 
 	}
 
 }
 
-new ChildTheme( get_stylesheet_directory() . '/config/config.php' );
+$child_theme_library = new ChildTheme( get_stylesheet_directory() . '/config/config.php' );

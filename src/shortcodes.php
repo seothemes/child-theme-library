@@ -51,7 +51,10 @@ class Shortcodes {
 
 		$this->theme = $theme;
 
-		add_shortcode( 'footer_backtotop', [ $this, 'footer_backtotop' ] );
+		add_shortcode( 'footer_backtotop', [
+			$this,
+			'footer_backtotop'
+		] );
 
 	}
 

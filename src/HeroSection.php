@@ -52,7 +52,10 @@ class HeroSection {
 
 		$this->theme = $theme;
 
-		add_action( 'genesis_before', [ $this, 'setup' ] );
+		add_action( 'genesis_before', [
+			$this,
+			'setup'
+		] );
 
 	}
 
@@ -99,11 +102,26 @@ class HeroSection {
 		add_action( 'child_theme_hero_section', 'genesis_do_taxonomy_title_description' );
 		add_action( 'child_theme_hero_section', 'genesis_do_author_title_description' );
 		add_action( 'child_theme_hero_section', 'genesis_do_cpt_archive_title_description' );
-		add_action( 'child_theme_hero_section', [ $this, 'title' ], 10 );
-		add_action( 'child_theme_hero_section', [ $this, 'excerpt' ], 20 );
-		add_action( 'be_title_toggle_remove', [ $this, 'title_toggle' ] );
-		add_action( 'genesis_before_content', [ $this, 'remove_404_title' ] );
-		add_action( 'genesis_before_content_sidebar_wrap', [ $this, 'display' ] );
+		add_action( 'child_theme_hero_section', [
+			$this,
+			'title'
+		], 10 );
+		add_action( 'child_theme_hero_section', [
+			$this,
+			'excerpt'
+		], 20 );
+		add_action( 'be_title_toggle_remove', [
+			$this,
+			'title_toggle'
+		] );
+		add_action( 'genesis_before_content', [
+			$this,
+			'remove_404_title'
+		] );
+		add_action( 'genesis_before_content_sidebar_wrap', [
+			$this,
+			'display'
+		] );
 
 	}
 
@@ -138,8 +156,14 @@ class HeroSection {
 	 */
 	function title_toggle() {
 
-		remove_action( 'child_theme_hero_section', [ $this, 'title' ], 10 );
-		remove_action( 'child_theme_hero_section', [ $this, 'excerpt' ], 20 );
+		remove_action( 'child_theme_hero_section', [
+			$this,
+			'title'
+		], 10 );
+		remove_action( 'child_theme_hero_section', [
+			$this,
+			'excerpt'
+		], 20 );
 
 	}
 
@@ -221,9 +245,10 @@ class HeroSection {
 	/**
 	 * Display page excerpt.
 	 *
-	 * Prints the correct excerpt on a per page basis. If on the WooCommerce shop
-	 * page then the products result count is be displayed instead of the page
-	 * excerpt. Also, if on a single product then no excerpt will be output.
+	 * Prints the correct excerpt on a per page basis. If on the WooCommerce
+	 * shop page then the products result count is be displayed instead of the
+	 * page excerpt. Also, if on a single product then no excerpt will be
+	 * output.
 	 *
 	 * @since  1.0.0
 	 *
@@ -267,8 +292,9 @@ class HeroSection {
 	/**
 	 * Display the hero section.
 	 *
-	 * Conditionally outputs the opening and closing hero section markup and runs
-	 * the hero_section hook which all of our hero functions are hooked to.
+	 * Conditionally outputs the opening and closing hero section markup and
+	 * runs the hero_section hook which all of our hero functions are hooked
+	 * to.
 	 *
 	 * @since  1.0.0
 	 *

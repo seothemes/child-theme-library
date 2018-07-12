@@ -51,8 +51,14 @@ class Templates {
 
 		$this->theme = $theme;
 
-		add_filter( 'theme_page_templates', [ $this, 'add' ] );
-		add_filter( 'template_include', [ $this, 'set' ] );
+		add_filter( 'theme_page_templates', [
+			$this,
+			'add'
+		] );
+		add_filter( 'template_include', [
+			$this,
+			'set'
+		] );
 
 	}
 

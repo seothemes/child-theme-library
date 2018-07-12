@@ -51,10 +51,22 @@ class Layout {
 
 		$this->theme = $theme;
 
-		add_action( 'after_setup_theme', [ $this, 'register' ] );
-		add_filter( 'genesis_site_layout', [ $this, 'search_page' ] );
-		add_filter( 'genesis_site_layout', [ $this, 'error_404' ] );
-		add_action( 'genesis_before', [ $this, 'remove_center_content_sidebars' ] );
+		add_action( 'after_setup_theme', [
+			$this,
+			'register'
+		] );
+		add_filter( 'genesis_site_layout', [
+			$this,
+			'search_page'
+		] );
+		add_filter( 'genesis_site_layout', [
+			$this,
+			'error_404'
+		] );
+		add_action( 'genesis_before', [
+			$this,
+			'remove_center_content_sidebars'
+		] );
 
 	}
 

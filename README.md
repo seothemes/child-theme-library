@@ -159,8 +159,6 @@ lib/
 
 | Name                               | Type     | Description                      |
 | :--------------------------------- | :------- | :------------------------------- |
-| `child_theme_init`                 | *action* | Runs during initialization       |
-| `child_theme_setup`                | *action* | Runs after initialization        |
 | `child_theme_after_title_area`     | *action* | Runs after the title area        |
 | `child_theme_hero_section`         | *action* | Runs during the hero section     |
 | `child_theme_front_page_widgets`   | *action* | Runs during the front page loop  |
@@ -188,9 +186,9 @@ See also the list of [contributors](https://github.com/seothemes/child-theme-lib
 
 A shout out to anyone who's code was used in or provided inspiration to this project:
 
+<a href="https://github.com/christophherr/" target="_blank">Christoph Herr</a>, 
 <a href="https://github.com/garyjones/" target="_blank">Gary Jones</a>, 
 <a href="https://github.com/craigsimps/" target="_blank">Craig Simpson</a>, 
-<a href="https://github.com/christophherr/" target="_blank">Christoph Herr</a>, 
 <a href="https://github.com/timothyjensen/" target="_blank">Tim Jensen</a>, 
 <a href="https://github.com/billerickson/" target="_blank">Bill Erickson</a>, 
 <a href="https://github.com/srikat/" target="_blank">Sridhar Katakam</a>, 
