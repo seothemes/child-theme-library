@@ -17,8 +17,6 @@ namespace SEOThemes\ChildThemeLibrary\Customizer;
 
 use function SEOThemes\ChildThemeLibrary\Utilities\get_config;
 
-use SEOThemes\RgbaCustomizerControl\RgbaCustomizerControl;
-
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
@@ -67,15 +65,13 @@ function settings( $wp_customize ) {
 		);
 
 		$wp_customize->add_control(
-			new RgbaCustomizerControl (
+			new \WP_Customize_Color_Control (
 				$wp_customize,
 				$setting,
 				array(
 					'section'      => 'colors',
 					'label'        => $label,
 					'settings'     => $setting,
-					'show_opacity' => true,
-					'palette'      => true,
 				)
 			)
 		);
