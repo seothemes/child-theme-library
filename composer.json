@@ -20,12 +20,22 @@
     "issues": "https://github.com/seothemes/child-theme-library/issues",
     "source": "https://github.com/seothemes/child-theme-library"
   },
-  "require": {},
+  "require": {
+    "tgmpa/tgm-plugin-activation": "^2.6.1"
+  },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
     "squizlabs/php_codesniffer": "^3.2.3",
     "wp-coding-standards/wpcs": "^0.14.1",
     "roave/security-advisories": "dev-master"
+  },
+  "autoload": {
+    "files": [
+      "src/ChildThemeLibrary.php"
+    ],
+    "psr-4": {
+      "SEOThemes\\ChildThemeLibrary\\": "src/"
+    }
   },
   "suggest": {
     "kint-php/kint": "^2.2",
@@ -35,7 +45,7 @@
     "sort-order": true
   },
   "scripts": {
-      "phpcs": "phpcs"
+    "phpcs": "phpcs"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
