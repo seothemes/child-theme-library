@@ -29,7 +29,7 @@
   },
   "autoload": {
     "files": [
-      "src/Theme.php"
+      "src/ChildTheme.php"
     ],
     "psr-4": {
       "SEOThemes\\ChildThemeLibrary\\": "src/"
