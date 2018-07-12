@@ -1,5 +1,12 @@
 # Child Theme Library Changelog
 
+## [1.4.0] - 2018-07-12
+* Add PSR-4 autoloading
+* Add folder structure based on PHP PDS
+* Update to object oriented design
+* Remove RGBA Customizer control
+* Remove TGMPA class, now composer dependency
+
 ## [1.3.0] - 2018-07-06
 * Add child_theme_init and child_theme_setup hooks
 * Remove composer autoload function
