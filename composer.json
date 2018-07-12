@@ -28,7 +28,12 @@
     "roave/security-advisories": "dev-master"
   },
   "autoload": {
-    "files": ["src/bootstrap.php"]
+    "files": [
+      "src/Theme.php"
+    ],
+    "psr-4": {
+      "SEOThemes\\ChildThemeLibrary\\": "src/"
+    }
   },
   "suggest": {
     "kint-php/kint": "^2.2",
@@ -38,7 +43,7 @@
     "sort-order": true
   },
   "scripts": {
-      "phpcs": "phpcs"
+    "phpcs": "phpcs"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
