@@ -75,7 +75,7 @@ class DemoImport {
 	 *
 	 * @return void
 	 */
-	function disable_branding() {
+	public function disable_branding() {
 
 		add_filter( 'pt-ocdi/disable_pt_branding', '__return_true' );
 
@@ -88,7 +88,7 @@ class DemoImport {
 	 *
 	 * @return array
 	 */
-	function import_settings() {
+	public function import_settings() {
 
 		$config = $this->theme->config['demo-import'];
 
@@ -107,7 +107,7 @@ class DemoImport {
 	 *
 	 * @return void
 	 */
-	function after_import() {
+	public function after_import() {
 
 		// Assign menus to their locations.
 		$menu = get_term_by( 'name', 'Header Menu', 'nav_menu' );

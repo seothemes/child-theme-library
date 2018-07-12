@@ -88,7 +88,7 @@ class Attributes {
 	 *
 	 * @return array
 	 */
-	function body_class( $classes ) {
+	public function body_class( $classes ) {
 
 		if ( get_theme_mod( 'child_theme_sticky_header' ) ) {
 
@@ -135,7 +135,7 @@ class Attributes {
 	 *
 	 * @return array
 	 */
-	function site_container( $atts ) {
+	public function site_container( $atts ) {
 
 		$atts['id'] = 'top';
 
@@ -152,7 +152,7 @@ class Attributes {
 	 *
 	 * @return array
 	 */
-	function title_area( $attr ) {
+	public function title_area( $attr ) {
 
 		$attr['itemscope'] = 'itemscope';
 		$attr['itemtype']  = 'http://schema.org/Organization';
@@ -170,7 +170,7 @@ class Attributes {
 	 *
 	 * @return array
 	 */
-	function site_title_schema( $attr ) {
+	public function site_title_schema( $attr ) {
 
 		$attr['itemprop'] = 'name';
 
@@ -189,7 +189,7 @@ class Attributes {
 	 *
 	 * @return array
 	 */
-	function hero_section( $attr ) {
+	public function hero_section( $attr ) {
 
 		$attr['id']   = 'hero-section';
 		$attr['role'] = 'banner';
@@ -215,7 +215,7 @@ class Attributes {
 	 *
 	 * @return array
 	 */
-	function entry( $atts ) {
+	public function entry( $atts ) {
 
 		if ( current_theme_supports( 'hero-section' ) && is_singular() ) {
 

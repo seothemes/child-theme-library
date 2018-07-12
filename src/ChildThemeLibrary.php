@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since   1.4.0
  */
-class ChildTheme {
+class ChildThemeLibrary {
 
 	/**
 	 * Theme name.
@@ -233,4 +233,4 @@ class ChildTheme {
 
 }
 
-$child_theme_library = new ChildTheme( apply_filters( 'child_theme_config', get_stylesheet_directory() . '/config/config.php' ) );
+$child_theme_library = new ChildThemeLibrary( apply_filters( 'child_theme_config', get_stylesheet_directory() . '/config/config.php' ) );

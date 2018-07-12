@@ -73,7 +73,7 @@ class Structure {
 	 *
 	 * @return void
 	 */
-	function display_custom_logo() {
+	public function display_custom_logo() {
 
 		add_action( 'genesis_site_title', 'the_custom_logo', 0 );
 
@@ -86,7 +86,7 @@ class Structure {
 	 *
 	 * @return void
 	 */
-	function reposition_menus() {
+	public function reposition_menus() {
 
 		remove_action( 'genesis_after_header', 'genesis_do_nav' );
 		remove_action( 'genesis_after_header', 'genesis_do_subnav' );
@@ -102,7 +102,7 @@ class Structure {
 	 *
 	 * @return void
 	 */
-	function reposition_footer_widgets() {
+	public function reposition_footer_widgets() {
 
 		remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
 		add_action( 'child_theme_before_footer_wrap', 'genesis_footer_widget_areas', 15 );

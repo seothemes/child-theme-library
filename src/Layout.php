@@ -77,7 +77,7 @@ class Layout {
 	 *
 	 * @return void
 	 */
-	function register() {
+	public function register() {
 
 		$config = $this->theme->config['layouts'];
 
@@ -121,7 +121,7 @@ class Layout {
 	 *
 	 * @return string
 	 */
-	function search_page( $layout ) {
+	public function search_page( $layout ) {
 
 		if ( is_search() ) {
 
@@ -148,7 +148,7 @@ class Layout {
 	 *
 	 * @return string
 	 */
-	function error_404( $layout ) {
+	public function error_404( $layout ) {
 
 		if ( is_404() ) {
 
@@ -173,7 +173,7 @@ class Layout {
 	 *
 	 * @return void
 	 */
-	function remove_center_content_sidebars() {
+	public function remove_center_content_sidebars() {
 
 		$site_layout = genesis_site_layout();
 

@@ -79,7 +79,7 @@ class Markup {
 	 *
 	 * @return string
 	 */
-	function after_title_area( $close_html, $args ) {
+	public function after_title_area( $close_html, $args ) {
 
 		if ( $close_html ) {
 
@@ -106,7 +106,7 @@ class Markup {
 	 *
 	 * @return void
 	 */
-	function structural_wrap_hooks() {
+	public function structural_wrap_hooks() {
 
 		$wraps = get_theme_support( 'genesis-structural-wraps' );
 

@@ -69,7 +69,7 @@ class HeroSection {
 	 *
 	 * @return void
 	 */
-	function setup() {
+	public function setup() {
 
 		if ( ! current_theme_supports( 'hero-section' ) ) {
 
@@ -130,7 +130,7 @@ class HeroSection {
 	 *
 	 * @return void
 	 */
-	function remove_404_title() {
+	public function remove_404_title() {
 
 		if ( is_404() ) {
 
@@ -152,7 +152,7 @@ class HeroSection {
 	 *
 	 * @return void
 	 */
-	function title_toggle() {
+	public function title_toggle() {
 
 		remove_action( 'child_theme_hero_section', [
 			$this,
@@ -175,7 +175,7 @@ class HeroSection {
 	 *
 	 * @return void
 	 */
-	function title() {
+	public function title() {
 
 		// Add post titles back inside posts loop.
 		if ( is_home() || is_archive() || is_category() || is_tag() || is_tax() || is_search() || is_page_template( 'page_blog.php' ) ) {
@@ -252,7 +252,7 @@ class HeroSection {
 	 *
 	 * @return void
 	 */
-	function excerpt() {
+	public function excerpt() {
 
 		if ( class_exists( 'WooCommerce' ) && is_shop() ) {
 
@@ -298,7 +298,7 @@ class HeroSection {
 	 *
 	 * @return void
 	 */
-	function display() {
+	public function display() {
 
 		// Output hero section markup.
 		genesis_markup(

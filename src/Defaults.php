@@ -75,7 +75,7 @@ class Defaults {
 	 *
 	 * @return array
 	 */
-	function set( array $defaults ) {
+	public function set( array $defaults ) {
 
 		$config = $this->theme->config['genesis-settings'];
 
@@ -92,7 +92,7 @@ class Defaults {
 	 *
 	 * @return void
 	 */
-	function update() {
+	public function update() {
 
 		$config = $this->theme->config;
 

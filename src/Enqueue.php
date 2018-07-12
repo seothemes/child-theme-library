@@ -95,7 +95,7 @@ class Enqueue {
 	 *
 	 * @return void
 	 */
-	function load_css() {
+	public function load_css() {
 
 		$config = $this->theme->config;
 
@@ -122,7 +122,7 @@ class Enqueue {
 	 *
 	 * @return void
 	 */
-	function load_js() {
+	public function load_js() {
 
 		$scripts = $this->theme->config['scripts'];
 
@@ -141,7 +141,7 @@ class Enqueue {
 	 *
 	 * @return void
 	 */
-	function menu_settings() {
+	public function menu_settings() {
 
 		$menu_settings = $this->theme->config['responsive-menu'];
 
@@ -168,7 +168,7 @@ class Enqueue {
 	 *
 	 * @return void
 	 */
-	function js_nojs() {
+	public function js_nojs() {
 
 		?>
 		<script>

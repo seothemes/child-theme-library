@@ -23,21 +23,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Templates
+ * Adds template logic to child theme.
  *
- * @package SEOThemes\ChildThemeLibrary
+ * @since 1.4.0
  */
 class Templates {
 
 	/**
-	 * @var Theme
+	 * Child theme object.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @var   object
 	 */
 	public $theme;
 
 	/**
-	 * Templates constructor.
+	 * Constructor.
 	 *
-	 * @param $theme
+	 * @since  1.4.0
+	 *
+	 * @param  object $theme Child theme object.
+	 *
+	 * @return void
 	 */
 	public function __construct( $theme ) {
 
@@ -70,7 +78,7 @@ class Templates {
 	 *
 	 * @return array
 	 */
-	function add( $page_templates ) {
+	public function add( $page_templates ) {
 
 		$config = $this->theme->config['page-templates'];
 
@@ -105,7 +113,7 @@ class Templates {
 	 *
 	 * @return string
 	 */
-	function set( $template ) {
+	public function set( $template ) {
 
 		if ( ! is_singular( 'page' ) ) {
 
@@ -153,7 +161,7 @@ class Templates {
 		$current_template = get_post_meta( get_the_ID(), '_wp_page_template', true );
 
 		if ( 'page-builder.php' === $current_template ) {
-			
+
 			remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 			remove_theme_support( 'hero-section' );
 			add_filter( 'genesis_markup_content-sidebar-wrap', '__return_null' );

@@ -80,7 +80,7 @@ class Shortcodes {
 	 *
 	 * @return string Output for `footer_backtotop` shortcode.
 	 */
-	function footer_backtotop( $atts ) {
+	public function footer_backtotop( $atts ) {
 
 		$defaults = array(
 			'after'    => '',

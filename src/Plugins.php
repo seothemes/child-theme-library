@@ -50,6 +50,7 @@ class Plugins {
 	public function __construct( $theme ) {
 
 		$this->theme = $theme;
+		$this->tgmpa = $this->tgmpa();
 
 		add_action( 'genesis_setup', [
 			$this,
@@ -91,17 +92,34 @@ class Plugins {
 	}
 
 	/**
+	 * Checks if TGMPA is available.
+	 *
+	 * @since  1.4.0
+	 *
+	 * @return bool
+	 */
+	public function tgmpa() {
+
+		$file = $this->theme->vendor . '/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php';
+
+		return ( file_exists( $file ) ? true : false );
+
+	}
+
+	/**
 	 * Instantiate the plugin activation class.
 	 *
 	 * @since  1.0.0
 	 *
 	 * @return void
 	 */
-	function activation() {
+	public function activation() {
 
-		require_once $this->theme->vendor . '/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php';
+		if ( $this->tgmpa ) {
 
-		new \TGM_Plugin_Activation();
+			new \TGM_Plugin_Activation();
+
+		}
 
 	}
 
@@ -124,7 +142,13 @@ class Plugins {
 	 *
 	 * @return void
 	 */
-	function required() {
+	public function required() {
+
+		if ( ! $this->tgmpa ) {
+
+			return;
+
+		}
 
 		$plugins = $this->theme->config['plugins'];
 
@@ -162,7 +186,7 @@ class Plugins {
 	 *
 	 * @return array Custom settings.
 	 */
-	function simple_social_defaults( $defaults ) {
+	public function simple_social_defaults( $defaults ) {
 
 		$settings = $this->theme->config['simple-social-icons'];
 
@@ -180,7 +204,7 @@ class Plugins {
 	 *
 	 * @return void
 	 */
-	function remove_simple_social_inline_css() {
+	public function remove_simple_social_inline_css() {
 
 		global $wp_widget_factory;
 
@@ -205,7 +229,7 @@ class Plugins {
 	 *
 	 * @return void
 	 */
-	function add_simple_social_inline_css() {
+	public function add_simple_social_inline_css() {
 
 		if ( ! class_exists( 'Simple_Social_Icons_Widget' ) ) {
 
@@ -256,7 +280,7 @@ class Plugins {
 	 *
 	 * @return array Modified column classes.
 	 */
-	function add_widget_columns( $column_classes ) {
+	public function add_widget_columns( $column_classes ) {
 
 		$column_classes[] = 'one-fifth';
 		$column_classes[] = 'two-fifths';
@@ -277,7 +301,7 @@ class Plugins {
 	 *
 	 * @return array
 	 */
-	function testimonial_defaults( $defaults ) {
+	public function testimonial_defaults( $defaults ) {
 
 		$config = $this->theme->config['testimonial-slider'];
 
@@ -302,7 +326,7 @@ class Plugins {
 	 *
 	 * @return array
 	 */
-	function map_styles( $json ) {
+	public function map_styles( $json ) {
 
 		$config = get_config( 'map-style' );
 
@@ -327,7 +351,7 @@ class Plugins {
 	 *
 	 * @return void
 	 */
-	function remove_plugin_css() {
+	public function remove_plugin_css() {
 
 		add_filter( 'gs_faq_print_styles', '__return_false' );
 		add_filter( 'genesis_portfolio_load_default_styles', '__return_false' );

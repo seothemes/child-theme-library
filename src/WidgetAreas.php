@@ -77,7 +77,7 @@ class WidgetAreas {
 	 *
 	 * @return void
 	 */
-	function remove() {
+	public function remove() {
 
 		$config = $this->theme->config['widget-areas'];
 		$config = array_fill_keys( array_keys( $config ), null );
@@ -112,7 +112,7 @@ class WidgetAreas {
 	 *
 	 * @return void
 	 */
-	function add() {
+	public function add() {
 
 		$config = $this->theme->config['widget-areas'];
 
@@ -198,7 +198,7 @@ class WidgetAreas {
 	 *
 	 * @return void
 	 */
-	function front_page() {
+	public function front_page() {
 
 		if ( ! is_front_page() || ! $this->theme->utilities->has_front_page_widgets() ) {
 
@@ -229,7 +229,7 @@ class WidgetAreas {
 	 *
 	 * @return void
 	 */
-	function footer_credits() {
+	public function footer_credits() {
 
 		if ( ! is_active_sidebar( 'footer-credits' ) ) {
 

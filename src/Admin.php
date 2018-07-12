@@ -75,7 +75,7 @@ class Admin {
 	 *
 	 * @return void
 	 */
-	function display_excerpt_metabox() {
+	public function display_excerpt_metabox() {
 
 		$user_id = get_current_user_id();
 
@@ -126,7 +126,7 @@ class Admin {
 	 *
 	 * @return array  request arguments
 	 */
-	function dont_update_theme( $request, $url ) {
+	public function dont_update_theme( $request, $url ) {
 
 		// Not a theme update request. Bail immediately.
 		if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check' ) ) {

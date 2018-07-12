@@ -67,9 +67,6 @@ The Child Theme Library loosely resembles the current Genesis Framework file str
 ./
 ├── docs/
 │   └── ExampleConfig.php
-├── resources/
-│   └── views/
-class-tgm-plugin-activation.php
 ├── src/
 │   ├── Setup.php
 │   ├── Utilities.php

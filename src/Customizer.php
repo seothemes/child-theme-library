@@ -72,7 +72,7 @@ class Customizer {
 	 *
 	 * @return void
 	 */
-	function settings( $wp_customize ) {
+	public function settings( $wp_customize ) {
 
 		$wp_customize->remove_control( 'background_color' );
 		$wp_customize->remove_control( 'header_textcolor' );
@@ -121,7 +121,7 @@ class Customizer {
 	 *
 	 * @return void
 	 */
-	function output() {
+	public function output() {
 
 		$css = '';
 

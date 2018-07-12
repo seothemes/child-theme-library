@@ -67,7 +67,7 @@ class Widgets {
 	 *
 	 * @return void
 	 */
-	function unregister() {
+	public function unregister() {
 
 		$config = $this->theme->config['widgets'];
 
@@ -86,7 +86,7 @@ class Widgets {
 	 *
 	 * @return void
 	 */
-	function enable_shortcodes() {
+	public function enable_shortcodes() {
 
 		add_filter( 'widget_text', 'do_shortcode' );
 
