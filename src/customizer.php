@@ -16,13 +16,70 @@
 namespace SEOThemes\ChildThemeLibrary\Customizer;
 
 use function SEOThemes\ChildThemeLibrary\Utilities\get_config;
-use function SEOThemes\ChildThemeLibrary\Utilities\minify_css;
+
+use SEOThemes\RgbaCustomizerControl\RgbaCustomizerControl;
 
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 
 	die;
 
+}
+
+add_action( 'customize_register', __NAMESPACE__ . '\settings' );
+/**
+ * Sets up the theme customizer sections, controls, and settings.
+ *
+ * @since  1.2.0
+ *
+ * @param  object $wp_customize Global customizer object.
+ *
+ * @return void
+ */
+function settings( $wp_customize ) {
+
+	$wp_customize->remove_control( 'background_color' );
+	$wp_customize->remove_control( 'header_textcolor' );
+
+	/*
+	| ------------------------------------------------------------------
+	| Colors
+	| ------------------------------------------------------------------
+	|
+	| Adds the color settings to the Customizer. Loops through an
+	| array of custom colors defined in the child theme config
+	| file to output a new setting and control for each one.
+	|
+	*/
+	$colors = get_config( 'colors' );
+
+	foreach ( $colors as $color => $settings ) {
+
+		$setting = "child_theme_{$color}_color";
+		$label   = ucwords( str_replace( '_', ' ', $color ) ) . __( ' Color', 'child-theme-library' );
+
+		$wp_customize->add_setting(
+			$setting,
+			array(
+				'default'           => $settings['default'],
+				'sanitize_callback' => 'SEOThemes\ChildThemeLibrary\Utilities\sanitize_rgba_color',
+			)
+		);
+
+		$wp_customize->add_control(
+			new RgbaCustomizerControl (
+				$wp_customize,
+				$setting,
+				array(
+					'section'      => 'colors',
+					'label'        => $label,
+					'settings'     => $setting,
+					'show_opacity' => true,
+					'palette'      => true,
+				)
+			)
+		);
+	}
 }
 
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\output', 100 );

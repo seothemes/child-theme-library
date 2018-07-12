@@ -22,6 +22,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 }
 
+add_action( 'child_theme_init', __NAMESPACE__ . '\display_custom_logo' );
+/**
+ * Display custom logo in site title area.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function display_custom_logo() {
+
+	add_action( 'genesis_site_title', 'the_custom_logo', 0 );
+
+}
 
 add_action( 'child_theme_init', __NAMESPACE__ . '\reposition_menus' );
 /**
@@ -37,5 +50,20 @@ function reposition_menus() {
 	remove_action( 'genesis_after_header', 'genesis_do_subnav' );
 	add_action( 'child_theme_after_title_area', 'genesis_do_nav' );
 	add_action( 'child_theme_after_header_wrap', 'genesis_do_subnav' );
+
+}
+
+add_action( 'child_theme_init', __NAMESPACE__ . '\reposition_footer_widgets' );
+/**
+ * Reposition footer widgets inside site footer.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function reposition_footer_widgets() {
+
+	remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
+	add_action( 'child_theme_before_footer_wrap', 'genesis_footer_widget_areas', 15 );
 
 }

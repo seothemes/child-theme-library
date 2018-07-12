@@ -17,6 +17,20 @@ namespace SEOThemes\ChildThemeLibrary\Demo;
 
 use function SEOThemes\ChildThemeLibrary\Utilities\get_config;
 
+add_action( 'child_theme_init', __NAMESPACE__ . '\disable_branding' );
+/**
+ * Remove One Click Demo Import branding.
+ *
+ * @since  1.0.0
+ *
+ * @return void
+ */
+function disable_branding() {
+
+	add_filter( 'pt-ocdi/disable_pt_branding', '__return_true' );
+
+}
+
 add_filter( 'pt-ocdi/import_files', __NAMESPACE__ . '\import_settings' );
 /**
  * One click demo import settings.

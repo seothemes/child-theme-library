@@ -28,9 +28,9 @@ add_action( 'child_theme_init', __NAMESPACE__ . '\activation' );
  */
 function activation() {
 
-	new \TGM_Plugin_Activation();
+	require_once CHILD_THEME_VENDOR . '/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php';
 
-	add_filter( 'pt-ocdi/disable_pt_branding', '__return_true' );
+	new \TGM_Plugin_Activation();
 
 }
 

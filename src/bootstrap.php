@@ -42,9 +42,9 @@ function constants() {
 			'CHILD_THEME_HANDLE'  => $child_theme->get( 'TextDomain' ),
 			'CHILD_THEME_AUTHOR'  => $child_theme->get( 'Author' ),
 			'CHILD_THEME_DIR'     => get_stylesheet_directory(),
-			'CHILD_THEME_LIB'     => get_stylesheet_directory() . '/vendor/seothemes/child-theme-library',
-			'CHILD_THEME_VIEWS'   => get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/views',
 			'CHILD_THEME_VENDOR'  => get_stylesheet_directory() . '/vendor',
+			'CHILD_THEME_LIB'     => get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/src',
+			'CHILD_THEME_VIEWS'   => get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/resources/views',
 			'CHILD_THEME_CONFIG'  => get_stylesheet_directory() . '/config/config.php',
 			'CHILD_THEME_URI'     => get_stylesheet_directory_uri(),
 			'CHILD_THEME_ASSETS'  => get_stylesheet_directory_uri() . '/assets',
@@ -62,19 +62,30 @@ function constants() {
 
 }
 
-add_action( 'child_theme_init', __NAMESPACE__ . '\load', 2 );
+add_action( 'child_theme_init', __NAMESPACE__ . '\autoload', 3 );
 /**
- * Load Genesis Framework and child theme autoloader.
+ * Autoload files.
  *
- * @since  1.3.0
+ * @since  1.1.0
  *
  * @return void
  */
-function load() {
+function autoload() {
+
+	$config = require_once CHILD_THEME_CONFIG;
 
 	require_once get_template_directory() . '/lib/init.php';
-	require_once dirname( __FILE__ ) . '/autoload.php';
 
+	foreach ( $config['autoload'] as $file ) {
+
+		$file_name = CHILD_THEME_LIB . '/' . $file . '.php';
+
+		if ( file_exists( $file_name ) ) {
+
+			require_once $file_name;
+
+		}
+	}
 }
 
 // Fires during initialization.
