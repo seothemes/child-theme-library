@@ -138,7 +138,7 @@ function title() {
 			array(
 				'open'    => '<h1 %s>',
 				'close'   => '</h1>',
-				'content' => apply_filters( 'child_theme_latest_posts_title', __( 'Latest Posts', 'child-theme-library' ) ),
+				'content' => apply_filters( 'child_theme_latest_posts_title', esc_html__( 'Latest Posts', 'child-theme-library' ) ),
 				'context' => 'entry-title',
 			)
 		);
@@ -149,7 +149,7 @@ function title() {
 			array(
 				'open'    => '<h1 %s>',
 				'close'   => '</h1>',
-				'content' => apply_filters( 'genesis_404_entry_title', __( 'Not found, error 404', 'child-theme-library' ) ),
+				'content' => apply_filters( 'genesis_404_entry_title', esc_html__( 'Not found, error 404', 'child-theme-library' ) ),
 				'context' => 'entry-title',
 			)
 		);
@@ -160,7 +160,7 @@ function title() {
 			array(
 				'open'    => '<h1 %s>',
 				'close'   => '</h1>',
-				'content' => apply_filters( 'genesis_search_title_text', __( 'Search results for: ', 'child-theme-library' ) ) . get_search_query(),
+				'content' => apply_filters( 'genesis_search_title_text', esc_html__( 'Search results for: ', 'child-theme-library' ) ) . get_search_query(),
 				'context' => 'entry-title',
 			)
 		);
@@ -196,7 +196,7 @@ function excerpt() {
 
 	} elseif ( is_home() && 'posts' === get_option( 'show_on_front' ) ) {
 
-		printf( '<p itemprop="description">%s</p>', apply_filters( 'child_theme_latest_posts_excerpt', 'Showing the latest posts' ) );
+		printf( '<p itemprop="description">%s</p>', apply_filters( 'child_theme_latest_posts_excerpt', esc_html__( 'Showing the latest posts', 'child-theme-library' ) ) );
 
 	} elseif ( is_search() ) {
 
