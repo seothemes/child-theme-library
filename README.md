@@ -16,6 +16,7 @@ The main purpose of the Child Theme Library is to provide a shareable codebase f
 | Composer >= 1.5.0 | `composer --version` | [getcomposer.org](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) |
 | Node >= 9.10.1 | `node -v` | [nodejs.org](https://nodejs.org/) |
 | NPM >= 5.6.0 | `npm -v` | [npm.js](https://www.npmjs.com/) |
+| Yarn >= 0.2.x | `yarn -v` | [yarnpkg.com](https://yarnpkg.com/lang/en/docs/install/#mac-stable) |
 | Gulp CLI >= 1.3.0 | `gulp -v` | [gulp.js](https://gulpjs.com/) |
 | Gulp = 3.9.1 | `gulp -v` | [gulp.js](https://gulpjs.com/) |
 
