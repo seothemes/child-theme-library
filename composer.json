@@ -28,7 +28,7 @@
     "roave/security-advisories": "dev-master"
   },
   "autoload": {
-    "files": ["init.php"]
+    "files": ["src/bootstrap.php"]
   },
   "suggest": {
     "kint-php/kint": "^2.2",
