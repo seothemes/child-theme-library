@@ -23,29 +23,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Adds templates logic to child theme.
+ * Class Templates
  *
- * @since 1.4.0
+ * @package SEOThemes\ChildThemeLibrary
  */
 class Templates {
 
 	/**
-	 * Child theme object.
-	 *
-	 * @since 1.4.0
-	 *
-	 * @var   object
+	 * @var Theme
 	 */
 	public $theme;
 
 	/**
-	 * Constructor.
+	 * Templates constructor.
 	 *
-	 * @since  1.4.0
-	 *
-	 * @param  object $theme Child theme object.
-	 *
-	 * @return void
+	 * @param $theme
 	 */
 	public function __construct( $theme ) {
 
@@ -59,6 +51,10 @@ class Templates {
 			$this,
 			'set'
 		] );
+		add_filter( 'genesis_before', [
+			$this,
+			'modify'
+		], 0 );
 
 	}
 
@@ -94,12 +90,6 @@ class Templates {
 
 		}
 
-		if ( ! current_theme_supports( 'hero-section' ) ) {
-
-			unset( $config['page-contact.php'] );
-
-		}
-
 		$page_templates = array_merge( $page_templates, $config );
 
 		return $page_templates;
@@ -117,8 +107,6 @@ class Templates {
 	 */
 	function set( $template ) {
 
-		$config = $this->theme->config['page-templates'];
-
 		if ( ! is_singular( 'page' ) ) {
 
 			return $template;
@@ -135,30 +123,59 @@ class Templates {
 
 		}
 
-		if ( ! array_key_exists( $current_template, $config ) ) {
+		if ( 'page-sitemap.php' === $current_template ) {
+
+			$template = get_template_directory() . '/page_sitemap.php';
 
 			return $template;
 
 		}
 
-		$template_override = $this->theme->dir . '/templates/' . $current_template;
+		return $template;
 
-		if ( file_exists( $template_override ) ) {
+	}
 
-			$template = $template_override;
+	/**
+	 * Modifies loop depending on current template.
+	 *
+	 * @since  1.4.0
+	 *
+	 * @return void
+	 */
+	public function modify() {
 
-		} else {
+		if ( ! is_singular( 'page' ) ) {
 
-			$template_path = trailingslashit( $this->theme->views ) . $current_template;
+			return;
 
-			if ( file_exists( $template_path ) ) {
-
-				$template = $template_path;
-
-			}
 		}
 
-		return $template;
+		$current_template = get_post_meta( get_the_ID(), '_wp_page_template', true );
+
+		if ( 'page-builder.php' === $current_template ) {
+			
+			remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
+			remove_theme_support( 'hero-section' );
+			add_filter( 'genesis_markup_content-sidebar-wrap', '__return_null' );
+
+		}
+
+		if ( 'page-landing.php' === $current_template ) {
+
+			remove_action( 'genesis_before_header', 'genesis_skip_links', 5 );
+			remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
+			remove_action( 'genesis_header', 'genesis_do_header' );
+			remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
+			remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
+			remove_action( 'genesis_footer', 'genesis_footer_markup_open', 5 );
+			remove_action( 'genesis_footer', 'genesis_do_footer' );
+			remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
+			remove_theme_support( 'hero-section' );
+			remove_theme_support( 'genesis-menus' );
+			remove_theme_support( 'genesis-footer-widgets' );
+			unregister_sidebar( 'footer-credits' );
+
+		}
 
 	}
 

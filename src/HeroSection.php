@@ -73,8 +73,6 @@ class HeroSection {
 
 		if ( ! current_theme_supports( 'hero-section' ) ) {
 
-			echo 'test';
-
 			return;
 
 		}

@@ -21,132 +21,79 @@ The main purpose of the Child Theme Library is to provide a shareable codebase f
 
 ## Installation
 
-### Composer (recommended)
+Include the package in your child theme's `composer.json` file:
 
-Include the package and the custom directory installer package in your child theme's `composer.json` file
+```bash
+composer require seothemes/child-theme-library
+```
 
-```json
-"require":{
-  "mnsami/composer-custom-directory-installer": "1.1.*",
-  "seothemes/child-theme-library": "dev-master"
+Optionally install the TGMPA composer package:
+
+```bash
+composer require tgmpa/tgm-plugin-activation
+```
+
+Include the composer autoloader from your `functions.php` file, before any custom code is loaded e.g:
+
+```php
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	require __DIR__ . '/vendor/autoload.php';
 }
 ```
 
-In the `extra` section define the custom directory you want the package to be installed in:
-
-```json
-"extra":{
-  "installer-paths":{
-    "./lib/": ["seothemes/child-theme-library"]
-  }
-},
-```
-
-Include the library from your `functions.php` file, before any custom code is loaded e.g:
-
-```php
-// Load Child Theme Library (do not remove).
-require_once get_stylesheet_directory() . '/lib/init.php';
-```
-
 An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json)
-
-### Git
-
-The Child Theme Library can be installed as a Git Submodule. This allows the library to receive future updates with ease. If you are not familiar with Git Submodules please read [this article](https://gist.github.com/gitaarik/8735255).
-
-From the terminal, navigate to your project directory:
-
-```sh
-cd wp-content/themes/my-theme
-```
-
-Clone from Github into the `lib` directory. This creates a submodule:
-
-```sh
-git submodule add https://github.com/seothemes/child-theme-library.git lib
-```
-
-Include the library from your `functions.php` file, before any custom code is loaded e.g:
-
-```php
-// Load Child Theme Library (do not remove).
-require_once get_stylesheet_directory() . '/lib/init.php';
-```
-
-### Manually
-
-Download the zip file from Github [here](https://github.com/seothemes/child-theme-library/archive/master.zip).
-
-Upload the file to your theme's main directory and unzip the contents.
-
-Include the library from your `functions.php` file, before any custom code is loaded e.g:
-
-```php
-// Load child theme's lib (do not remove).
-require_once get_stylesheet_directory() . '/lib/init.php';
-```
 
 ## Setup
 
 Once the library has been included in your theme, it is ready to accept your config file. By default, this should be placed in `./config/config.php`, however this location can be changed by using the config path filter, e.g:
 
 ```php
-add_filter( 'child_theme_config', get_stylesheet_directory() . 'my-config.php' );
+add_filter( 'child_theme_config', 'custom_child_theme_config_path' );
+/**
+ * Filters the theme config path.
+ */
+function custom_child_theme_config_path() {
+	return get_stylesheet_directory() . 'config.php';
+}
 ```
 
-A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json).
+A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/child-theme-library/docs/ExampleConfig.php).
 
 ## Structure
 
 The Child Theme Library loosely resembles the current Genesis Framework file structure:
 
 ```sh
-lib/
-├── admin/
-│   ├── customizer-output.php
-│   └── customizer-settings.php
-├── classes/
-│   ├── class-rgba-customizer-control.php
-│   └── class-tgm-plugin-activation.php
-├── css/
-│   ├── customizer.css
-│   └── load-styles.php
-├── functions/
-│   ├── attributes.php
-│   ├── defaults.php
-│   ├── demo.php
-│   ├── general.php
-│   ├── hero.php
-│   ├── layout.php
-│   ├── markup.php
-│   ├── plugins.php
-│   ├── setup.php
-│   ├── templates.php
-│   ├── upgrade.php
-│   └── utilities.php
-├── js/
-│   ├── customizer.js
-│   └── load-scripts.php
-├── shortcodes/
-│   └── footer.php
-├── structure/
-│   ├── footer.php
-│   ├── header.php
-│   └── menu.php
-├── views/
-│   ├── page-blog.php
-│   ├── page-boxed.php
-│   ├── page-builder.php
-│   ├── page-contact.php
-│   ├── page-landing.php
-│   └── page-sitemap.php
-├── widgets/
-│   ├── widget-areas.php
-│   └── widgets.php
+./
+├── docs/
+│   └── ExampleConfig.php
+├── resources/
+│   └── views/
+class-tgm-plugin-activation.php
+├── src/
+│   ├── Setup.php
+│   ├── Utilities.php
+│   ├── Attributes.php
+│   ├── Defaults.php
+│   ├── DemoImport.php
+│   ├── HeroSection.php
+│   ├── Layout.php
+│   ├── Markup.php
+│   ├── Plugins.php
+│   ├── Enqueue.php
+│   ├── Shortcodes.php
+│   ├── Widgets.php
+│   ├── WidgetAreas.php
+│   ├── Admin.php
+│   ├── Customizer.php
+│   └── Structure.php
+├── tests/
+├── .editorconfig
 ├── .gitattributes
+├── .gitignore
 ├── composer.json
 ├── CHANGELOG.md
+├── CONTRIBUTING.md
 ├── LICENSE.md
 ├── README.md
 ├── autoload.php

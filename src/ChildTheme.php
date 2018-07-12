@@ -233,4 +233,4 @@ class ChildTheme {
 
 }
 
-$child_theme_library = new ChildTheme( get_stylesheet_directory() . '/config/config.php' );
+$child_theme_library = new ChildTheme( apply_filters( 'child_theme_config', get_stylesheet_directory() . '/config/config.php' ) );
