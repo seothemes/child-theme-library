@@ -30,26 +30,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Markup {
 
 	/**
-	 * Child theme object.
-	 *
-	 * @since 1.4.0
-	 *
-	 * @var   object
-	 */
-	public $theme;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since  1.4.0
 	 *
-	 * @param  object $theme Child theme object.
-	 *
 	 * @return void
 	 */
-	public function __construct( $theme ) {
-
-		$this->theme = $theme;
+	public function __construct() {
 
 		add_filter( 'genesis_markup_title-area_close', [
 			$this,
@@ -112,15 +99,6 @@ class Markup {
 
 		foreach ( $wraps[0] as $context ) {
 
-			/**
-			 * Inserts an action hook before the opening div and after the closing div
-			 * for each of the structural wraps.
-			 *
-			 * @param string $output HTML for opening or closing the structural wrap.
-			 * @param string $original Either 'open' or 'close'.
-			 *
-			 * @return string
-			 */
 			add_filter(
 				"genesis_structural_wrap-{$context}", function ( $output, $original ) use ( $context ) {
 
@@ -140,8 +118,7 @@ class Markup {
 
 				}
 
-			}, 10, 2
-			);
+			}, 10, 2 );
 
 		}
 

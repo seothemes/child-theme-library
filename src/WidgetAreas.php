@@ -39,6 +39,15 @@ class WidgetAreas {
 	public $theme;
 
 	/**
+	 * Child theme config.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @var   array
+	 */
+	public $config;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since  1.4.0
@@ -49,24 +58,13 @@ class WidgetAreas {
 	 */
 	public function __construct( $theme ) {
 
-		$this->theme = $theme;
+		$this->theme  = $theme;
+		$this->config = $theme->config;
 
-		add_action( 'after_setup_theme', [
-			$this,
-			'remove'
-		], 0 );
-		add_action( 'after_setup_theme', [
-			$this,
-			'add'
-		] );
-		add_action( 'genesis_meta', [
-			$this,
-			'front_page'
-		] );
-		add_action( 'genesis_before', [
-			$this,
-			'footer_credits'
-		] );
+		$this->remove( $this->config['widget-areas'] );
+		$this->add( $this->config['widget-areas'] );
+		$this->front_page();
+		$this->footer_credits();
 
 	}
 
@@ -75,11 +73,12 @@ class WidgetAreas {
 	 *
 	 * @since  1.0.0
 	 *
+	 * @param  array $config Widget areas config.
+	 *
 	 * @return void
 	 */
-	public function remove() {
+	public function remove( $config ) {
 
-		$config = $this->theme->config['widget-areas'];
 		$config = array_fill_keys( array_keys( $config ), null );
 
 		$defaults = array(
@@ -110,11 +109,11 @@ class WidgetAreas {
 	 *
 	 * @since  1.0.0
 	 *
+	 * @param  array $config Widget areas config.
+	 *
 	 * @return void
 	 */
-	public function add() {
-
-		$config = $this->theme->config['widget-areas'];
+	public function add( $config ) {
 
 		foreach ( $config as $id => $location ) {
 
@@ -200,7 +199,7 @@ class WidgetAreas {
 	 */
 	public function front_page() {
 
-		if ( ! is_front_page() || ! $this->theme->utilities->has_front_page_widgets() ) {
+		if ( is_admin() || ! is_front_page() || ! $this->theme->utilities->has_front_page_widgets() ) {
 
 			return;
 
@@ -212,13 +211,11 @@ class WidgetAreas {
 		remove_theme_support( 'hero-section' );
 
 		remove_action( 'genesis_loop', 'genesis_do_loop' );
-		add_action(
-			'genesis_loop', function () {
+		add_action( 'genesis_loop', function () {
 
 			do_action( 'child_theme_front_page_widgets' );
 
-		}
-		);
+		} );
 
 	}
 
@@ -231,7 +228,7 @@ class WidgetAreas {
 	 */
 	public function footer_credits() {
 
-		if ( ! is_active_sidebar( 'footer-credits' ) ) {
+		if ( is_admin() || ! is_active_sidebar( 'footer-credits' ) ) {
 
 			return;
 

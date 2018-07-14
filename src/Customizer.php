@@ -39,6 +39,15 @@ class Customizer {
 	public $theme;
 
 	/**
+	 * Child theme colors config.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @var   array
+	 */
+	public $colors;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since  1.4.0

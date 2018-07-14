@@ -30,13 +30,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Defaults {
 
 	/**
-	 * Child theme object.
+	 * Child theme config.
 	 *
 	 * @since 1.4.0
 	 *
-	 * @var   object
+	 * @var   array
 	 */
-	public $theme;
+	public $config;
 
 	/**
 	 * Defaults constructor.
@@ -49,7 +49,7 @@ class Defaults {
 	 */
 	public function __construct( $theme ) {
 
-		$this->theme = $theme;
+		$this->config = $theme->config;
 
 		add_filter(
 			'genesis_theme_settings_defaults', [
@@ -77,9 +77,7 @@ class Defaults {
 	 */
 	public function set( array $defaults ) {
 
-		$config = $this->theme->config['genesis-settings'];
-
-		$defaults = wp_parse_args( $config, $defaults );
+		$defaults = wp_parse_args( $this->config['genesis-settings'], $defaults );
 
 		return $defaults;
 
@@ -94,17 +92,15 @@ class Defaults {
 	 */
 	public function update() {
 
-		$config = $this->theme->config;
-
 		if ( function_exists( 'genesis_update_settings' ) ) {
 
-			genesis_update_settings( $config['genesis-settings'] );
+			genesis_update_settings( $this->config['genesis-settings'] );
 
 		}
 
-		if ( $config['genesis-settings']['blog_cat_num'] ) {
+		if ( $this->config['genesis-settings']['blog_cat_num'] ) {
 
-			update_option( 'posts_per_page', $config['genesis-settings']['blog_cat_num'] );
+			update_option( 'posts_per_page', $this->config['genesis-settings']['blog_cat_num'] );
 
 		}
 

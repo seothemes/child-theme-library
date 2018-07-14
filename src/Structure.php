@@ -30,39 +30,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Structure {
 
 	/**
-	 * Child theme object.
-	 *
-	 * @since 1.4.0
-	 *
-	 * @var   object
-	 */
-	public $theme;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since  1.4.0
 	 *
-	 * @param  object $theme Child theme object.
-	 *
 	 * @return void
 	 */
-	public function __construct( $theme ) {
+	public function __construct() {
 
-		$this->theme = $theme;
-
-		add_action( 'after_setup_theme', [
-			$this,
-			'display_custom_logo'
-		] );
-		add_action( 'after_setup_theme', [
-			$this,
-			'reposition_menus'
-		] );
-		add_action( 'after_setup_theme', [
-			$this,
-			'reposition_footer_widgets'
-		] );
+		$this->display_custom_logo();
+		$this->reposition_menus();
+		$this->reposition_footer_widgets();
 
 	}
 

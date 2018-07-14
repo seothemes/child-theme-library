@@ -39,6 +39,15 @@ class Enqueue {
 	public $theme;
 
 	/**
+	 * Child theme config.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @var   array
+	 */
+	public $config;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since  1.4.0
@@ -49,7 +58,8 @@ class Enqueue {
 	 */
 	public function __construct( $theme ) {
 
-		$this->theme = $theme;
+		$this->theme  = $theme;
+		$this->config = $theme->config;
 
 		add_action( 'genesis_meta', [
 			$this,
@@ -97,15 +107,13 @@ class Enqueue {
 	 */
 	public function load_css() {
 
-		$config = $this->theme->config;
-
-		foreach ( $config['styles'] as $style => $params ) {
+		foreach ( $this->config['styles'] as $style => $params ) {
 
 			wp_enqueue_style( 'child-theme-' . $style, $params['src'], $params['deps'], $params['ver'], $params['media'] );
 
 		}
 
-		foreach ( $config['google-fonts'] as $google_font ) {
+		foreach ( $this->config['google-fonts'] as $google_font ) {
 
 			$google_fonts[] = $google_font;
 
@@ -124,9 +132,7 @@ class Enqueue {
 	 */
 	public function load_js() {
 
-		$scripts = $this->theme->config['scripts'];
-
-		foreach ( $scripts as $script => $params ) {
+		foreach ( $this->config['scripts'] as $script => $params ) {
 
 			wp_enqueue_script( 'child-theme-' . $script, $params['src'], explode( ',', $params['deps'] ), $params['ver'], $params['in_footer'] );
 
@@ -143,9 +149,7 @@ class Enqueue {
 	 */
 	public function menu_settings() {
 
-		$menu_settings = $this->theme->config['responsive-menu'];
-
-		wp_localize_script( 'child-theme-menu', 'genesis_responsive_menu', $menu_settings );
+		wp_localize_script( 'child-theme-menu', 'genesis_responsive_menu', $this->config['responsive-menu'] );
 
 	}
 

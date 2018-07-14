@@ -30,31 +30,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Shortcodes {
 
 	/**
-	 * Child theme object.
-	 *
-	 * @since 1.4.0
-	 *
-	 * @var   object
-	 */
-	public $theme;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since  1.4.0
 	 *
-	 * @param  object $theme Child theme object.
-	 *
 	 * @return void
 	 */
-	public function __construct( $theme ) {
+	public function __construct() {
 
-		$this->theme = $theme;
+		$this->enable_widget_shortcodes();
 
 		add_shortcode( 'footer_backtotop', [
 			$this,
 			'footer_backtotop'
 		] );
+
+	}
+
+	/**
+	 * Enables shortcodes in text widgets.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return void
+	 */
+	public function enable_widget_shortcodes() {
+
+		add_filter( 'widget_text', 'do_shortcode' );
 
 	}
 

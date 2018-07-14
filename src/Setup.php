@@ -30,13 +30,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Setup {
 
 	/**
-	 * Child theme object.
+	 * Child theme config.
 	 *
 	 * @since 1.4.0
 	 *
-	 * @var   object
+	 * @var   array
 	 */
-	public $theme;
+	public $config;
 
 	/**
 	 * Constructor.
@@ -49,13 +49,13 @@ class Setup {
 	 */
 	public function __construct( $theme ) {
 
-		$this->theme = $theme;
+		$this->config = $theme->config;
 
-		$this->add_text_domain();
-		$this->add_theme_supports();
-		$this->add_image_sizes();
-		$this->add_post_type_supports();
-		$this->add_default_headers();
+		$this->add_text_domain( $this->config['textdomain'] );
+		$this->add_theme_supports( $this->config['theme-supports'] );
+		$this->add_image_sizes( $this->config['image-sizes'] );
+		$this->add_post_type_supports( $this->config['post-type-supports'] );
+		$this->add_default_headers( $this->config['default-headers'] );
 
 	}
 
@@ -64,11 +64,11 @@ class Setup {
 	 *
 	 * @since  1.3.0
 	 *
+	 * @param  array $config Text domain config.
+	 *
 	 * @return void
 	 */
-	public function add_text_domain() {
-
-		$config = $this->theme->config['textdomain'];
+	public function add_text_domain( $config ) {
 
 		load_child_theme_textdomain( $config['domain'], $config['path'] );
 
@@ -79,11 +79,11 @@ class Setup {
 	 *
 	 * @since  1.0.0
 	 *
+	 * @param  array $config Text domain config.
+	 *
 	 * @return void
 	 */
-	public function add_theme_supports() {
-
-		$config = $this->theme->config['theme-supports'];
+	public function add_theme_supports( $config ) {
 
 		foreach ( $config as $feature => $args ) {
 
@@ -105,11 +105,11 @@ class Setup {
 	 *
 	 * @since  1.0.0
 	 *
+	 * @param  array $config Text domain config.
+	 *
 	 * @return void
 	 */
-	public function add_image_sizes() {
-
-		$config = $this->theme->config['image-sizes'];
+	public function add_image_sizes( $config ) {
 
 		foreach ( $config as $name => $args ) {
 
@@ -126,11 +126,11 @@ class Setup {
 	 *
 	 * @since  1.0.0
 	 *
+	 * @param  array $config Text domain config.
+	 *
 	 * @return void
 	 */
-	public function add_post_type_supports() {
-
-		$config = $this->theme->config['post-type-supports'];
+	public function add_post_type_supports( $config ) {
 
 		foreach ( $config as $post_type => $support ) {
 
@@ -145,11 +145,11 @@ class Setup {
 	 *
 	 * @since  1.0.0
 	 *
+	 * @param  array $config Text domain config.
+	 *
 	 * @return void
 	 */
-	public function add_default_headers() {
-
-		$config = $this->theme->config['default-headers'];
+	public function add_default_headers( $config ) {
 
 		register_default_headers( $config );
 

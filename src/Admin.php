@@ -30,26 +30,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Admin {
 
 	/**
-	 * Child theme object.
-	 *
-	 * @since 1.4.0
-	 *
-	 * @var   object
-	 */
-	public $theme;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since  1.4.0
 	 *
-	 * @param  object $theme Child theme object.
-	 *
 	 * @return void
 	 */
-	public function __construct( $theme ) {
-
-		$this->theme = $theme;
+	public function __construct() {
 
 		add_action( 'after_switch_theme', [
 			$this,

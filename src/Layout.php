@@ -39,6 +39,15 @@ class Layout {
 	public $theme;
 
 	/**
+	 * Child theme config.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @var   array
+	 */
+	public $config;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since  1.4.0
@@ -49,7 +58,8 @@ class Layout {
 	 */
 	public function __construct( $theme ) {
 
-		$this->theme = $theme;
+		$this->theme  = $theme;
+		$this->config = $theme->config;
 
 		add_action( 'after_setup_theme', [
 			$this,
@@ -79,8 +89,6 @@ class Layout {
 	 */
 	public function register() {
 
-		$config = $this->theme->config['layouts'];
-
 		$initial_layouts = array(
 			'full-width-content',
 			'content-sidebar',
@@ -90,8 +98,8 @@ class Layout {
 			'sidebar-content-sidebar',
 		);
 
-		$layouts_to_remove = array_diff( $initial_layouts, $config );
-		$custom_layouts    = array_diff( $config, $initial_layouts );
+		$layouts_to_remove = array_diff( $initial_layouts, $this->config['layouts'] );
+		$custom_layouts    = array_diff( $this->config['layouts'], $initial_layouts );
 
 		foreach ( $layouts_to_remove as $layout_to_remove ) {
 

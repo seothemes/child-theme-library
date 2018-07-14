@@ -30,13 +30,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Templates {
 
 	/**
-	 * Child theme object.
+	 * Child theme config.
 	 *
 	 * @since 1.4.0
 	 *
-	 * @var   object
+	 * @var   array
 	 */
-	public $theme;
+	public $config;
 
 	/**
 	 * Constructor.
@@ -49,7 +49,7 @@ class Templates {
 	 */
 	public function __construct( $theme ) {
 
-		$this->theme = $theme;
+		$this->config = $theme->config['page-templates'];
 
 		add_filter( 'theme_page_templates', [
 			$this,
@@ -80,11 +80,9 @@ class Templates {
 	 */
 	public function add( $page_templates ) {
 
-		$config = $this->theme->config['page-templates'];
+		if ( array_key_exists( 'page-blog.php', $this->config ) ) {
 
-		if ( array_key_exists( 'page-blog.php', $config ) ) {
-
-			unset( $config['page-blog.php'] );
+			unset( $this->config['page-blog.php'] );
 
 		} else {
 
@@ -92,13 +90,13 @@ class Templates {
 
 		}
 
-		if ( array_key_exists( 'page-sitemap.php', $config ) ) {
+		if ( array_key_exists( 'page-sitemap.php', $this->config ) ) {
 
 			unset( $page_templates['page_archive.php'] );
 
 		}
 
-		$page_templates = array_merge( $page_templates, $config );
+		$page_templates = array_merge( $page_templates, $this->config );
 
 		return $page_templates;
 

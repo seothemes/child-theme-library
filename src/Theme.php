@@ -224,8 +224,6 @@ class Theme {
 
 		}
 
-		d($this->admin);
-
 	}
 
 	/**

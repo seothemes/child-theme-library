@@ -39,6 +39,15 @@ class Plugins {
 	public $theme;
 
 	/**
+	 * Child theme config.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @var   array
+	 */
+	public $config;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since  1.4.0
@@ -49,7 +58,8 @@ class Plugins {
 	 */
 	public function __construct( $theme ) {
 
-		$this->theme = $theme;
+		$this->theme  = $theme;
+		$this->config = $theme->config;
 
 		add_action( 'genesis_setup', [
 			$this,
@@ -163,7 +173,7 @@ class Plugins {
 
 		}
 
-		$plugins = $this->theme->config['plugins'];
+		$plugins = $this->config['plugins'];
 
 		if ( class_exists( 'WooCommerce' ) ) {
 
@@ -201,9 +211,7 @@ class Plugins {
 	 */
 	public function simple_social_defaults( $defaults ) {
 
-		$settings = $this->theme->config['simple-social-icons'];
-
-		return wp_parse_args( $settings, $defaults );
+		return wp_parse_args( $this->config['simple-social-icons'], $defaults );
 
 	}
 
@@ -316,7 +324,7 @@ class Plugins {
 	 */
 	public function testimonial_defaults( $defaults ) {
 
-		$config = $this->theme->config['testimonial-slider'];
+		$config = $this->config['testimonial-slider'];
 
 		return ( $config ? $config : $defaults );
 
@@ -341,7 +349,7 @@ class Plugins {
 	 */
 	public function add_map_styles( $json ) {
 
-		$config = $this->theme->config['map-style'];
+		$config = $this->config['map-style'];
 
 		if ( ! is_readable( $config['style'] ) ) {
 

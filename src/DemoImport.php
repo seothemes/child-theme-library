@@ -30,13 +30,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class DemoImport {
 
 	/**
-	 * Child theme object.
+	 * Child theme config.
 	 *
 	 * @since 1.4.0
 	 *
-	 * @var   object
+	 * @var   array
 	 */
-	public $theme;
+	public $config;
 
 	/**
 	 * Constructor.
@@ -49,7 +49,7 @@ class DemoImport {
 	 */
 	public function __construct( $theme ) {
 
-		$this->theme = $theme;
+		$this->config = $theme->config;
 
 		$this->disable_branding();
 
@@ -90,7 +90,7 @@ class DemoImport {
 	 */
 	public function import_settings() {
 
-		$config = $this->theme->config['demo-import'];
+		$config = $this->config['demo-import'];
 
 		return [ $config ];
 
