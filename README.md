@@ -24,7 +24,7 @@ The main purpose of the Child Theme Library is to provide a shareable codebase f
 
 ## Installation
 
-Include the package in your child theme's `composer.json` file. An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json):
+Include the package in your child theme's `composer.json` file. An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json).
 
 ```bash
 composer require seothemes/child-theme-library
@@ -58,7 +58,7 @@ function custom_child_theme_config_path() {
 }
 ```
 
-A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/child-theme-library/docs/ExampleConfig.php).
+A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/child-theme-library/blob/master/docs/ExampleConfig.php).
 
 ## Structure
 
@@ -71,7 +71,6 @@ The Child Theme Library follows the [PHP Package Development Standard](https://g
 ├── src/
 │   ├── Admin.php
 │   ├── Attributes.php
-│   ├── ChildThemeLibrary.php
 │   ├── Customizer.php
 │   ├── Defaults.php
 │   ├── DemoImport.php
@@ -84,6 +83,7 @@ The Child Theme Library follows the [PHP Package Development Standard](https://g
 │   ├── Shortcodes.php
 │   ├── Structure.php
 │   ├── Templates.php
+│   ├── Theme.php
 │   ├── Utilities.php
 │   ├── WidgetAreas.php
 │   └── Widgets.php

@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since   1.4.0
  */
-class ChildThemeLibrary {
+class Theme {
 
 	/**
 	 * Theme object.
@@ -147,32 +147,13 @@ class ChildThemeLibrary {
 	public $config;
 
 	/**
-	 * Theme constructor.
-	 *
-	 * @since  1.4.0
-	 *
-	 * @param  string $config Path to theme configuration file.
-	 *
-	 * @return void
-	 */
-	public function __construct( $config ) {
-
-		$this->config = require_once $config;
-
-		$this->init();
-		$this->modules();
-		$this->autoload();
-
-	}
-
-	/**
-	 * Initialize child theme properties.
+	 * Constructor.
 	 *
 	 * @since  1.4.0
 	 *
 	 * @return void
 	 */
-	public function init() {
+	public function __construct() {
 
 		$this->theme   = wp_get_theme();
 		$this->name    = $this->theme->get( 'Name' );
@@ -186,44 +167,77 @@ class ChildThemeLibrary {
 		$this->views   = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/resources/views';
 		$this->uri     = get_stylesheet_directory_uri();
 		$this->assets  = get_stylesheet_directory_uri() . '/assets';
+		$this->config  = get_stylesheet_directory() . '/config/config.php';
+
+		$this->init( $this->config );
 
 	}
 
 	/**
-	 * Bootstrap child theme modules.
+	 * Initialize child theme library.
 	 *
 	 * @since  1.4.0
 	 *
+	 * @param  string $config Path to config file.
+	 *
 	 * @return void
 	 */
-	public function modules() {
+	public function init( $config ) {
 
-		$modules = $this->config['modules'];
+		$config = apply_filters( 'child_theme_config', $config );
+
+		if ( file_exists( $config ) ) {
+
+			$this->config = require_once  $config;
+
+		} else {
+
+			$this->config = require_once dirname( __DIR__ ) . '/docs/ExampleConfig.php';
+
+		}
+
+		$this->modules( $this->config['modules'] );
+		$this->autoload( $this->config['autoload'] );
+
+	}
+
+	/**
+	 * Load child theme modules after the Genesis Framework.
+	 *
+	 * @since  1.4.0
+	 *
+	 * @param  array $modules List of modules to load.
+	 *
+	 * @return void
+	 */
+	public function modules( $modules ) {
+
+		require_once get_template_directory() . '/lib/init.php';
 
 		foreach ( $modules as $module ) {
 
 			$property  = strtolower( $module );
 			$namespace = __NAMESPACE__ . '\\';
-			$class     = $namespace . $module;
+			$classname = $namespace . $module;
 
-			$this->$property = new $class( $this );
+			$this->$property = new $classname( $this );
 
 		}
+
+		d($this->admin);
 
 	}
 
 	/**
-	 * Autoloads Genesis and additional files listed in theme config.
+	 * Loads Genesis and additional files listed in theme config.
 	 *
 	 * @since  1.4.0
 	 *
+	 * @param  array $files List of files to autoload.
+	 *
 	 * @return void
 	 */
-	public function autoload() {
-
-		require_once get_template_directory() . '/lib/init.php';
-
-		$files = $this->config['autoload'];
+	public function autoload( $files ) {
 
 		foreach ( $files as $file ) {
 
@@ -241,4 +255,4 @@ class ChildThemeLibrary {
 
 }
 
-new ChildThemeLibrary( apply_filters( 'child_theme_config', get_stylesheet_directory() . '/config/config.php' ) );
+new Theme();

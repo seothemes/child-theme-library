@@ -31,7 +31,7 @@
   },
   "autoload": {
     "files": [
-      "src/ChildThemeLibrary.php"
+      "src/Theme.php"
     ],
     "psr-4": {
       "SEOThemes\\ChildThemeLibrary\\": "src/"
