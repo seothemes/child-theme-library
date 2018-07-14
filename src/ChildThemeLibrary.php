@@ -30,11 +30,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ChildThemeLibrary {
 
 	/**
+	 * Theme object.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @var   object
+	 */
+	public $theme;
+
+	/**
 	 * Theme name.
 	 *
 	 * @since 1.4.0
 	 *
-	 * @var   false|string
+	 * @var   string
 	 */
 	public $name;
 
@@ -43,7 +52,7 @@ class ChildThemeLibrary {
 	 *
 	 * @since 1.4.0
 	 *
-	 * @var   false|string
+	 * @var   string
 	 */
 	public $url;
 
@@ -52,7 +61,7 @@ class ChildThemeLibrary {
 	 *
 	 * @since 1.4.0
 	 *
-	 * @var   false|string
+	 * @var   string
 	 */
 	public $version;
 
@@ -61,7 +70,7 @@ class ChildThemeLibrary {
 	 *
 	 * @since 1.4.0
 	 *
-	 * @var   false|string
+	 * @var   string
 	 */
 	public $handle;
 
@@ -70,7 +79,7 @@ class ChildThemeLibrary {
 	 *
 	 * @since 1.4.0
 	 *
-	 * @var   false|string
+	 * @var   string
 	 */
 	public $author;
 
@@ -151,7 +160,7 @@ class ChildThemeLibrary {
 		$this->config = require_once $config;
 
 		$this->init();
-		$this->bootstrap();
+		$this->modules();
 		$this->autoload();
 
 	}
@@ -165,13 +174,12 @@ class ChildThemeLibrary {
 	 */
 	public function init() {
 
-		$child_theme = wp_get_theme();
-
-		$this->name    = $child_theme->get( 'Name' );
-		$this->url     = $child_theme->get( 'ThemeURI' );
-		$this->version = $child_theme->get( 'Version' );
-		$this->handle  = $child_theme->get( 'TextDomain' );
-		$this->author  = $child_theme->get( 'Author' );
+		$this->theme   = wp_get_theme();
+		$this->name    = $this->theme->get( 'Name' );
+		$this->url     = $this->theme->get( 'ThemeURI' );
+		$this->version = $this->theme->get( 'Version' );
+		$this->handle  = $this->theme->get( 'TextDomain' );
+		$this->author  = $this->theme->get( 'Author' );
 		$this->dir     = get_stylesheet_directory();
 		$this->vendor  = get_stylesheet_directory() . '/vendor';
 		$this->lib     = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/src';
@@ -188,7 +196,7 @@ class ChildThemeLibrary {
 	 *
 	 * @return void
 	 */
-	public function bootstrap() {
+	public function modules() {
 
 		$modules = $this->config['modules'];
 
@@ -205,7 +213,7 @@ class ChildThemeLibrary {
 	}
 
 	/**
-	 * Autoloads Genesis and files specified in config.
+	 * Autoloads Genesis and additional files listed in theme config.
 	 *
 	 * @since  1.4.0
 	 *
@@ -233,4 +241,4 @@ class ChildThemeLibrary {
 
 }
 
-$child_theme_library = new ChildThemeLibrary( apply_filters( 'child_theme_config', get_stylesheet_directory() . '/config/config.php' ) );
+new ChildThemeLibrary( apply_filters( 'child_theme_config', get_stylesheet_directory() . '/config/config.php' ) );

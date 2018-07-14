@@ -75,9 +75,9 @@ class Enqueue {
 	}
 
 	/**
-	 * Description of expected behavior.
+	 * Loads child theme style sheet after plugin style sheets.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 *
 	 * @return void
 	 */

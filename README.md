@@ -1,12 +1,14 @@
 # Child Theme Library
 
-A configuration based drop-in library for extending Genesis child themes. See an example of how to integrate the library [here](https://github.com/seothemes/genesis-starter-theme) or check out the [live demo](https://demo.seothemes.com/genesis-starter). 
+[![WordPress](https://img.shields.io/badge/wordpress-4.9.7%20tested-brightgreen.svg)]() [![License](https://img.shields.io/badge/license-GPL--2.0--or--later-blue.svg)](https://github.com/seothemes/child-theme-library/blob/master/LICENSE.md)
 
-### Why was the Child Theme Library built?
+A config-based composer package that provides a set of modules to extend Genesis child theme development.
 
-The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's configuration. Using this approach, we are able to use a single codebase which can be heavily customized by passing in different configs.
+## Description
 
-### Requirements
+The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's configuration. Using this approach, we are able to use a single codebase which can be heavily customized by passing in different configs. This project is inspired by the [Genesis Theme Toolkit](https://github.com/gamajo/genesis-theme-toolkit) by Gary Jones, but contains additional functionality specific to commercial themes, including support for older versions of PHP.
+
+## Requirements
 
 | Requirement | How to Check | How to Install |
 | :---------- | :----------- | :------------- |
@@ -22,7 +24,7 @@ The main purpose of the Child Theme Library is to provide a shareable codebase f
 
 ## Installation
 
-Include the package in your child theme's `composer.json` file:
+Include the package in your child theme's `composer.json` file. An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json):
 
 ```bash
 composer require seothemes/child-theme-library
@@ -42,8 +44,6 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 ```
 
-An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json)
-
 ## Setup
 
 Once the library has been included in your theme, it is ready to accept your config file. By default, this should be placed in `./config/config.php`, however this location can be changed by using the config path filter, e.g:
@@ -62,29 +62,31 @@ A working example of the config file with all of the possible settings can be fo
 
 ## Structure
 
-The Child Theme Library loosely resembles the current Genesis Framework file structure:
+The Child Theme Library follows the [PHP Package Development Standard](https://github.com/php-pds/skeleton_research) folder structure and uses [PSR-4 Autoloading](https://www.php-fig.org/psr/psr-4/).
 
 ```sh
 ./
 ├── docs/
 │   └── ExampleConfig.php
 ├── src/
-│   ├── Setup.php
-│   ├── Utilities.php
+│   ├── Admin.php
 │   ├── Attributes.php
+│   ├── ChildThemeLibrary.php
+│   ├── Customizer.php
 │   ├── Defaults.php
 │   ├── DemoImport.php
+│   ├── Enqueue.php
 │   ├── HeroSection.php
 │   ├── Layout.php
 │   ├── Markup.php
 │   ├── Plugins.php
-│   ├── Enqueue.php
+│   ├── Setup.php
 │   ├── Shortcodes.php
-│   ├── Widgets.php
+│   ├── Structure.php
+│   ├── Templates.php
+│   ├── Utilities.php
 │   ├── WidgetAreas.php
-│   ├── Admin.php
-│   ├── Customizer.php
-│   └── Structure.php
+│   └── Widgets.php
 ├── tests/
 ├── .editorconfig
 ├── .gitattributes
@@ -98,9 +100,7 @@ The Child Theme Library loosely resembles the current Genesis Framework file str
 └── init.php
 ```
 
-## Code Reference
-
-### Hooks
+## Hooks
 
 | Name                               | Type     | Description                      |
 | :--------------------------------- | :------- | :------------------------------- |
