@@ -188,11 +188,10 @@ class Attributes {
 	/**
 	 * Add itemref attribute to link entry-title.
 	 *
-	 * Since the entry-title is repositioned outside of the entry article, we
-	 * need to add some additional microdata so that it is still picked up as a
-	 * part of the entry. By adding the itemref attribute, we are telling
-	 * search engines to check the hero-section element for additional
-	 * elements.
+	 * Since the entry title is repositioned outside of the entry article, we
+	 * need to add some additional microdata so that it is still picked up
+	 * as a part of the entry. By adding the itemref attributes, search
+	 * engines will search the hero section for additional microdata.
 	 *
 	 * @since  1.0.0
 	 *

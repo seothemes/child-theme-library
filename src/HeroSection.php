@@ -39,30 +39,24 @@ class HeroSection {
 	 */
 	public function __construct() {
 
-		add_action( 'genesis_before', [
-			$this,
-			'setup'
-		] );
+		if ( is_admin() || ! current_theme_supports( 'hero-section' ) ) {
+
+			return;
+
+		}
+
+		$this->setup();
 
 	}
 
 	/**
 	 * Set up hero section.
 	 *
-	 * Removes and repositions the title on all possible types of pages. Wrapped
-	 * up into one function so it can easily be unhooked from genesis_before.
-	 *
 	 * @since  1.0.0
 	 *
 	 * @return void
 	 */
 	public function setup() {
-
-		if ( ! current_theme_supports( 'hero-section' ) ) {
-
-			return;
-
-		}
 
 		remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 		remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
@@ -78,10 +72,8 @@ class HeroSection {
 		remove_action( 'genesis_before_loop', 'genesis_do_search_title' );
 		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
 		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
-
 		add_filter( 'woocommerce_show_page_title', '__return_null' );
 		add_filter( 'genesis_search_title_output', '__return_false' );
-
 		add_action( 'child_theme_hero_section', 'genesis_do_posts_page_heading' );
 		add_action( 'child_theme_hero_section', 'genesis_do_date_archive_title' );
 		add_action( 'child_theme_hero_section', 'genesis_do_taxonomy_title_description' );
@@ -135,7 +127,7 @@ class HeroSection {
 	 * @since  1.0.0
 	 *
 	 * @author Bill Erickson
-	 * @link   https://www.billerickson.net/code/genesis-title-toggle-theme-integration
+	 * @link   http://billerickson.net/code/genesis-title-toggle-theme-integration
 	 *
 	 * @return void
 	 */
@@ -155,16 +147,12 @@ class HeroSection {
 	/**
 	 * Display title in hero section.
 	 *
-	 * Works out the correct title to display in the hero section on a per page
-	 * basis. Also adds the entry title back in to the entry inside the loop.
-	 *
 	 * @since  1.0.0
 	 *
 	 * @return void
 	 */
 	public function title() {
 
-		// Add post titles back inside posts loop.
 		if ( is_home() || is_archive() || is_category() || is_tag() || is_tax() || is_search() || is_page_template( 'page_blog.php' ) ) {
 
 			add_action( 'genesis_entry_header', 'genesis_do_post_title', 2 );
@@ -230,11 +218,6 @@ class HeroSection {
 	/**
 	 * Display page excerpt.
 	 *
-	 * Prints the correct excerpt on a per page basis. If on the WooCommerce
-	 * shop page then the products result count is be displayed instead of the
-	 * page excerpt. Also, if on a single product then no excerpt will be
-	 * output.
-	 *
 	 * @since  1.0.0
 	 *
 	 * @return void
@@ -275,11 +258,75 @@ class HeroSection {
 	}
 
 	/**
-	 * Display the hero section.
+	 * Custom header image callback.
 	 *
-	 * Conditionally outputs the opening and closing hero section markup and
-	 * runs the hero_section hook which all of our hero functions are hooked
-	 * to.
+	 * Loads custom header or featured image depending on what is set on a per
+	 * page basis. If a featured image is set for a page, it will override
+	 * the default header image. It also gets the image for custom post
+	 * types by looking for a page with the same slug as the CPT e.g
+	 * the Portfolio CPT archive will pull the featured image from
+	 * a page with the slug of 'portfolio', if the page exists.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string
+	 */
+	public static function custom_header() {
+
+		$id = '';
+
+		if ( class_exists( 'WooCommerce' ) && is_shop() ) {
+
+			$id = wc_get_page_id( 'shop' );
+
+		} elseif ( is_post_type_archive() ) {
+
+			$id = get_page_by_path( get_query_var( 'post_type' ) );
+
+		} elseif ( is_front_page() ) {
+
+			$id = get_option( 'page_on_front' );
+
+		} elseif ( 'posts' === get_option( 'show_on_front' ) && is_home() ) {
+
+			$id = get_option( 'page_for_posts' );
+
+		} elseif ( is_search() ) {
+
+			$id = get_page_by_path( 'search' );
+
+		} elseif ( is_404() ) {
+
+			$id = get_page_by_path( 'error' );
+
+		} elseif ( is_singular() ) {
+
+			$id = get_the_id();
+
+		}
+
+		$url = get_the_post_thumbnail_url( $id, 'hero' );
+
+		if ( '0' === $id || ! $url ) {
+
+			$url = get_header_image();
+
+		}
+
+		if ( current_theme_supports( 'hero-section' ) || is_front_page() ) {
+
+			$selector = get_theme_support( 'custom-header', 'header-selector' );
+
+			return printf( '<style type="text/css">' . esc_attr( $selector ) . '{background-image:url(%s)}</style>' . "\n", esc_url( $url ) );
+
+		}
+
+		return '';
+
+	}
+
+	/**
+	 * Display the hero section.
 	 *
 	 * @since  1.0.0
 	 *
@@ -287,7 +334,6 @@ class HeroSection {
 	 */
 	public function display() {
 
-		// Output hero section markup.
 		genesis_markup(
 			array(
 				'open'    => '<section %s><div class="wrap">',
@@ -295,21 +341,8 @@ class HeroSection {
 			)
 		);
 
-		/**
-		 * Do hero section hook.
-		 *
-		 * @hooked SEOThemes\ChildThemeLibrary\HeroSection\title - 10
-		 * @hooked SEOThemes\ChildThemeLibrary\HeroSection\excerpt - 20
-		 * @hooked genesis_do_posts_page_heading
-		 * @hooked genesis_do_date_archive_title
-		 * @hooked genesis_do_blog_template_heading
-		 * @hooked genesis_do_taxonomy_title_description
-		 * @hooked genesis_do_author_title_description
-		 * @hooked genesis_do_cpt_archive_title_description
-		 */
 		do_action( 'child_theme_hero_section' );
 
-		// Output hero section markup.
 		genesis_markup(
 			array(
 				'close'   => '</div></section>',

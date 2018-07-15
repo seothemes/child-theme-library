@@ -186,15 +186,13 @@ class Theme {
 
 		$config = apply_filters( 'child_theme_config', $config );
 
-		if ( file_exists( $config ) ) {
+		if ( ! file_exists( $config ) ) {
 
-			$this->config = require_once  $config;
-
-		} else {
-
-			$this->config = require_once dirname( __DIR__ ) . '/docs/ExampleConfig.php';
+			$config = dirname( __DIR__ ) . '/docs/ExampleConfig.php';
 
 		}
+
+		$this->config = require_once $config;
 
 		$this->modules( $this->config['modules'] );
 		$this->autoload( $this->config['autoload'] );
@@ -219,8 +217,13 @@ class Theme {
 			$property  = strtolower( $module );
 			$namespace = __NAMESPACE__ . '\\';
 			$classname = $namespace . $module;
+			$filename  = trailingslashit( __DIR__ ) . $module . '.php';
 
-			$this->$property = new $classname( $this );
+			if ( file_exists( $filename ) ) {
+
+				$this->$property = new $classname( $this );
+
+			}
 
 		}
 
