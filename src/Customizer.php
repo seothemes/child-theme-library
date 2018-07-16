@@ -54,18 +54,8 @@ class Customizer {
 		$this->theme  = $theme;
 		$this->colors = $theme->config['colors'];
 
-		add_action(
-			'customize_register', [
-				$this,
-				'settings',
-			]
-		);
-		add_action(
-			'wp_enqueue_scripts', [
-				$this,
-				'output',
-			], 100
-		);
+		add_action( 'customize_register', [ $this, 'settings' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'output' ], 100 );
 
 	}
 

@@ -46,18 +46,8 @@ class DemoImport {
 
 		$this->disable_branding();
 
-		add_filter(
-			'pt-ocdi/import_files', [
-				$this,
-				'import_settings',
-			]
-		);
-		add_filter(
-			'pt-ocdi/after_all_import_execution', [
-				$this,
-				'after_import',
-			], 99
-		);
+		add_filter( 'pt-ocdi/import_files', [ $this, 'import_settings' ] );
+		add_filter( 'pt-ocdi/after_all_import_execution', [ $this, 'after_import' ], 99 );
 	}
 
 

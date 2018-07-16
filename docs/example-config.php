@@ -25,7 +25,9 @@ return [
 	| not including the php extension, E.g: 'directory_name/file_name'.
 	|
 	*/
-	'autoload'            => [],
+	'autoload'            => [
+		'app/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation',
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,11 +41,12 @@ return [
 	*/
 	'colors'              => [
 		'background' => [
-			'default' => 'rgba(255,255,255,1)',
+			'default' => '#ffffff',
 			'output'  => [
 				[
 					'elements'   => [
 						'body',
+						'.site-container',
 					],
 					'properties' => [
 						'background-color' => '%s',
@@ -52,7 +55,7 @@ return [
 			],
 		],
 		'link'       => [
-			'default' => 'rgba(0,115,229,1)',
+			'default' => '#0073e5',
 			'output'  => [
 				[
 					'elements'   => [
@@ -113,13 +116,13 @@ return [
 	|
 	| Defines the default header settings to be registered in the Customizer
 	| Header Media section. This theme includes an example hero.jpg image
-	| located in the theme's ./assets/images/ directory to be replaced.
+	| located in the theme's ./resources/img/ directory to be replaced.
 	|
 	*/
 	'default-headers'     => [
 		'child' => [
-			'url'           => '%2$s/assets/images/hero.jpg',
-			'thumbnail_url' => '%2$s/assets/images/hero.jpg',
+			'url'           => '%2$s/resources/img/hero.jpg',
+			'thumbnail_url' => '%2$s/resources/img/hero.jpg',
 			'description'   => __( 'Hero Image', 'child-theme-library' ),
 		],
 	],
@@ -135,9 +138,9 @@ return [
 	|
 	*/
 	'demo-import'         => [
-		'local_import_file'            => get_stylesheet_directory() . '/sample.xml',
-		'local_import_widget_file'     => get_stylesheet_directory() . '/widgets.wie',
-		'local_import_customizer_file' => get_stylesheet_directory() . '/customizer.dat',
+		'local_import_file'            => get_stylesheet_directory() . '/resources/demo/sample.xml',
+		'local_import_widget_file'     => get_stylesheet_directory() . '/resources/demo/widgets.wie',
+		'local_import_customizer_file' => get_stylesheet_directory() . '/resources/demo/customizer.dat',
 		'import_file_name'             => 'Demo Import',
 		'categories'                   => false,
 		'local_import_redux'           => false,
@@ -242,7 +245,7 @@ return [
 	|
 	| Enable or disable the built in Genesis Framework layouts with this array.
 	| If a custom layout is defined, such as narrow-content, the theme will
-	| search for assets/images/narrow-content.gif as the thumbnail image.
+	| search for resources/img/narrow-content.gif as the thumbnail image.
 	|
 	*/
 	'layouts'             => [
@@ -253,22 +256,6 @@ return [
 		// 'content-sidebar-sidebar',
 		// 'sidebar-sidebar-content',
 		// 'sidebar-content-sidebar',
-	],
-
-	/*
-	|--------------------------------------------------------------------------
-	| Map Style
-	|--------------------------------------------------------------------------
-	|
-	| Allows users to register custom map styles with the Google Map plugin
-	| by providing an id, name and path to a JSON file containing custom
-	| styles. http://snazzymaps.com/style/151/ultra-light-with-labels
-	|
-	*/
-	'map-style'           => [
-		'id'    => '123456789',
-		'name'  => 'Ultra Light',
-		'style' => get_stylesheet_directory() . '/map.json',
 	],
 
 	/*
@@ -294,7 +281,6 @@ return [
 		'Templates',
 		'Enqueue',
 		'Shortcodes',
-		'Widgets',
 		'WidgetAreas',
 		'Admin',
 		'Customizer',
@@ -426,13 +412,13 @@ return [
 	*/
 	'scripts'             => [
 		'menu'   => [
-			'src'       => get_stylesheet_directory_uri() . '/assets/js/menus.js',
+			'src'       => get_stylesheet_directory_uri() . '/resources/js/menus.js',
 			'deps'      => 'jquery',
 			'ver'       => wp_get_theme()->get( 'Version' ),
 			'in_footer' => true,
 		],
 		'script' => [
-			'src'       => get_stylesheet_directory_uri() . '/assets/js/script.js',
+			'src'       => get_stylesheet_directory_uri() . '/resources/js/script.js',
 			'deps'      => 'jquery',
 			'ver'       => wp_get_theme()->get( 'Version' ),
 			'in_footer' => true,
@@ -537,7 +523,7 @@ return [
 	*/
 	'textdomain'          => [
 		'domain' => 'child-theme-library',
-		'path'   => apply_filters( 'child_theme_textdomain', get_stylesheet_directory_uri() . '/assets/lang', 'child-theme-library' ),
+		'path'   => apply_filters( 'child_theme_textdomain', get_stylesheet_directory_uri() . '/resources/lang', 'child-theme-library' ),
 	],
 
 	/*
@@ -568,7 +554,7 @@ return [
 		],
 		'custom-header'            => [
 			'header-selector'  => '.hero-section',
-			'default_image'    => get_stylesheet_directory_uri() . '/assets/images/hero.jpg',
+			'default_image'    => get_stylesheet_directory_uri() . '/resources/img/hero.jpg',
 			'header-text'      => false,
 			'width'            => 1280,
 			'height'           => 720,
@@ -577,7 +563,7 @@ return [
 			'uploads'          => true,
 			'video'            => true,
 			'wp-head-callback' => [
-				'SEOThemes\ChildThemeLibrary\Utilities',
+				'SEOThemes\ChildThemeLibrary\HeroSection',
 				'custom_header',
 			],
 		],
@@ -657,57 +643,6 @@ return [
 		'front-page-3'   => 'child_theme_front_page_widgets',
 		'front-page-4'   => 'child_theme_front_page_widgets',
 		'front-page-5'   => 'child_theme_front_page_widgets',
-	],
-
-	/*
-	|--------------------------------------------------------------------------
-	| Remove Widgets
-	|--------------------------------------------------------------------------
-	|
-	| Provides an easy way to remove unused widgets from the dashboard. This
-	| config is not used in premium Genesis child themes but is left here
-	| as an example for developers who might find this function useful.
-	|
-	*/
-	'widgets'             => [
-		// 'Genesis_Featured_Page',
-		// 'Genesis_Featured_Post',
-		// 'Genesis_User_Profile_Widget',
-		// 'WP_Widget_Pages',
-		// 'WP_Widget_Calendar',
-		// 'WP_Widget_Archives',
-		// 'WP_Widget_Links',
-		// 'WP_Widget_Media_Audio',
-		// 'WP_Widget_Media_Image',
-		// 'WP_Widget_Media_Gallery',
-		// 'WP_Widget_Media_Video',
-		// 'WP_Widget_Meta',
-		// 'WP_Widget_Search',
-		// 'WP_Widget_Text',
-		// 'WP_Widget_Categories',
-		// 'WP_Widget_Recent_Posts',
-		// 'WP_Widget_Recent_Comments',
-		// 'WP_Widget_RSS',
-		// 'WP_Widget_Tag_Cloud',
-		// 'WP_Nav_Menu_Widget',
-		// 'WP_Widget_Custom_HTML',
-		// 'WC_Widget_Products',
-		// 'WC_Widget_Recent_Products',
-		// 'WC_Widget_Featured_Products',
-		// 'WC_Widget_Product_Categories',
-		// 'WC_Widget_Product_Tag_Cloud',
-		// 'WC_Widget_Cart',
-		// 'WC_Widget_Layered_Nav',
-		// 'WC_Widget_Layered_Nav_Filters',
-		// 'WC_Widget_Price_Filter',
-		// 'WC_Widget_Rating_Filter',
-		// 'WC_Widget_Product_Search',
-		// 'WC_Widget_Top_Rated_Products',
-		// 'WC_Widget_Recent_Reviews',
-		// 'WC_Widget_Recently_Viewed',
-		// 'WC_Widget_Best_Sellers',
-		// 'WC_Widget_Onsale',
-		// 'WC_Widget_Random_Products',
 	],
 
 ];

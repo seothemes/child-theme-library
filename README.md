@@ -6,7 +6,7 @@ A config-based composer package that provides a set of modules to extend Genesis
 
 ## Description
 
-The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's configuration. Using this approach, we are able to use a single codebase which can be heavily customized by passing in different configs. This project is inspired by the [Genesis Theme Toolkit](https://github.com/gamajo/genesis-theme-toolkit) by Gary Jones, but contains additional functionality specific to commercial themes, including support for older versions of PHP.
+The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's configuration. Using this approach, we are able to use a single codebase which can be heavily customized by passing in different configs. This project is inspired by the [Genesis Theme Toolkit](https://github.com/gamajo/genesis-theme-toolkit) by Gary Jones, but contains additional functionality specific to commercial themes, including support for older versions of PHP. See the [Genesis Starter Theme](https://github.com/seothemes/genesis-starter-theme) as an example.
 
 ## Requirements
 
@@ -24,7 +24,7 @@ The main purpose of the Child Theme Library is to provide a shareable codebase f
 
 ## Installation
 
-Include the package in your child theme's `composer.json` file. An example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json).
+Include the package in your child theme's `composer.json` file (an example `composer.json` file can be found [here](https://github.com/seothemes/genesis-starter-theme/composer.json)).
 
 ```bash
 composer require seothemes/child-theme-library
@@ -36,29 +36,45 @@ Optionally install the TGMPA composer package:
 composer require tgmpa/tgm-plugin-activation
 ```
 
-Include the composer autoloader from your `functions.php` file, before any custom code is loaded e.g:
+## Usage
+
+There are three steps to include the Child Theme Library in your project:
+
+- Include the composer autoloader
+- Store the library as a global variable for use throughout your theme
+- Initalize the child theme library and pass in config
+
+An example config file can be found [here](https://github.com/seothemes/child-theme-library/blob/master/docs/example-config.php).
+
+The following is an example of how to achieve the above. This code should be placed in your `functions.php` file, before any custom code is loaded:
 
 ```php
-if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
-	require __DIR__ . '/vendor/autoload.php';
+if ( file_exists( __DIR__ . '/app/autoload.php' ) ) {
+
+	// Include the composer autoloader.
+	require_once __DIR__ . '/app/autoload.php';
+
+	// Store as global variable.
+	$child_theme = new SEOThemes\ChildThemeLibrary\Theme();
+
+	// Initialize object and pass in config.
+	$child_theme->init( __DIR__ . '/config/config.php' );
+
 }
 ```
 
-## Setup
-
-Once the library has been included in your theme, it is ready to accept your config file. By default, this should be placed in `./config/config.php`, however this location can be changed by using the config path filter, e.g:
+Storing the Child Theme Library object as a global variable provides access to the library's properties and methods. For example, to print the name of the theme you can do the following:
 
 ```php
-add_filter( 'child_theme_config', 'custom_child_theme_config_path' );
-/**
- * Filters the theme config path.
- */
-function custom_child_theme_config_path() {
-	return get_stylesheet_directory() . 'config.php';
-}
+echo $child_theme->name;
 ```
 
-A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/child-theme-library/blob/master/docs/ExampleConfig.php).
+Or, to use the Minify CSS helper function:
+
+```php
+$css = 'body { background-color: red; }';
+echo $child_theme->utilities->minify_css( $css );
+```
 
 ## Structure
 
@@ -67,7 +83,7 @@ The Child Theme Library follows the [PHP Package Development Standard](https://g
 ```sh
 ./
 ├── docs/
-│   └── ExampleConfig.php
+│   └── example-config.php
 ├── src/
 │   ├── Admin.php
 │   ├── Attributes.php
@@ -85,19 +101,17 @@ The Child Theme Library follows the [PHP Package Development Standard](https://g
 │   ├── Templates.php
 │   ├── Theme.php
 │   ├── Utilities.php
-│   ├── WidgetAreas.php
-│   └── Widgets.php
+│   └── WidgetsAreas.php
 ├── tests/
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
 ├── composer.json
+├── phpcs.xml
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE.md
-├── README.md
-├── autoload.php
-└── init.php
+└── README.md
 ```
 
 ## Hooks
