@@ -6,7 +6,7 @@ A config-based composer package that provides a set of modules to extend Genesis
 
 ## Description
 
-The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's configuration. Using this approach, we are able to use a single codebase which can be heavily customized by passing in different configs. This project is inspired by the [Genesis Theme Toolkit](https://github.com/gamajo/genesis-theme-toolkit) by Gary Jones, but contains additional functionality specific to commercial themes, including support for older versions of PHP.
+The main purpose of the Child Theme Library is to provide a shareable codebase for commercial Genesis child themes. This is achieved by using configuration-based architecture to separate the theme's reusable logic from it's configuration. Using this approach, we are able to use a single codebase which can be heavily customized by passing in different configs. This project is inspired by the [Genesis Theme Toolkit](https://github.com/gamajo/genesis-theme-toolkit) by Gary Jones, but contains additional functionality specific to commercial themes, including support for older versions of PHP. See the [Genesis Starter Theme](https://github.com/seothemes/genesis-starter-theme) as an example.
 
 ## Requirements
 
