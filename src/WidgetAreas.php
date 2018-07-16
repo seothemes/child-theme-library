@@ -15,13 +15,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Adds widget area logic to child theme.
  *
@@ -155,33 +148,33 @@ class WidgetAreas {
 					add_action(
 						$location, function () use ( $id ) {
 
-						if ( 'front-page-1' === $id ) {
+							if ( 'front-page-1' === $id ) {
 
-							ob_start();
-							the_custom_header_markup();
-							$custom_header = ob_get_clean();
+								ob_start();
+								the_custom_header_markup();
+								$custom_header = ob_get_clean();
 
-							genesis_widget_area(
-								$id, array(
-									'before'       => '<div class="' . $id . ' widget-area hero-section" role="banner">' . $custom_header . '<div class="wrap">',
-									'after'        => '</div></div>',
-									'before_title' => '<h1 itemprop="headline">',
-									'after_title'  => '</h1>',
-								)
-							);
+								genesis_widget_area(
+									$id, array(
+										'before'       => '<div class="' . $id . ' widget-area hero-section" role="banner">' . $custom_header . '<div class="wrap">',
+										'after'        => '</div></div>',
+										'before_title' => '<h1 itemprop="headline">',
+										'after_title'  => '</h1>',
+									)
+								);
 
-						} else {
+							} else {
 
-							genesis_widget_area(
-								$id, array(
-									'before' => '<div class="' . $id . ' widget-area"><div class="wrap">',
-									'after'  => '</div></div>',
-								)
-							);
+								genesis_widget_area(
+									$id, array(
+										'before' => '<div class="' . $id . ' widget-area"><div class="wrap">',
+										'after'  => '</div></div>',
+									)
+								);
+
+							}
 
 						}
-
-					}
 					);
 
 				}
@@ -211,11 +204,13 @@ class WidgetAreas {
 		remove_theme_support( 'hero-section' );
 
 		remove_action( 'genesis_loop', 'genesis_do_loop' );
-		add_action( 'genesis_loop', function () {
+		add_action(
+			'genesis_loop', function () {
 
-			do_action( 'child_theme_front_page_widgets' );
+				do_action( 'child_theme_front_page_widgets' );
 
-		} );
+			}
+		);
 
 	}
 

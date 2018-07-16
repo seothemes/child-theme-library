@@ -13,13 +13,6 @@
 
 namespace SEOThemes\GenesisStarterTheme;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 return [
 
 	/*

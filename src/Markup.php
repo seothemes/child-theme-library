@@ -15,13 +15,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Adds markup logic to child theme.
  *
@@ -38,14 +31,18 @@ class Markup {
 	 */
 	public function __construct() {
 
-		add_filter( 'genesis_markup_title-area_close', [
-			$this,
-			'after_title_area'
-		], 10, 2 );
-		add_action( 'init', [
-			$this,
-			'structural_wrap_hooks'
-		] );
+		add_filter(
+			'genesis_markup_title-area_close', [
+				$this,
+				'after_title_area',
+			], 10, 2
+		);
+		add_action(
+			'init', [
+				$this,
+				'structural_wrap_hooks',
+			]
+		);
 
 	}
 
@@ -102,23 +99,24 @@ class Markup {
 			add_filter(
 				"genesis_structural_wrap-{$context}", function ( $output, $original ) use ( $context ) {
 
-				$position = ( 'open' === $original ) ? 'before' : 'after';
+					$position = ( 'open' === $original ) ? 'before' : 'after';
 
-				ob_start();
+					ob_start();
 
-				do_action( "child_theme_{$position}_{$context}_wrap" );
+					do_action( "child_theme_{$position}_{$context}_wrap" );
 
-				if ( 'open' === $original ) {
+					if ( 'open' === $original ) {
 
-					return ob_get_clean() . $output;
+						return ob_get_clean() . $output;
 
-				} else {
+					} else {
 
-					return $output . ob_get_clean();
+						return $output . ob_get_clean();
 
-				}
+					}
 
-			}, 10, 2 );
+				}, 10, 2
+			);
 
 		}
 

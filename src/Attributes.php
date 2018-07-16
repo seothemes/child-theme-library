@@ -16,13 +16,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Adds attributes logic to child theme.
  *
@@ -39,30 +32,42 @@ class Attributes {
 	 */
 	public function __construct() {
 
-		add_filter( 'body_class', [
-			$this,
-			'body_class'
-		] );
-		add_filter( 'genesis_attr_site-container', [
-			$this,
-			'site_container'
-		] );
-		add_filter( 'genesis_attr_title-area', [
-			$this,
-			'title_area'
-		] );
-		add_filter( 'genesis_attr_site-title', [
-			$this,
-			'site_title_schema'
-		] );
-		add_filter( 'genesis_attr_hero-section', [
-			$this,
-			'hero_section'
-		] );
-		add_filter( 'genesis_attr_entry', [
-			$this,
-			'entry'
-		] );
+		add_filter(
+			'body_class', [
+				$this,
+				'body_class',
+			]
+		);
+		add_filter(
+			'genesis_attr_site-container', [
+				$this,
+				'site_container',
+			]
+		);
+		add_filter(
+			'genesis_attr_title-area', [
+				$this,
+				'title_area',
+			]
+		);
+		add_filter(
+			'genesis_attr_site-title', [
+				$this,
+				'site_title_schema',
+			]
+		);
+		add_filter(
+			'genesis_attr_hero-section', [
+				$this,
+				'hero_section',
+			]
+		);
+		add_filter(
+			'genesis_attr_entry', [
+				$this,
+				'entry',
+			]
+		);
 
 	}
 

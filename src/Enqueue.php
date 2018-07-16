@@ -15,13 +15,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Adds enqueueing logic to child theme.
  *
@@ -61,26 +54,36 @@ class Enqueue {
 		$this->theme  = $theme;
 		$this->config = $theme->config;
 
-		add_action( 'genesis_meta', [
-			$this,
-			'style_trump'
-		], 0 );
-		add_action( 'wp_enqueue_scripts', [
-			$this,
-			'load_css'
-		], 10 );
-		add_action( 'wp_enqueue_scripts', [
-			$this,
-			'load_js'
-		], 99 );
-		add_action( 'wp_enqueue_scripts', [
-			$this,
-			'menu_settings'
-		], 99 );
-		add_action( 'genesis_before', [
-			$this,
-			'js_nojs'
-		], 1 );
+		add_action(
+			'genesis_meta', [
+				$this,
+				'style_trump',
+			], 0
+		);
+		add_action(
+			'wp_enqueue_scripts', [
+				$this,
+				'load_css',
+			], 10
+		);
+		add_action(
+			'wp_enqueue_scripts', [
+				$this,
+				'load_js',
+			], 99
+		);
+		add_action(
+			'wp_enqueue_scripts', [
+				$this,
+				'menu_settings',
+			], 99
+		);
+		add_action(
+			'genesis_before', [
+				$this,
+				'js_nojs',
+			], 1
+		);
 
 	}
 

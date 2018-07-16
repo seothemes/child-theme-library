@@ -15,13 +15,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Adds shortcodes logic to child theme.
  *
@@ -40,10 +33,12 @@ class Shortcodes {
 
 		$this->enable_widget_shortcodes();
 
-		add_shortcode( 'footer_backtotop', [
-			$this,
-			'footer_backtotop'
-		] );
+		add_shortcode(
+			'footer_backtotop', [
+				$this,
+				'footer_backtotop',
+			]
+		);
 
 	}
 

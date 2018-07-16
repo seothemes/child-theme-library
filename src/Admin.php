@@ -15,13 +15,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Adds admin logic to child theme.
  *
@@ -38,14 +31,18 @@ class Admin {
 	 */
 	public function __construct() {
 
-		add_action( 'after_switch_theme', [
-			$this,
-			'display_excerpt_metabox'
-		] );
-		add_filter( 'http_request_args', [
-			$this,
-			'dont_update_theme'
-		], 5, 2 );
+		add_action(
+			'after_switch_theme', [
+				$this,
+				'display_excerpt_metabox',
+			]
+		);
+		add_filter(
+			'http_request_args', [
+				$this,
+				'dont_update_theme',
+			], 5, 2
+		);
 
 	}
 

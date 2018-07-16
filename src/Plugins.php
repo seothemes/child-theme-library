@@ -15,13 +15,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Adds plugins logic to child theme.
  *
@@ -61,42 +54,54 @@ class Plugins {
 		$this->theme  = $theme;
 		$this->config = $theme->config;
 
-		add_action( 'genesis_setup', [
-			$this,
-			'activation'
-		] );
-		add_action( 'tgmpa_register', [
-			$this,
-			'required'
-		] );
-		add_action( 'wp_head', [
-			$this,
-			'remove_simple_social_inline_css'
-		], 1 );
-		add_action( 'wp_head', [
-			$this,
-			'add_simple_social_inline_css'
-		] );
-		add_action( 'wp_enqueue_scripts', [
-			$this,
-			'remove_plugin_css'
-		] );
-		add_filter( 'simple_social_default_styles', [
-			$this,
-			'simple_social_defaults'
-		] );
-		add_filter( 'genesis_widget_column_classes', [
-			$this,
-			'add_widget_columns'
-		] );
-		add_filter( 'gsw_settings_defaults', [
-			$this,
-			'testimonial_defaults'
-		] );
-		add_filter( 'agm_custom_styles', [
-			$this,
-			'add_map_styles'
-		] );
+		add_action(
+			'genesis_setup', [
+				$this,
+				'activation',
+			]
+		);
+		add_action(
+			'tgmpa_register', [
+				$this,
+				'required',
+			]
+		);
+		add_action(
+			'wp_head', [
+				$this,
+				'remove_simple_social_inline_css',
+			], 1
+		);
+		add_action(
+			'wp_head', [
+				$this,
+				'add_simple_social_inline_css',
+			]
+		);
+		add_action(
+			'wp_enqueue_scripts', [
+				$this,
+				'remove_plugin_css',
+			]
+		);
+		add_filter(
+			'simple_social_default_styles', [
+				$this,
+				'simple_social_defaults',
+			]
+		);
+		add_filter(
+			'genesis_widget_column_classes', [
+				$this,
+				'add_widget_columns',
+			]
+		);
+		add_filter(
+			'gsw_settings_defaults', [
+				$this,
+				'testimonial_defaults',
+			]
+		);
 
 	}
 
@@ -284,9 +289,9 @@ class Plugins {
 			color: ' . $instance['icon_color_hover'] . ';
 		}';
 
-			$css = $this->theme->utilities->minify_css( $css ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Input is escaped through plugin.
+			$css = $this->theme->utilities->minify_css( $css );
 
-			printf( '<style type="text/css" media="screen">%s</style>', $css );
+			printf( '<style type="text/css" media="screen">%s</style>', $css ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped -- Input is escaped through plugin.
 
 		endforeach;
 
@@ -327,41 +332,6 @@ class Plugins {
 		$config = $this->config['testimonial-slider'];
 
 		return ( $config ? $config : $defaults );
-
-	}
-
-	/**
-	 * Add custom Google Map style.
-	 *
-	 * Adds a custom Google map style to the Google Map plugin used in the
-	 * theme demo. The JSON file used in this function can be found in the top
-	 * level directory of the theme. More information can be found by following
-	 * the links below.
-	 *
-	 * @since  1.0.0
-	 *
-	 * @link   https://github.com/ankurk91/wp-google-map/wiki/How-to-add-your-own-styles
-	 * @link   https://snazzymaps.com/style/85413/cartagena
-	 *
-	 * @param  array $json Array of JSON data.
-	 *
-	 * @return array
-	 */
-	public function add_map_styles( $json ) {
-
-		$config = $this->config['map-style'];
-
-		if ( ! is_readable( $config['style'] ) ) {
-
-			return $json;
-
-		}
-
-		$config['style'] = json_decode( file_get_contents( $config['style'] ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions -- Let's keep it simple.
-
-		array_push( $json, $config );
-
-		return $json;
 
 	}
 

@@ -15,13 +15,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Adds demo import logic to child theme.
  *
@@ -61,9 +54,9 @@ class DemoImport {
 		);
 		add_filter(
 			'pt-ocdi/after_all_import_execution', [
-			$this,
-			'after_import',
-		], 99
+				$this,
+				'after_import',
+			], 99
 		);
 	}
 

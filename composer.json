@@ -30,9 +30,6 @@
     "roave/security-advisories": "dev-master"
   },
   "autoload": {
-    "files": [
-      "src/Theme.php"
-    ],
     "psr-4": {
       "SEOThemes\\ChildThemeLibrary\\": "src/"
     }

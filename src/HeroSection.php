@@ -16,13 +16,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Adds hero section logic to child theme.
  *
@@ -79,26 +72,36 @@ class HeroSection {
 		add_action( 'child_theme_hero_section', 'genesis_do_taxonomy_title_description' );
 		add_action( 'child_theme_hero_section', 'genesis_do_author_title_description' );
 		add_action( 'child_theme_hero_section', 'genesis_do_cpt_archive_title_description' );
-		add_action( 'child_theme_hero_section', [
-			$this,
-			'title'
-		], 10 );
-		add_action( 'child_theme_hero_section', [
-			$this,
-			'excerpt'
-		], 20 );
-		add_action( 'be_title_toggle_remove', [
-			$this,
-			'title_toggle'
-		] );
-		add_action( 'genesis_before_content', [
-			$this,
-			'remove_404_title'
-		] );
-		add_action( 'genesis_before_content_sidebar_wrap', [
-			$this,
-			'display'
-		] );
+		add_action(
+			'child_theme_hero_section', [
+				$this,
+				'title',
+			], 10
+		);
+		add_action(
+			'child_theme_hero_section', [
+				$this,
+				'excerpt',
+			], 20
+		);
+		add_action(
+			'be_title_toggle_remove', [
+				$this,
+				'title_toggle',
+			]
+		);
+		add_action(
+			'genesis_before_content', [
+				$this,
+				'remove_404_title',
+			]
+		);
+		add_action(
+			'genesis_before_content_sidebar_wrap', [
+				$this,
+				'display',
+			]
+		);
 
 	}
 
@@ -133,14 +136,18 @@ class HeroSection {
 	 */
 	public function title_toggle() {
 
-		remove_action( 'child_theme_hero_section', [
-			$this,
-			'title'
-		], 10 );
-		remove_action( 'child_theme_hero_section', [
-			$this,
-			'excerpt'
-		], 20 );
+		remove_action(
+			'child_theme_hero_section', [
+				$this,
+				'title',
+			], 10
+		);
+		remove_action(
+			'child_theme_hero_section', [
+				$this,
+				'excerpt',
+			], 20
+		);
 
 	}
 
@@ -187,7 +194,7 @@ class HeroSection {
 				array(
 					'open'    => '<h1 %s>',
 					'close'   => '</h1>',
-					'content' => apply_filters( 'genesis_404_entry_title', esc_html__( 'Not found, error 404', 'child-theme-library' ) ),
+					'content' => apply_filters( 'genesis_404_entry_title', esc_html__( 'Not found, error 404', 'child-theme-library' ) ), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Parent theme prefix.
 					'context' => 'entry-title',
 				)
 			);
@@ -198,14 +205,14 @@ class HeroSection {
 				array(
 					'open'    => '<h1 %s>',
 					'close'   => '</h1>',
-					'content' => apply_filters( 'genesis_search_title_text', esc_html__( 'Search results for: ', 'child-theme-library' ) ) . get_search_query(),
+					'content' => apply_filters( 'genesis_search_title_text', esc_html__( 'Search results for: ', 'child-theme-library' ) ) . get_search_query(), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Parent theme prefix.
 					'context' => 'entry-title',
 				)
 			);
 
 		} elseif ( is_page_template( 'page_blog.php' ) ) {
 
-			do_action( 'genesis_archive_title_descriptions', get_the_title(), '', 'posts-page-description' );
+			do_action( 'genesis_archive_title_descriptions', get_the_title(), '', 'posts-page-description' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Parent theme prefix.
 
 		} elseif ( is_singular() ) {
 
@@ -230,7 +237,7 @@ class HeroSection {
 
 		} elseif ( is_home() && 'posts' === get_option( 'show_on_front' ) ) {
 
-			printf( '<p itemprop="description">%s</p>', apply_filters( 'child_theme_latest_posts_excerpt', esc_html__( 'Showing the latest posts', 'child-theme-library' ) ) );
+			printf( '<p itemprop="description">%s</p>', esc_html( apply_filters( 'child_theme_latest_posts_excerpt', __( 'Showing the latest posts', 'child-theme-library' ) ) ) );
 
 		} elseif ( is_search() ) {
 

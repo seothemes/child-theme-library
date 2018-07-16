@@ -15,13 +15,6 @@
 
 namespace SEOThemes\ChildThemeLibrary;
 
-// If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
-
-	die;
-
-}
-
 /**
  * Main child theme library class.
  *
@@ -164,7 +157,7 @@ class Theme {
 		$this->dir     = get_stylesheet_directory();
 		$this->vendor  = get_stylesheet_directory() . '/vendor';
 		$this->lib     = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/src';
-		$this->views   = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/resources/views';
+		$this->views   = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/assets/views';
 		$this->uri     = get_stylesheet_directory_uri();
 		$this->assets  = get_stylesheet_directory_uri() . '/assets';
 		$this->config  = get_stylesheet_directory() . '/config/config.php';
@@ -188,7 +181,7 @@ class Theme {
 
 		if ( ! file_exists( $config ) ) {
 
-			$config = dirname( __DIR__ ) . '/docs/ExampleConfig.php';
+			$config = dirname( __DIR__ ) . '/docs/example-config.php';
 
 		}
 
@@ -224,7 +217,6 @@ class Theme {
 				$this->$property = new $classname( $this );
 
 			}
-
 		}
 
 	}
@@ -249,11 +241,8 @@ class Theme {
 				require_once $file_name;
 
 			}
-
 		}
 
 	}
 
 }
-
-new Theme();
