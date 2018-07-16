@@ -130,7 +130,7 @@ class Plugins {
 
 		$file = $this->theme->vendor . '/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php';
 
-		return ( file_exists( $file ) ? require_once $file : false );
+		return ( file_exists( $file ) ? true : false );
 
 	}
 
