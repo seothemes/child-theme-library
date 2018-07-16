@@ -58,7 +58,7 @@ function custom_child_theme_config_path() {
 }
 ```
 
-A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/child-theme-library/blob/master/docs/ExampleConfig.php).
+A working example of the config file with all of the possible settings can be found [here](https://github.com/seothemes/child-theme-library/blob/master/docs/example-config.php).
 
 ## Structure
 
