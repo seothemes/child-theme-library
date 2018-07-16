@@ -155,11 +155,11 @@ class Theme {
 		$this->handle  = $this->theme->get( 'TextDomain' );
 		$this->author  = $this->theme->get( 'Author' );
 		$this->dir     = get_stylesheet_directory();
-		$this->vendor  = get_stylesheet_directory() . '/vendor';
-		$this->lib     = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/src';
-		$this->views   = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/assets/views';
+		$this->vendor  = get_stylesheet_directory() . '/app';
+		$this->lib     = get_stylesheet_directory() . '/app/seothemes/child-theme-library/src';
+		$this->views   = get_stylesheet_directory() . '/app/seothemes/child-theme-library/resources/views';
 		$this->uri     = get_stylesheet_directory_uri();
-		$this->assets  = get_stylesheet_directory_uri() . '/assets';
+		$this->assets  = get_stylesheet_directory_uri() . '/resources';
 		$this->config  = get_stylesheet_directory() . '/config/config.php';
 
 		$this->init( $this->config );

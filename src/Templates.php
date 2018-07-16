@@ -130,7 +130,7 @@ class Templates {
 
 		if ( 'page-sitemap.php' === $current_template ) {
 
-			$template = get_template_directory() . '/page_sitemap.php';
+			$template = get_template_directory() . '/page_archive.php';
 
 			return $template;
 
