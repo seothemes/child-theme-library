@@ -44,24 +44,9 @@ class Templates {
 
 		$this->config = $theme->config['page-templates'];
 
-		add_filter(
-			'theme_page_templates', [
-				$this,
-				'add',
-			]
-		);
-		add_filter(
-			'template_include', [
-				$this,
-				'set',
-			]
-		);
-		add_filter(
-			'genesis_before', [
-				$this,
-				'modify',
-			], 0
-		);
+		add_filter( 'theme_page_templates', [ $this, 'add' ] );
+		add_filter( 'template_include', [ $this, 'set' ] );
+		add_filter( 'genesis_before', [ $this, 'modify' ], 0 );
 
 	}
 

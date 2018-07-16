@@ -44,18 +44,8 @@ class Defaults {
 
 		$this->config = $theme->config;
 
-		add_filter(
-			'genesis_theme_settings_defaults', [
-				$this,
-				'set',
-			]
-		);
-		add_action(
-			'after_switch_theme', [
-				$this,
-				'update',
-			]
-		);
+		add_filter( 'genesis_theme_settings_defaults', [ $this, 'set' ] );
+		add_action( 'after_switch_theme', [ $this, 'update' ] );
 
 	}
 

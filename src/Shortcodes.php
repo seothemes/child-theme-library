@@ -33,12 +33,7 @@ class Shortcodes {
 
 		$this->enable_widget_shortcodes();
 
-		add_shortcode(
-			'footer_backtotop', [
-				$this,
-				'footer_backtotop',
-			]
-		);
+		add_shortcode( 'footer_backtotop', [ $this, 'footer_backtotop' ] );
 
 	}
 
