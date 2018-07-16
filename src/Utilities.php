@@ -47,47 +47,6 @@ class Utilities {
 	}
 
 	/**
-	 * Sanitize RGBA values.
-	 *
-	 * If string does not start with 'rgba', then treat as hex then
-	 * sanitize the hex color and finally convert hex to rgba.
-	 *
-	 * @since  1.0.0
-	 *
-	 * @param  string $color The rgba color to sanitize.
-	 *
-	 * @return string $color Sanitized value.
-	 */
-	public function sanitize_rgba_color( $color ) {
-
-		// Return invisible if empty.
-		if ( empty( $color ) || is_array( $color ) ) {
-
-			return 'rgba(0,0,0,0)';
-
-		}
-
-		// Return sanitized hex if not rgba value.
-		if ( false === strpos( $color, 'rgba' ) ) {
-
-			return sanitize_hex_color( $color );
-
-		}
-
-		$red   = '';
-		$green = '';
-		$blue  = '';
-		$alpha = '';
-
-		// Finally, sanitize and return rgba.
-		$color = str_replace( ' ', '', $color );
-		sscanf( $color, 'rgba(%d,%d,%d,%f)', $red, $green, $blue, $alpha );
-
-		return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
-
-	}
-
-	/**
 	 * Minify CSS helper function.
 	 *
 	 * @since  1.0.0

@@ -102,7 +102,7 @@ class Customizer {
 				$setting,
 				array(
 					'default'           => $settings['default'],
-					'sanitize_callback' => 'SEOThemes\ChildThemeLibrary\Utilities\sanitize_rgba_color',
+					'sanitize_callback' => 'sanitize_hex_color',
 				)
 			);
 
@@ -167,7 +167,7 @@ class Customizer {
 
 		if ( ! empty( $css ) ) {
 
-			wp_add_inline_style( sanitize_title_with_dashes( $this->theme->name ), $this->theme->utilities->minify_css( $css ) );
+			wp_add_inline_style( sanitize_title_with_dashes( 'child-theme' ), $this->theme->utilities->minify_css( $css ) );
 
 		}
 
