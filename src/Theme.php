@@ -162,8 +162,6 @@ class Theme {
 		$this->assets  = get_stylesheet_directory_uri() . '/resources';
 		$this->config  = get_stylesheet_directory() . '/config/config.php';
 
-		$this->init( $this->config );
-
 	}
 
 	/**
