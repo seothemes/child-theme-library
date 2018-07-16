@@ -12,7 +12,7 @@ The main purpose of the Child Theme Library is to provide a shareable codebase f
 
 | Requirement | How to Check | How to Install |
 | :---------- | :----------- | :------------- |
-| PHP >= 5.3 | `php -v` | [php.net](http://php.net/manual/en/install.php) |
+| PHP >= 5.4 | `php -v` | [php.net](http://php.net/manual/en/install.php) |
 | WordPress >= 4.8 | `Admin Footer` | [wordpress.org](https://codex.wordpress.org/Installing_WordPress) |
 | Genesis >= 2.6 | `Theme Page` | [studiopress.com](http://www.shareasale.com/r.cfm?b=346198&u=1459023&m=28169&urllink=&afftrack=) |
 | Composer >= 1.5.0 | `composer --version` | [getcomposer.org](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) |
@@ -40,7 +40,7 @@ composer require tgmpa/tgm-plugin-activation
 
 There are three steps to include the Child Theme Library in your project:
 
-- Include the composer autoloader
+- Include the Composer `autoload.php` file
 - Store the library as a global variable for use throughout your theme
 - Initalize the child theme library and pass in config
 
@@ -49,10 +49,10 @@ An example config file can be found [here](https://github.com/seothemes/child-th
 The following is an example of how to achieve the above. This code should be placed in your `functions.php` file, before any custom code is loaded:
 
 ```php
-if ( file_exists( __DIR__ . '/app/autoload.php' ) ) {
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 
 	// Include the composer autoloader.
-	require_once __DIR__ . '/app/autoload.php';
+	require_once __DIR__ . '/vendor/autoload.php';
 
 	// Store as global variable.
 	$child_theme = new SEOThemes\ChildThemeLibrary\Theme();
