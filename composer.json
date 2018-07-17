@@ -2,7 +2,7 @@
   "name": "seothemes/child-theme-library",
   "type": "library",
   "description": "A lightweight drop-in library for extending Genesis child themes.",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "keywords": [
     "wordpress",
     "wordpress-theme",

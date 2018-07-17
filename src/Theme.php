@@ -106,7 +106,7 @@ class Theme {
 	/**
 	 * Constructor.
 	 *
-	 * @since  1.4.0
+	 * @since  1.5.0
 	 *
 	 * @return void
 	 */
@@ -127,7 +127,7 @@ class Theme {
 	/**
 	 * Initialize child theme library.
 	 *
-	 * @since  1.4.0
+	 * @since  1.5.0
 	 *
 	 * @return void
 	 */
@@ -164,7 +164,7 @@ class Theme {
 	/**
 	 * Load child theme modules after the Genesis Framework.
 	 *
-	 * @since  1.4.0
+	 * @since  1.5.0
 	 *
 	 * @param  array $modules List of modules to load.
 	 *

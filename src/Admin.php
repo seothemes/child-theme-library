@@ -53,10 +53,8 @@ class Admin {
 	 * Display excerpt metabox by default.
 	 *
 	 * The excerpt metabox is hidden by default on the page edit screen which can
-	 * cause confusion for some users if they want to edit or remove the excerpt.
-	 * To make it easier, we want to show the excerpt metabox by default. It only
-	 * runs after switching theme so the current user's screen     * options are
-	 * updated, allowing them to hide the metabox if not used.
+	 * cause confusion for some users if they want to change the pages excerpt.
+	 * To make it easier, we want to display the excerpt metabox by default.
 	 *
 	 * @since  1.0.0
 	 *
