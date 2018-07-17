@@ -88,7 +88,7 @@ class Plugins {
 	 */
 	public function is_tgmpa_active() {
 
-		$file = $this->theme->vendor . '/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php';
+		$file = $this->theme->dir . '/vendor/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php';
 
 		return ( file_exists( $file ) ? true : false );
 

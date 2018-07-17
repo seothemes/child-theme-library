@@ -93,7 +93,7 @@ class Layout {
 			genesis_register_layout(
 				$custom_layout, array(
 					'label' => ucwords( str_replace( '-', ' ', $custom_layout ) ),
-					'img'   => $this->theme->assets . '/images/' . $custom_layout . '.gif',
+					'img'   => $this->theme->uri . '/assets/img/' . $custom_layout . '.gif',
 				)
 			);
 

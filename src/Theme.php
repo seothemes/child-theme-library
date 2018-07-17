@@ -86,33 +86,6 @@ class Theme {
 	public $dir;
 
 	/**
-	 * Theme vendor.
-	 *
-	 * @since 1.4.0
-	 *
-	 * @var   string
-	 */
-	public $vendor;
-
-	/**
-	 * Theme lib.
-	 *
-	 * @since 1.4.0
-	 *
-	 * @var   string
-	 */
-	public $lib;
-
-	/**
-	 * Theme views.
-	 *
-	 * @since 1.4.0
-	 *
-	 * @var   string
-	 */
-	public $views;
-
-	/**
 	 * Theme uri.
 	 *
 	 * @since 1.4.0
@@ -120,15 +93,6 @@ class Theme {
 	 * @var   string
 	 */
 	public $uri;
-
-	/**
-	 * Theme assets.
-	 *
-	 * @since 1.4.0
-	 *
-	 * @var   string
-	 */
-	public $assets;
 
 	/**
 	 * Theme config.
@@ -155,12 +119,7 @@ class Theme {
 		$this->handle  = $this->theme->get( 'TextDomain' );
 		$this->author  = $this->theme->get( 'Author' );
 		$this->dir     = get_stylesheet_directory();
-		$this->vendor  = get_stylesheet_directory() . '/vendor';
-		$this->lib     = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/src';
-		$this->views   = get_stylesheet_directory() . '/vendor/seothemes/child-theme-library/assets/views';
 		$this->uri     = get_stylesheet_directory_uri();
-		$this->assets  = get_stylesheet_directory_uri() . '/assets';
-		$this->config  = get_stylesheet_directory() . '/config/config.php';
 
 	}
 
