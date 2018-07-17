@@ -19,20 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 class Admin extends TestCase {
 
-	/**
-	 * Test should return true.
-	 */
-	public function test_should_return_true_when_true() {
-		$this->assertTrue( true );
-		$this->assertTrue( 5 == 4 );
-		$this->assertTrue( 5 < 10 );
-		$this->assertTrue( 47 > -1 );
-		$this->assertTrue( 'foo' !== 'bar' );
-		$config = array(
-			'post_type'       => 'foo',
-			'number_of_posts' => 5,
-		);
-		$this->assertTrue( array_key_exists( 'post_type', $config ) );
-		$this->assertTrue( isset( $config['post_type'] ) );
-	}
+
+
 }
