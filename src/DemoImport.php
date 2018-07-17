@@ -44,10 +44,21 @@ class DemoImport {
 
 		$this->config = $theme->config;
 
-		$this->disable_branding();
+	}
 
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
+		$this->disable_branding();
 		add_filter( 'pt-ocdi/import_files', [ $this, 'import_settings' ] );
 		add_filter( 'pt-ocdi/after_all_import_execution', [ $this, 'after_import' ], 99 );
+
 	}
 
 

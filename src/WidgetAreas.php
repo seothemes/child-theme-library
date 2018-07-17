@@ -54,6 +54,17 @@ class WidgetAreas {
 		$this->theme  = $theme;
 		$this->config = $theme->config;
 
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		$this->remove( $this->config['widget-areas'] );
 		$this->add( $this->config['widget-areas'] );
 		$this->front_page();

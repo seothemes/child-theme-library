@@ -54,6 +54,17 @@ class Enqueue {
 		$this->theme  = $theme;
 		$this->config = $theme->config;
 
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		add_action( 'genesis_meta', [ $this, 'style_trump' ], 0 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'load_css' ], 10 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'load_js' ], 99 );

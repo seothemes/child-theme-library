@@ -110,7 +110,7 @@ class Theme {
 	 *
 	 * @return void
 	 */
-	public function __construct() {
+	public function __construct( $config ) {
 
 		$this->theme   = wp_get_theme();
 		$this->name    = $this->theme->get( 'Name' );
@@ -120,6 +120,7 @@ class Theme {
 		$this->author  = $this->theme->get( 'Author' );
 		$this->dir     = get_stylesheet_directory();
 		$this->uri     = get_stylesheet_directory_uri();
+		$this->config  = $this->get_config( $config );
 
 	}
 
@@ -128,11 +129,25 @@ class Theme {
 	 *
 	 * @since  1.4.0
 	 *
-	 * @param  string $config Path to config file.
-	 *
 	 * @return void
 	 */
-	public function init( $config ) {
+	public function init() {
+
+		$this->create_modules( $this->config['modules'] );
+		$this->autoload_files( $this->config['autoload'] );
+
+	}
+
+	/**
+	 * Initialize child theme library.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @param  string $config Path to config file.
+	 *
+	 * @return array
+	 */
+	public function get_config( $config ) {
 
 		$config = apply_filters( 'child_theme_config', $config );
 
@@ -142,10 +157,7 @@ class Theme {
 
 		}
 
-		$this->config = require_once $config;
-
-		$this->modules( $this->config['modules'] );
-		$this->autoload( $this->config['autoload'] );
+		return require_once $config;
 
 	}
 
@@ -158,7 +170,7 @@ class Theme {
 	 *
 	 * @return void
 	 */
-	public function modules( $modules ) {
+	public function create_modules( $modules ) {
 
 		require_once get_template_directory() . '/lib/init.php';
 
@@ -172,6 +184,7 @@ class Theme {
 			if ( file_exists( $filename ) ) {
 
 				$this->$property = new $classname( $this );
+				$this->$property->init();
 
 			}
 		}
@@ -187,7 +200,7 @@ class Theme {
 	 *
 	 * @return void
 	 */
-	public function autoload( $files ) {
+	public function autoload_files( $files ) {
 
 		foreach ( $files as $file ) {
 

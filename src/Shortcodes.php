@@ -31,8 +31,20 @@ class Shortcodes {
 	 */
 	public function __construct() {
 
-		$this->enable_widget_shortcodes();
+		// Do nothing.
 
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
+		$this->enable_widget_shortcodes();
 		add_shortcode( 'footer_backtotop', [ $this, 'footer_backtotop' ] );
 
 	}

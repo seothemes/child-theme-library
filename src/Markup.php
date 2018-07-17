@@ -31,6 +31,19 @@ class Markup {
 	 */
 	public function __construct() {
 
+		// Do nothing.
+
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		add_filter( 'genesis_markup_title-area_close', [ $this, 'after_title_area' ], 10, 2 );
 		add_action( 'init', [ $this, 'structural_wrap_hooks' ] );
 

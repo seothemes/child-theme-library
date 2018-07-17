@@ -33,11 +33,24 @@ class Setup {
 	 */
 	public function __construct( $theme ) {
 
-		$this->add_text_domain( $theme->config['textdomain'] );
-		$this->add_theme_supports( $theme->config['theme-supports'] );
-		$this->add_image_sizes( $theme->config['image-sizes'] );
-		$this->add_post_type_supports( $theme->config['post-type-supports'] );
-		$this->add_default_headers( $theme->config['default-headers'] );
+		$this->config = $theme->config;
+
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
+		$this->add_text_domain( $this->config['textdomain'] );
+		$this->add_theme_supports( $this->config['theme-supports'] );
+		$this->add_image_sizes( $this->config['image-sizes'] );
+		$this->add_post_type_supports( $this->config['post-type-supports'] );
+		$this->add_default_headers( $this->config['default-headers'] );
 
 	}
 

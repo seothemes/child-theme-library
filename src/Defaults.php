@@ -44,6 +44,17 @@ class Defaults {
 
 		$this->config = $theme->config;
 
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		add_filter( 'genesis_theme_settings_defaults', [ $this, 'set' ] );
 		add_action( 'after_switch_theme', [ $this, 'update' ] );
 

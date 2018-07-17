@@ -32,24 +32,24 @@ class HeroSection {
 	 */
 	public function __construct() {
 
+		// Do nothing.
+
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		if ( is_admin() || ! current_theme_supports( 'hero-section' ) ) {
 
 			return;
 
 		}
-
-		$this->setup();
-
-	}
-
-	/**
-	 * Set up hero section.
-	 *
-	 * @since  1.0.0
-	 *
-	 * @return void
-	 */
-	public function setup() {
 
 		remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 		remove_action( 'genesis_entry_header', 'genesis_do_post_title' );

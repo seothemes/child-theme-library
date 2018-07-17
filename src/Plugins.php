@@ -54,6 +54,17 @@ class Plugins {
 		$this->theme  = $theme;
 		$this->config = $theme->config;
 
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		add_action( 'genesis_setup', [ $this, 'activation' ] );
 		add_action( 'tgmpa_register', [ $this, 'required' ] );
 		add_action( 'wp_head', [ $this, 'remove_simple_social_inline_css' ], 1 );

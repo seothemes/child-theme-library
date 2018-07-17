@@ -26,11 +26,24 @@ class Attributes {
 	/**
 	 * Attributes constructor.
 	 *
-	 * @since  1.4.0
+	 * @since  1.5.0
 	 *
 	 * @return void
 	 */
 	public function __construct() {
+
+		// Do nothing.
+
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
 
 		add_filter( 'body_class', [ $this, 'body_class' ] );
 		add_filter( 'genesis_attr_site-container', [ $this, 'site_container' ] );

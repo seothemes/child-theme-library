@@ -47,6 +47,19 @@ class Utilities {
 	}
 
 	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
+		// Do nothing.
+
+	}
+
+	/**
 	 * Minify CSS helper function.
 	 *
 	 * @since  1.0.0

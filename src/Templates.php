@@ -44,6 +44,17 @@ class Templates {
 
 		$this->config = $theme->config['page-templates'];
 
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		add_filter( 'theme_page_templates', [ $this, 'add' ] );
 		add_filter( 'template_include', [ $this, 'set' ] );
 		add_filter( 'genesis_before', [ $this, 'modify' ], 0 );

@@ -54,6 +54,17 @@ class Customizer {
 		$this->theme  = $theme;
 		$this->colors = $theme->config['colors'];
 
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		add_action( 'customize_register', [ $this, 'settings' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'output' ], 100 );
 

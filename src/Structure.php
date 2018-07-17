@@ -31,6 +31,19 @@ class Structure {
 	 */
 	public function __construct() {
 
+		// Do nothing.
+
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		$this->display_custom_logo();
 		$this->reposition_menus();
 		$this->reposition_footer_widgets();

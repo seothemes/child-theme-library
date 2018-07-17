@@ -54,6 +54,17 @@ class Layout {
 		$this->theme  = $theme;
 		$this->config = $theme->config;
 
+	}
+
+	/**
+	 * Initialize class.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function init() {
+
 		add_action( 'after_setup_theme', [ $this, 'register' ] );
 		add_filter( 'genesis_site_layout', [ $this, 'search_page' ] );
 		add_filter( 'genesis_site_layout', [ $this, 'error_404' ] );
