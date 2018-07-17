@@ -42,23 +42,18 @@ There are three steps to include the Child Theme Library in your project:
 
 - Include the Composer `autoload.php` file
 - Store the library as a global variable for use throughout your theme
-- Initalize the child theme library and pass in config
+- Initialize the child theme library
 
-An example config file can be found [here](https://github.com/seothemes/child-theme-library/blob/master/docs/example-config.php).
+All changes to the child theme should be made via the theme configuration file. An example config can be found [here](https://github.com/seothemes/child-theme-library/blob/master/docs/example-config.php).
 
-The following is an example of how to achieve the above. This code should be placed in your `functions.php` file, before any custom code is loaded:
+The following is an example of how to achieve the steps mentioned above. This code should be placed in your `functions.php` file, before any custom code is loaded:
 
 ```php
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 
-	// Include the composer autoloader.
 	require_once __DIR__ . '/vendor/autoload.php';
-
-	// Store child theme library as global variable.
 	$child_theme = new SEOThemes\ChildThemeLibrary\Theme();
-
-	// Initialize object and pass in config.
-	$child_theme->init( __DIR__ . '/config/config.php' );
+	$child_theme->init();
 
 }
 ```

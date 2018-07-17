@@ -110,7 +110,7 @@ class Theme {
 	 *
 	 * @return void
 	 */
-	public function __construct( $config ) {
+	public function __construct() {
 
 		$this->theme   = wp_get_theme();
 		$this->name    = $this->theme->get( 'Name' );
@@ -120,7 +120,7 @@ class Theme {
 		$this->author  = $this->theme->get( 'Author' );
 		$this->dir     = get_stylesheet_directory();
 		$this->uri     = get_stylesheet_directory_uri();
-		$this->config  = $this->get_config( $config );
+		$this->config  = $this->get_config();
 
 	}
 
@@ -143,13 +143,11 @@ class Theme {
 	 *
 	 * @since  1.5.0
 	 *
-	 * @param  string $config Path to config file.
-	 *
 	 * @return array
 	 */
-	public function get_config( $config ) {
+	public function get_config() {
 
-		$config = apply_filters( 'child_theme_config', $config );
+		$config = apply_filters( 'child_theme_config', $this->dir . '/config/config.php' );
 
 		if ( ! file_exists( $config ) ) {
 
