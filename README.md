@@ -54,7 +54,7 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	// Include the composer autoloader.
 	require_once __DIR__ . '/vendor/autoload.php';
 
-	// Store as global variable.
+	// Store child theme library as global variable.
 	$child_theme = new SEOThemes\ChildThemeLibrary\Theme();
 
 	// Initialize object and pass in config.
@@ -63,7 +63,7 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 ```
 
-Storing the Child Theme Library object as a global variable provides access to the library's properties and methods. For example, to print the name of the theme you can do the following:
+Storing the Child Theme Library object as a global variable provides access to the library's public properties and methods. For example, to print the name of the theme you can do the following:
 
 ```php
 echo $child_theme->name;
