@@ -45,6 +45,19 @@ class HeroSection {
 	 */
 	public function init() {
 
+		add_action( 'genesis_before', [ $this, 'setup' ], 15 );
+
+	}
+
+	/**
+	 * Sets up hero section.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @return void
+	 */
+	public function setup() {
+
 		if ( is_admin() || ! current_theme_supports( 'hero-section' ) ) {
 
 			return;
@@ -306,21 +319,17 @@ class HeroSection {
 	 */
 	public function display() {
 
-		genesis_markup(
-			[
-				'open'    => '<section %s><div class="wrap">',
-				'context' => 'hero-section',
-			]
-		);
+		genesis_markup( [
+			'open'    => '<section %s><div class="wrap">',
+			'context' => 'hero-section',
+		] );
 
 		do_action( 'child_theme_hero_section' );
 
-		genesis_markup(
-			[
-				'close'   => '</div></section>',
-				'context' => 'hero-section',
-			]
-		);
+		genesis_markup( [
+			'close'   => '</div></section>',
+			'context' => 'hero-section',
+		] );
 
 	}
 
