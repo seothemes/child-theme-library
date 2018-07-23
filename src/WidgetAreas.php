@@ -67,8 +67,8 @@ class WidgetAreas {
 
 		$this->remove( $this->config['widget-areas'] );
 		$this->add( $this->config['widget-areas'] );
-		$this->front_page();
-		$this->footer_credits();
+		add_action( 'genesis_before', [ $this, 'front_page' ] );
+		add_action( 'genesis_before', [ $this, 'footer_credits' ] );
 
 	}
 
