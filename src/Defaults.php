@@ -92,7 +92,7 @@ class Defaults {
 
 		}
 
-		if ( $this->config['genesis-settings']['blog_cat_num'] ) {
+		if ( ! empty( $this->config['genesis-settings']['blog_cat_num'] ) ) {
 
 			update_option( 'posts_per_page', $this->config['genesis-settings']['blog_cat_num'] );
 
