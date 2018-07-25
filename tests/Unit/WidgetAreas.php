@@ -19,6 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 class WidgetAreas extends TestCase {
 
-	
+
 
 }

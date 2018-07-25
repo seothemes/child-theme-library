@@ -17,11 +17,6 @@ namespace SEOThemes\ChildThemeLibrary\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * Adds hero section logic to child theme.
- *
- * @since 1.4.0
- */
 class HeroSection extends TestCase {
 
 

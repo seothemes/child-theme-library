@@ -17,11 +17,6 @@ namespace SEOThemes\ChildThemeLibrary\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * Adds demo import logic to child theme.
- *
- * @since 1.4.0
- */
 class DemoImport extends TestCase {
 
 

@@ -17,11 +17,6 @@ namespace SEOThemes\ChildThemeLibrary\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * Adds Customizer logic to child theme.
- *
- * @since   1.4.0
- */
 class Customizer extends TestCase {
 
 

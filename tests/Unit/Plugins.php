@@ -19,6 +19,13 @@ use PHPUnit\Framework\TestCase;
 
 class Plugins extends TestCase {
 
+	/*
+	 * Test if TGMPA file exists.
+	 */
+	public function test_tgmpa_class_exists() {
 
+		$this->assertFileExists( dirname( dirname( __DIR__ ) ) . '/vendor/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php' );
+
+	}
 
 }
