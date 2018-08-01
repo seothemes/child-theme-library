@@ -21,7 +21,8 @@
     "source": "https://github.com/seothemes/child-theme-library"
   },
   "require": {
-    "php": "^5.4|^7"
+    "php": "^5.4|^7",
+    "brightnucleus/config": "^0.4.10"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
