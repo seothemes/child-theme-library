@@ -2,6 +2,8 @@
 
 [![WordPress](https://img.shields.io/badge/wordpress-4.9.7%20tested-brightgreen.svg)]() [![License](https://img.shields.io/badge/license-GPL--2.0--or--later-blue.svg)](https://github.com/seothemes/child-theme-library/blob/master/LICENSE.md)
 
+**Note:** This project is no longer maintained. Please use [d2/core](https://github.com/d2themes/core) instead.
+
 A config-based composer package that provides a set of modules to extend Genesis child theme development.
 
 ## Description
